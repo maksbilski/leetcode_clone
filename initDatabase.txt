@@ -1,0 +1,84 @@
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL CHECK (TRIM(name) <> ''),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+CREATE TABLE exercises (
+    exercise_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    difficulty VARCHAR(50) NOT NULL
+);
+CREATE TABLE ex_users (
+    exercise_id INT,
+    user_id INT,
+    speed INT,
+    done BOOLEAN,
+    success BOOLEAN,
+    PRIMARY KEY (exercise_id, user_id),
+    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+CREATE TABLE exercise_content (
+    exercise_id INT PRIMARY KEY,
+    content TEXT,
+    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id)
+);
+INSERT INTO users (name, email, password)
+VALUES
+    ('John Doe', 'john.doe@example.com', 'password123'),
+    ('Jane Smith', 'jane.smith@example.com', 'securepass'),
+    ('Alice Johnson', 'alice.johnson@example.com', 'pass123'),
+    ('Bob Williams', 'bob.williams@example.com', 'secret'),
+    ('Eva Davis', 'eva.davis@example.com', 'letmein'),
+    ('Charlie Brown', 'charlie.brown@example.com', 'brownie'),
+    ('Olivia Miller', 'olivia.miller@example.com', 'password456'),
+    ('Daniel White', 'daniel.white@example.com', 'dannyboy'),
+    ('Sophia Lee', 'sophia.lee@example.com', 'sophie123'),
+    ('Michael Turner', 'michael.turner@example.com', 'mikepass');
+
+
+
+
+INSERT INTO exercises (name, category, difficulty)
+VALUES
+    ('Bubble Sort', 'Algorithms', 'Easy'),
+    ('Database Normalization', 'Database', 'Medium'),
+    ('Quick Sort', 'Algorithms', 'Medium'),
+    ('Entity-Relationship Diagrams', 'Database', 'Easy'),
+    ('Dijkstras Algorithm', 'Algorithms', 'Hard'),
+    ('SQL Joins', 'Database', 'Medium'),
+    ('Binary Search', 'Algorithms', 'Easy'),
+    ('Transaction Management', 'Database', 'Hard'),
+    ('Dynamic Programming', 'Algorithms', 'Hard'),
+    ('Indexing in Databases', 'Database', 'Medium');
+
+INSERT INTO ex_users (exercise_id, user_id, speed, done, success)
+VALUES
+    (1, 1, 20, true, true),
+    (2, 3, 8, true, false),
+    (3, 5, 0, false, false),
+    (4, 2, 15, true, true),
+    (5, 4, 25, true, true),
+    (6, 6, 10, true, false),
+    (7, 8, 0, false, false),
+    (8, 10, 30, true, true),
+    (9, 7, 22, true, true),
+    (10, 9, 5, true, false),
+    (2, 1, 3, true, true),
+    (3, 1, 4, true, true),
+    (4, 1, 5, true, false);
+	 
+INSERT INTO exercise_content (exercise_id, content)
+VALUES
+    (1, 'Implement the Bubble Sort algorithm in your preferred programming language.'),
+    (2, 'Explain the process of normalizing a relational database.'),
+    (3, 'Write a program to implement the Quick Sort algorithm.'),
+    (4, 'Create an Entity-Relationship Diagram for a given scenario.'),
+    (5, 'Implement Dijkstra\s Algorithm for finding the shortest path in a graph.'),
+    (6, 'Write SQL queries demonstrating various types of joins.'),
+    (7, 'Implement the Binary Search algorithm in a programming language of your choice.'),
+    (8, 'Discuss the importance of transaction management in databases.'),
+    (9, 'Solve a dynamic programming problem and explain the approach.'),
+    (10, 'Explain the concept of indexing and its significance in databases.');
