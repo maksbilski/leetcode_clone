@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+   }
+   
+   header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+   }
+   .nav-buttons, .login-register {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+   }
+   
+   button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+   }

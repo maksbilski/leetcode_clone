@@ -1,0 +1,126 @@
+<!-- public/exercises.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEETCODE CLONE - Exercises</title>
+  <style>
+    /* Add any additional styles here */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      color: #4CAF50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* New styles for buttons and sorting */
+    .sort-container {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .sort-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Exercises Page</h1>
+  
+  <!-- Sorting buttons -->
+  <div class="sort-container">
+    <span>Sort by:</span>
+    <button class="sort-button" onclick="sortBy('difficulty')">Difficulty</button>
+    <button class="sort-button" onclick="sortBy('category')">Category</button>
+  </div>
+
+  <!-- Table for displaying exercises -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Difficulty</th>
+      </tr>
+    </thead>
+    <tbody id="exerciseList"></tbody>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // When the page is loaded, fetch exercises from the server
+      fetch('/api/exercises')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch exercises');
+          }
+          return response.json();
+        })
+        .then(exercises => {
+          // Display the fetched exercises in the table
+          const exerciseList = document.getElementById('exerciseList');
+          exercises.forEach(exercise => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${exercise.id}</td>
+              <td>${exercise.name}</td>
+              <td>${exercise.category}</td>
+              <td>${exercise.difficulty}</td>
+            `;
+            exerciseList.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+          // Handle error (e.g., show an error message to the user)
+        });
+    });
+
+    function sortBy(key) {
+      // Implement sorting logic based on the selected key (difficulty or category)
+      // You can modify this function according to your sorting requirements
+      console.log(`Sorting by ${key}`);
+    }
+  </script>
+</body>
+</html>
