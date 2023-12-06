@@ -7,6 +7,7 @@
 
 ### postgresql:
 [link](https://www.postgresql.org/download/linux/ubuntu/)
+use  `initDatabase.txt` to create tables and fill them
 
 ## How to run
 
