@@ -23,19 +23,8 @@ const sort_exercises = async (req, res) => {
      }
 };
 
-const open_exercise = async (req, res) => {
-    try {
-      const exerciseId = req.params.exercise_id;
-      const result = await pool.query(`SELECT name FROM exercises WHERE exercise_id = ${exerciseId}`);
-      res.json(result.rows[0]);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-};
 
 module.exports = {
     get_exercises,
     sort_exercises,
-    open_exercise,  
 }
