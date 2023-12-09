@@ -12,15 +12,17 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 //setup routers
-const exercises = require('./routers/exercises');
-const statistics = require('./routers/statistics')
-const pages = require('./routers/SSR_pages')
-const register = require('./routers/register')
+const exercisesRouter = require('./routers/exercises');
+const statisticsRouter = require('./routers/statistics')
+const pagesRouter = require('./routers/SSR_pages')
+const registerRouter = require('./routers/register')
+const exercisePageRouter = require('./routers/exercise_page')
 
-app.use('/api/exercises', exercises)
-app.use('/api/statistics', statistics)
-app.use('/', pages)
-app.use('/api/register', register)
+app.use('/api/exercises', exercisesRouter)
+app.use('/api/statistics', statisticsRouter)
+app.use('/', pagesRouter)
+app.use('/api/register', registerRouter)
+app.use('/api/exercises/:exercise_id', exercisePageRouter)
 
 
 
