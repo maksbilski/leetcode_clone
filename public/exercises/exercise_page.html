@@ -40,7 +40,7 @@
 
 <body>
 	<div class="problem-description">
-		<h2>Problem Title</h2>
+		<h2 id="problem-title"></h2>
 		<p>
 			Here is the description of the problem. You can include details, instructions, examples, etc.
 		</p>
@@ -48,7 +48,32 @@
 	</div>
 	<div class="code-editor">
 		<textarea id="editor">/* Type your code here */</textarea>
+		<button id="submit-btn">Submit</button>
 	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const pathArray = window.location.pathname.split('/');
+			const exerciseId = pathArray[pathArray.length - 1];
+			fetch(`/api/exercises/${exerciseId}`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Failed to fetch exercise page');
+					}
+					return response.json();
+				})
+				.then(exercise => {
+					document.getElementById('problem-title').innerText = exercise.name;
+				})
+				.catch(error => {
+					console.error(error);
+				});
+			document.getElementById('submit-btn').addEventListener('click', function () {
+				const code = document.getElementById('editor').value;
+			});
+		});
+	</script>
+
 </body>
 
 </html>
