@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercise Page</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			height: 100vh;
+		}
+
+		.problem-description {
+			flex: 1;
+			padding: 20px;
+			overflow-y: auto;
+		}
+
+		.code-editor {
+			flex: 1;
+			padding: 20px;
+		}
+
+		textarea {
+			width: 100%;
+			height: calc(100% - 40px);
+			/* Adjust height to take full container height */
+			font-family: monospace;
+			font-size: 16px;
+			border: none;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="problem-description">
+		<h2>Problem Title</h2>
+		<p>
+			Here is the description of the problem. You can include details, instructions, examples, etc.
+		</p>
+		<!-- Add more content as needed -->
+	</div>
+	<div class="code-editor">
+		<textarea id="editor">/* Type your code here */</textarea>
+	</div>
+</body>
+
+</html>

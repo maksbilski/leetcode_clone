@@ -1,6 +1,7 @@
 <!-- public/exercises.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,8 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 12px;
       text-align: left;
@@ -63,9 +65,10 @@
     }
   </style>
 </head>
+
 <body>
   <h1>Exercises Page</h1>
-  
+
   <!-- Sorting buttons -->
   <div class="sort-container">
     <span>Sort by:</span>
@@ -101,7 +104,7 @@
           exercises.forEach(exercise => {
             const row = document.createElement('tr');
             row.innerHTML = `
-              <td>${exercise.name}</td>
+              <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
               <td>${exercise.category}</td>
               <td>${exercise.difficulty}</td>
             `;
@@ -115,37 +118,38 @@
     });
 
     function sortBy(key) {
- // Clear the table
- const exerciseList = document.getElementById('exerciseList');
- while (exerciseList.firstChild) {
-  exerciseList.firstChild.remove();
- }
+      // Clear the table
+      const exerciseList = document.getElementById('exerciseList');
+      while (exerciseList.firstChild) {
+        exerciseList.firstChild.remove();
+      }
 
- // Make a fetch request to the server with the selected key as a parameter
- fetch(`/api/exercises/sort?key=${key}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Failed to sort exercises by ${key}`);
-    }
-    return response.json();
-  })
-  .then(exercises => {
-    // Add the sorted exercises to the table
-    exercises.forEach(exercise => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${exercise.name}</td>
+      // Make a fetch request to the server with the selected key as a parameter
+      fetch(`/api/exercises/sort?key=${key}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to sort exercises by ${key}`);
+          }
+          return response.json();
+        })
+        .then(exercises => {
+          // Add the sorted exercises to the table
+          exercises.forEach(exercise => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+        <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
         <td>${exercise.category}</td>
         <td>${exercise.difficulty}</td>
       `;
-      exerciseList.appendChild(row);
-    });
-  })
-  .catch(error => {
-    console.error(error);
-    // Handle error (e.g., show an error message to the user)
-  });
-}
+            exerciseList.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+          // Handle error (e.g., show an error message to the user)
+        });
+    }
   </script>
 </body>
+
 </html>
