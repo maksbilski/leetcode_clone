@@ -28,4 +28,10 @@ router.get('/exercises', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercises.html'));
     });
 
+router.get('/exercises/:exercise_id', (req, res) => {
+    console.log('exercise_page')
+    res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercise_page.html'));
+    });
+
+
 module.exports = router

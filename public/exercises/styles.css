@@ -1,0 +1,84 @@
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	height: 100vh;
+	color: #ccc;
+	background-color: #121212;
+}
+
+.problem-description,
+.code-editor {
+	margin: 20px;
+	padding: 20px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: #252526;
+	/* Dark gray background */
+}
+
+.problem-description {
+	flex: 3;
+	height: calc(100vh - 40px);
+	overflow-y: auto;
+	margin-right: 10px;
+}
+
+.code-editor {
+	flex: 2;
+	height: calc(100vh - 40px);
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+h2 {
+	margin-top: 0;
+	color: #4CAF50;
+	/* Light green color similar to the button */
+}
+
+p {
+	font-size: 0.9em;
+	line-height: 1.4;
+	color: #bbb;
+	/* Lighter text color for readability */
+}
+
+textarea {
+	flex-grow: 1;
+	width: 100%;
+	margin-top: 20px;
+	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-size: 14px;
+	border: none;
+	border-radius: 8px;
+	padding: 10px;
+	resize: none;
+	/* Disable resizing */
+	background-color: #1e1e1e;
+	/* Even darker background for contrast */
+	color: #dcdcdc;
+	/* Light text color for contrast */
+}
+
+button {
+	width: 100px;
+	padding: 10px;
+	margin-top: 10px;
+	background-color: #4CAF50;
+	/* Light green background */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	align-self: flex-start;
+	/* Align to the start of flex container */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s;
+}
+
+button:hover {
+	background-color: #388e3c;
+}
