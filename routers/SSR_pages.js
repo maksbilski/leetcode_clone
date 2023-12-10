@@ -15,7 +15,7 @@ router.get('/help', (req, res) => {
     });
    
 router.get('/statistics', (req, res) => {
-     res.status(200).sendFile('statistics.html', {root: path.join(__dirname, '..', 'public', '/statistics') });
+     res.status(200).sendFile('statistics.html', {root: path.join(__dirname, '..', 'public', 'statistics') });
     });
 
 router.get('/', (req, res) => {
