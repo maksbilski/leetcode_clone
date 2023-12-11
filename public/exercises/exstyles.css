@@ -22,6 +22,11 @@ header {
 h1 {
 	text-align: center;
 	color: #31748f;
+	margin-left: 20px;
+}
+
+.fa-spinner {
+	color: orange;
 }
 
 .home-link {
@@ -42,12 +47,13 @@ h1 {
 	align-items: center;
 	/* Center sorting buttons */
 	padding: 10px;
+	margin-top: 10px;
 }
 
 /* Sorting label styles */
 .sort-container span {
 	margin-right: 10px;
-	margin-left: 5px;
+	margin-left: 91px;
 	font-size: 1.2em;
 	/* Slightly larger text for the sort label */
 }
@@ -86,10 +92,12 @@ h1 {
 
 /* Table styles */
 table {
-	width: 100%;
+
+	width: 90%;
 	border-collapse: collapse;
 	/* Remove space between table cells */
-	margin-top: 20px;
+	margin-top: 10px;
+	margin-left: 100px;
 }
 
 th,
@@ -105,6 +113,24 @@ th {
 	color: #31748f;
 	background-color: #1c1c1c;
 	/* Light green color for headers */
+}
+
+th:first-child,
+td:first-child {
+	width: 50px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+	width: auto;
+}
+
+tr:nth-child(odd) {
+	background-color: #121212;
+}
+
+tr:nth-child(even) {
+	background-color: #1c1c1c;
 }
 
 td.exercise-name a {

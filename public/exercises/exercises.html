@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercises page</title>
   <link rel="stylesheet" href="./exstyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
@@ -27,7 +28,8 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Status</th>
+        <th>Problem</th>
         <th>Category</th>
         <th>Difficulty</th>
       </tr>
@@ -52,7 +54,9 @@
             const row = document.createElement('tr');
             const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
             const categoryClass = `category-${exercise.category.toLowerCase()}`;
+            const statusIcon = 'fas fa-spinner';
             row.innerHTML = `
+              <td> <i class="${statusIcon}"></i></td>
               <td class="exercise-name"><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
               <td class="${categoryClass}">${exercise.category}</td>
               <td class="${difficultyClass}">${exercise.difficulty}</td>

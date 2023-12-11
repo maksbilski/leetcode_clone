@@ -21,6 +21,7 @@ header {
 h1 {
 	text-align: center;
 	color: #31748f;
+	margin-left: 20px;
 }
 
 .home-link {
@@ -57,7 +58,7 @@ h1 {
 }
 
 .code-editor {
-	flex: 2;
+	flex: 3;
 	height: calc(100vh - 25px);
 	display: flex;
 	flex-direction: column;

@@ -20,6 +20,7 @@ header {
 h1 {
    text-align: center;
    color: #31748f;
+   margin-left: 20px;
 }
 
 .home-link {
@@ -38,11 +39,12 @@ h1 {
    justify-content: center;
    align-items: center;
    padding: 10px;
+   margin-top: 10px;
 }
 
 .sort-container span {
    margin-right: 10px;
-   margin-left: 5px;
+   margin-left: 91px;
    font-size: 1.2em;
 }
 
@@ -71,9 +73,10 @@ h1 {
 }
 
 table {
-   width: 100%;
+   width: 90%;
    border-collapse: collapse;
-   margin-top: 20px;
+   margin-top: 10px;
+   margin-left: 100px;
 }
 
 th,
@@ -88,4 +91,16 @@ th {
    color: #31748f;
    background-color: #1c1c1c;
    /* Light green color for headers */
+}
+
+tr:nth-child(odd) {
+   background-color: #121212;
+}
+
+tr:nth-child(even) {
+   background-color: #1c1c1c;
+}
+
+td {
+   color: #ffffff;
 }
