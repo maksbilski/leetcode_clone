@@ -10,49 +10,56 @@ body {
 
 .problem-description,
 .code-editor {
-	margin: 20px;
-	padding: 20px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 	box-sizing: border-box;
-	border-radius: 8px;
+	border-radius: 10px;
 	background-color: #252526;
 	/* Dark gray background */
 }
 
 .problem-description {
 	flex: 3;
-	height: calc(100vh - 40px);
+	height: calc(100vh - 25px);
 	overflow-y: auto;
 	margin-right: 10px;
 }
 
 .code-editor {
 	flex: 2;
-	height: calc(100vh - 40px);
+	height: calc(100vh - 25px);
 	display: flex;
 	flex-direction: column;
 	margin-left: 10px;
 }
 
 h2 {
-	margin-top: 0;
+	font-size: 3.0em;
+	margin-top: 20.0px;
+	margin-left: 20.0px;
 	color: #4CAF50;
 	/* Light green color similar to the button */
 }
 
 p {
-	font-size: 0.9em;
-	line-height: 1.4;
+	font-size: 1.0em;
+	margin-left: 20.0px;
+	line-height: 1.0;
 	color: #bbb;
 	/* Lighter text color for readability */
 }
 
 textarea {
 	flex-grow: 1;
-	width: 100%;
+	width: 95%;
 	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: 'Consolas', 'Courier New', Courier, monospace;
 	font-size: 14px;
-	border: none;
+	border: 2px groove #4CAF50;
 	border-radius: 8px;
 	padding: 10px;
 	resize: none;
@@ -67,6 +74,9 @@ button {
 	width: 100px;
 	padding: 10px;
 	margin-top: 10px;
+	margin-left: auto;
+	margin-right: 10px;
+	margin-bottom: 10px;
 	background-color: #4CAF50;
 	/* Light green background */
 	color: white;
