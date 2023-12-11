@@ -49,10 +49,12 @@
           const exerciseList = document.getElementById('exerciseList');
           exercises.forEach(exercise => {
             const row = document.createElement('tr');
+            const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
+            const categoryClass = `category-${exercise.category.toLowerCase()}`;
             row.innerHTML = `
               <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
-              <td>${exercise.category}</td>
-              <td>${exercise.difficulty}</td>
+              <td class="${categoryClass}">${exercise.category}</td>
+              <td class="${difficultyClass}">${exercise.difficulty}</td>
             `;
             exerciseList.appendChild(row);
           });
@@ -82,10 +84,12 @@
           // Add the sorted exercises to the table
           exercises.forEach(exercise => {
             const row = document.createElement('tr');
+            const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
+            const categoryClass = `category-${exercise.category.toLowerCase()}`;
             row.innerHTML = `
         <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
-        <td>${exercise.category}</td>
-        <td>${exercise.difficulty}</td>
+        <td class="${categoryClass}">${exercise.category}</td>
+        <td class="${difficultyClass}">${exercise.difficulty}</td>
       `;
             exerciseList.appendChild(row);
           });

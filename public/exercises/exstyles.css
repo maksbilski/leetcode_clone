@@ -76,6 +76,7 @@ table {
 
 th,
 td {
+	font-weight: bold;
 	text-align: left;
 	padding: 15px;
 	border-bottom: 1px solid #252526;
@@ -87,9 +88,37 @@ th {
 	/* Light green color for headers */
 }
 
+td.category-database,
+td.category-algorithms {
+	font-weight: normal;
+}
+
+td.category-database {
+	color: #FFA500
+}
+
+td.category-algorithms {
+	color: #007BFF
+}
+
+/* Specific styles for each difficulty level */
+td.difficulty-easy {
+	color: #3CB371;
+	/* A green color for easy difficulty */
+}
+
+td.difficulty-medium {
+	color: #FFA500;
+	/* An orange color for medium difficulty */
+}
+
+td.difficulty-hard {
+	color: #FF6347;
+	/* A red color for hard difficulty */
+}
+
 a {
-	color: #ebbcba;
-	/* Light blue color for links */
+	color: white;
 	text-decoration: none;
 }
 
