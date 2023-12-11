@@ -29,7 +29,7 @@ h1 {
 /* Sorting label styles */
 .sort-container span {
 	margin-right: 10px;
-	margin-left: 10px;
+	margin-left: 5px;
 	font-size: 1.2em;
 	/* Slightly larger text for the sort label */
 }
