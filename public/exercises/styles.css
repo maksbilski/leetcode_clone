@@ -3,21 +3,50 @@ body {
 	margin: 0;
 	padding: 0;
 	display: flex;
+	flex-direction: column;
 	height: 100vh;
 	color: #ccc;
 	background-color: #121212;
 }
 
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px;
+	background-color: #1c1c1c;
+	width: 100%;
+}
+
+h1 {
+	text-align: center;
+	color: #31748f;
+}
+
+.home-link {
+	color: inherit;
+	transition: color 0.5s;
+	text-decoration: none;
+}
+
+.home-link:hover {
+	text-decoration: none;
+	color: #927347;
+}
+
+
+.content-container {
+	display: flex;
+	flex-grow: 1;
+}
+
 .problem-description,
 .code-editor {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
 	box-sizing: border-box;
 	border-radius: 10px;
 	background-color: #252526;
 	/* Dark gray background */
+	margin: 10px;
 }
 
 .problem-description {

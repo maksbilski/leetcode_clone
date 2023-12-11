@@ -9,11 +9,30 @@ body {
 	background-color: #121212;
 }
 
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px;
+	background-color: #1c1c1c;
+	/* Slightly lighter dark shade for header */
+}
+
 /* Style for the main heading */
 h1 {
 	text-align: center;
 	color: #31748f;
-	padding: 20px 0;
+}
+
+.home-link {
+	color: inherit;
+	transition: color 0.5s;
+	text-decoration: none;
+}
+
+.home-link:hover {
+	text-decoration: none;
+	color: #927347;
 }
 
 /* Sorting container styles */
@@ -45,7 +64,7 @@ h1 {
 	padding: 10px 10px;
 	margin-right: auto;
 	cursor: pointer;
-	transition: background-color 0.5s;
+	transition: background-color 0.3s;
 	-webkit-appearance: none;
 	/* Removes default styling on webkit browsers */
 	-moz-appearance: none;
@@ -85,6 +104,17 @@ td {
 th {
 	color: #31748f;
 	/* Light green color for headers */
+}
+
+td.exercise-name a {
+	transition: color 0.5s;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+td.exercise-name a:hover {
+	color: #927347;
+	text-decoration: none;
 }
 
 td.category-database,

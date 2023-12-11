@@ -5,13 +5,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEETCODE CLONE - Exercises</title>
+  <title>Exercises page</title>
   <link rel="stylesheet" href="./exstyles.css">
 </head>
 
 <body>
-  <h1>Exercises</h1>
-
+  <header>
+    <h1><a href="/" class="home-link">Leetcode Clone</a></h1>
+  </header>
   <!-- Sorting buttons -->
   <div class="sort-container">
     <span>Sort by:</span>
@@ -52,7 +53,7 @@
             const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
             const categoryClass = `category-${exercise.category.toLowerCase()}`;
             row.innerHTML = `
-              <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
+              <td class="exercise-name"><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
               <td class="${categoryClass}">${exercise.category}</td>
               <td class="${difficultyClass}">${exercise.difficulty}</td>
             `;
