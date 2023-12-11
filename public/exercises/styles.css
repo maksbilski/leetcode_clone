@@ -39,7 +39,7 @@ h2 {
 	font-size: 3.0em;
 	margin-top: 20.0px;
 	margin-left: 20.0px;
-	color: #4CAF50;
+	color: #31748f;
 	/* Light green color similar to the button */
 }
 
@@ -59,7 +59,7 @@ textarea {
 	margin-right: auto;
 	font-family: 'Consolas', 'Courier New', Courier, monospace;
 	font-size: 14px;
-	border: 2px groove #4CAF50;
+	border: 2px groove #31748f;
 	border-radius: 8px;
 	padding: 10px;
 	resize: none;
@@ -90,5 +90,5 @@ button {
 }
 
 button:hover {
-	background-color: #388e3c;
+	background-color: #31748f;
 }
