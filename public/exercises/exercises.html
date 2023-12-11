@@ -6,74 +6,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LEETCODE CLONE - Exercises</title>
-  <style>
-    /* Add any additional styles here */
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f7f7f7;
-      color: #333;
-    }
-
-    h1 {
-      color: #4CAF50;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    th {
-      background-color: #4CAF50;
-      color: white;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    /* New styles for buttons and sorting */
-    .sort-container {
-      text-align: right;
-      margin-top: 10px;
-    }
-
-    .sort-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin-left: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="./exstyles.css">
 </head>
 
 <body>
-  <h1>Exercises Page</h1>
+  <h1>Exercises</h1>
 
   <!-- Sorting buttons -->
   <div class="sort-container">
     <span>Sort by:</span>
-    <button class="sort-button" onclick="sortBy('difficulty')">Difficulty</button>
-    <button class="sort-button" onclick="sortBy('category')">Category</button>
+    <select id="sortOptions" class="sort-select" onchange="sortBy(this.value)">
+      <option value="">Select</option>
+      <option value="difficulty">Difficulty</option>
+      <option value="category">Category</option>
+    </select>
   </div>
 
   <!-- Table for displaying exercises -->
