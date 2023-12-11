@@ -1,28 +1,69 @@
+/* styles.css */
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-   }
-   
-   header {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    /* Dark background */
+    color: #ffffff;
+    /* White text color */
+}
+
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-   }
-   .nav-buttons, .login-register {
-    display: flex;
-    justify-content: space-around;
-    width: 200px;
-   }
-   
-   button {
-    background-color: green;
-    color: white;
-    border: none;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    background-color: #1c1c1c;
+    /* Slightly lighter dark shade for header */
+}
+
+h1 {
+    color: #31748f;
+    /* Green color for the main heading */
+    margin: 0;
+}
+
+.nav-buttons button,
+.login-register button {
+    background-color: #333333;
+    /* Dark grey background for buttons */
+    color: #ffffff;
+    /* White text color */
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
     cursor: pointer;
-   }
+    transition: background-color 0.3s;
+}
+
+.nav-buttons button:hover,
+.login-register button:hover {
+    background-color: #927347;
+    /* Lighter grey background on hover */
+}
+
+
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .nav-buttons,
+    .login-register {
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .nav-buttons button,
+    .login-register button {
+        flex-grow: 1;
+        /* Buttons will expand to fill space evenly */
+    }
+}
