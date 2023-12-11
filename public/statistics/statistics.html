@@ -1,23 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Statistics Page</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
-  <div>
-      <label>Sort by:</label>
-      <button id="sortSuccessRate">Success rate</button>
-      <button id="sortAmount">Amount</button>
+  <header>
+    <h1><a href="/" class="home-link">CodeChampions</a></h1>
+  </header>
+  <div class="sort-container">
+    <span>Sort by:</span>
+    <select id="sortOptions" class="sort-select" onchange="sortBy(this.value)">
+      <option value="">Select</option>
+      <option value="success_rate">Success rate</option>
+      <option value="total_exercises_completed">Amount</option>
+    </select>
   </div>
-  <table id="statisticsTable">
+  <table>
+    <thead>
       <tr>
-          <th>User</th>
-          <th>Exercises Attempted</th>
-          <th>Exercises Completed</th>
-          <th>Success rate</th>
+        <th>User</th>
+        <th>Exercises Attempted</th>
+        <th>Exercises Completed</th>
+        <th>Success rate</th>
       </tr>
+    </thead>
+    <tbody id="statisticsTable"></tbody>
   </table>
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('/api/statistics')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch statistics');
+          }
+          return response.json();
+        })
+        .then(statistics => {
+          const tableBody = document.getElementById('statisticsTable');
+          statistics.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${record.name}</td>
+              <td>${record.total_exercises_attempted}</td>
+              <td>${record.total_exercises_completed}</td>
+              <td>${record.success_rate}%</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+
+    function sortBy(key) {
+      if (key == "") {
+        return;
+      }
+      const tableBody = document.getElementById('statisticsTable');
+      while (tableBody.firstChild) {
+        tableBody.firstChild.remove();
+      }
+
+      fetch(`/api/statistics/sort?key=${key}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to sort statistics by ${key}`);
+          }
+          return response.json();
+        })
+        .then(statistics => {
+          statistics.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${record.name}</td>
+              <td>${record.total_exercises_attempted}</td>
+              <td>${record.total_exercises_completed}</td>
+              <td>${record.success_rate}%</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  </script>
 </body>
+
 </html>

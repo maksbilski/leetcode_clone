@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <h1><a href="/" class="home-link">Leetcode Clone</a></h1>
+    <h1><a href="/" class="home-link">CodeChampions</a></h1>
   </header>
   <!-- Sorting buttons -->
   <div class="sort-container">
@@ -67,7 +67,9 @@
     });
 
     function sortBy(key) {
-      // Clear the table
+      if (key == "") {
+        return;
+      }
       const exerciseList = document.getElementById('exerciseList');
       while (exerciseList.firstChild) {
         exerciseList.firstChild.remove();
