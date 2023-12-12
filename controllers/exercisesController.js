@@ -14,9 +14,16 @@ const get_exercises = async (req, res) => {
    
 const sort_exercises = async (req, res) => {
     try {
-      const sortKey = req.query.key;
-      const result = await pool.query`SELECT * FROM exercises ORDER BY ${sortKey}`;
-      res.json(result.rows);
+      const validKeys = ["exercise_id", "name", "category", "difficulty"];
+      const {key} = req.query;
+      if (!validKeys.includes(key)) {
+        return res.status(400).json({ error: 'Invalid sort key' });
+      }
+      const result = await pool`
+      SELECT * 
+      FROM exercises 
+      ORDER BY ${pool(key)};`;
+      res.json(result);
      } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });

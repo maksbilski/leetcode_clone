@@ -2,8 +2,11 @@ const pool = require('../db')
 
 const sort_statistics = async (req, res) => {
     try {
-  
+      const validKeys = ["total_exercises_completed", "success_rate"];
       const {key} = req.query;
+      if (!validKeys.includes(key)) {
+        return res.status(400).json({ error: 'Invalid sort key' });
+      }
       const result = await pool`
       SELECT 
           users.name,
@@ -16,7 +19,7 @@ const sort_statistics = async (req, res) => {
           ex_users ON users.user_id = ex_users.user_id
          GROUP BY 
           users.name
-        order by ${key} DESC;`;
+        order by ${pool(key)} DESC;`;
       res.json(result);
     } catch (error) {
       console.error(error);
