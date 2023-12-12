@@ -9,4 +9,10 @@ apt-get install nodejs -y
 sudo apt install npm
 
 npm install
-npm start
+npm start &
+
+# Wait for the server to start up
+sleep 5
+
+# Open the default web browser on a specific URL
+xdg-open http://localhost:5000/

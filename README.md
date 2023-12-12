@@ -1,21 +1,6 @@
-
-## Prerequisites
-### nodejs:
-[link](https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions)
-
-### Node Package Manager (NPM):
-`sudo apt install npm`
-
-### postgresql:
-[link](https://www.postgresql.org/download/linux/ubuntu/)
-
-use  `initDatabase.txt` to create tables and fill them
-
-## How to run
-
-###
-`npm install` installs all packages needed specified in package.json
-
-`npm start` starts nodemon script
-
-`http://localhost:5000/` navigate here to use the website
+## Install dependencies and run the app
+The run.sh script installs the necessary dependencies, including Node.js and npm.
+To execute this script, you need to use sudo permissions.
+The script will automatically run the app with your default browser.
+Open a terminal in your project directory and enter the following command:
+```sudo ./run.sh```
