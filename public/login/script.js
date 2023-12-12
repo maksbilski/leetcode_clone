@@ -1,12 +1,10 @@
 document.getElementById('loginForm').addEventListener('submit', function (event) {
   event.preventDefault();
   console.log('lalalal');
-  var name = document.getElementById('name').value;
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
   var data = {
-    name: name,
     email: email,
     password: password
   };

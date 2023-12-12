@@ -2,106 +2,113 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-end; /* Форма справа */
+  justify-content: flex-end;
+  /* Форма справа */
   align-items: center;
   height: 100vh;
   color: #ccc;
   background-color: #121212;
 }
-  
+
 form {
   width: 500px;
-  margin-right: 10%; /* Отступ справа от изображения */
+  margin-right: 10%;
+  /* Отступ справа от изображения */
   align-items: center;
 }
-  
-  label {
-    font-family: Century Gothic;
-    font-weight: bold;
-    font-size: 2em;
-    display: block;
-    margin-top: 20px;
-  }
-  
-  input[type="text"],input[type="email"],input[type="password"] {
-      width: 100%;
-      font-size: 1.5em;
-      font-family: Century Gothic;
-      font-weight: bold;
-      height: 2em;
-      border-radius: 5px;
-      padding: 2%;
-      margin-top: 5px;
-      background-color: aliceblue;
-      transition: background-color 0.3s;
-  }
 
-  input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-      background-color: #8ca5e9;
-    }
-  
-  input[type="submit"] {
-    width: 50%;
-    padding: 0.7em;
-    margin: 1em 0 4em 4em;
-    font-size: 2em;
-    font-weight: bold;
-    background-color: #4CAF50;
-    /* Light green background */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    justify-content: center;
-    /* Align to the start of flex container */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s;
-  }
-  
-  input[type="submit"]:hover{
-    background-color: #388e3c;
-  }
+label {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+  display: block;
+  margin-top: 20px;
+}
 
-  img.background {
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100vh; /* Высота не менее 100% высоты видимой области */
-    min-width: 50vw; /* Ширина не менее 100% ширины видимой области */
-  
-    /* Дополнительные стили, если необходимо */
-  }
-  
-  /* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
-  @media screen and (max-width: 640px) {
-    img.bg {
-      left: 50%;
-      margin-left: -320px;
-    }
-  }
-  
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  font-size: 1.5em;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  height: 2em;
+  border-radius: 5px;
+  padding: 2%;
+  margin-top: 5px;
+  background-color: aliceblue;
+  transition: background-color 0.3s;
+}
 
-  .overlay {
-    position: absolute;
-    top: 75%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #EF6461;
-    font-size: 3em;
-    font-family: "Century Gothic", sans-serif;
-    font-weight: bold;
-    transition: font-size 0.3s, color 0.3s;
-  }
-  
-  .overlay:hover {
-    font-size: 3.5em; /* Увеличьте размер шрифта по вашему усмотрению */
-    color: rgb(83, 215, 204); /* Измените цвет затемнения по вашему усмотрению */
-  }
-  
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background-color: #8ca5e9;
+}
 
- 
+input[type="submit"] {
+  width: 50%;
+  padding: 0.7em;
+  margin: 1em 0 4em 4em;
+  font-size: 2em;
+  font-weight: bold;
+  background-color: #4CAF50;
+  /* Light green background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  /* Align to the start of flex container */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #388e3c;
+}
+
+img.background {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  /* Высота не менее 100% высоты видимой области */
+  min-width: 50vw;
+  /* Ширина не менее 100% ширины видимой области */
+
+  /* Дополнительные стили, если необходимо */
+}
+
+/* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
+@media screen and (max-width: 640px) {
+  img.bg {
+    left: 50%;
+    margin-left: -320px;
+  }
+}
+
+
+.overlay {
+  position: absolute;
+  top: 75%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #EF6461;
+  font-size: 3em;
+  font-family: "Courier New, Courier, monospace", sans-serif;
+  font-weight: bold;
+  transition: font-size 0.3s, color 0.3s;
+}
+
+.overlay:hover {
+  font-size: 3.5em;
+  /* Увеличьте размер шрифта по вашему усмотрению */
+  color: rgb(83, 215, 204);
+  /* Измените цвет затемнения по вашему усмотрению */
+}

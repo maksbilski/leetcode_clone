@@ -2,7 +2,7 @@
 
 /* Apply a global font and remove default margins */
 body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Courier New', Courier, monospace;
 	margin: 0;
 	padding: 0;
 	color: #ccc;

@@ -1,328 +1,491 @@
 body {
-   margin: 0;
-   padding: 0;
-   /* display: flex; */
-   /* justify-content: flex-end;  */
-   align-items: center;
-   height: 100vh;
-   color: #ccc;
-   background-color: #121212;
- }
- 
- .content{
+  margin: 0;
+  padding: 0;
+  /* display: flex; */
+  /* justify-content: flex-end;  */
+  align-items: center;
+  height: 100vh;
+  color: #ccc;
+  background-color: #121212;
+}
+
+.content {
   display: flex;
-  width:100%;
- }
-   
- form {
-   width: 50%;
-   margin-right: 15%; /* Отступ справа от изображения */
-   margin-top: 5%;
-   align-items: center;
- }
-   
-   label {
-     font-family: Century Gothic;
-     font-weight: bold;
-     font-size: 2em;
-     display: block;
-     margin-top: 20px;
-   }
-   
-   input[type="text"],input[type="email"],input[type="password"] {
-       width: 100%;
-       font-size: 1.5em;
-       font-family: Century Gothic;
-       font-weight: bold;
-       height: 2em;
-       border-radius: 5px;
-       padding: 2%;
-       margin-top: 5px;
-       background-color: aliceblue;
-       transition: background-color 0.3s;
-   }
- 
-   input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
-       background-color: #8ca5e9;
-     }
-   
-   input[type="submit"] {
-     width: 50%;
-     padding: 0.7em;
-     margin: 1em 0 4em 4em;
-     font-size: 2em;
-     font-weight: bold;
-     background-color: #4CAF50;
-     /* Light green background */
-     color: white;
-     border: none;
-     border-radius: 5px;
-     cursor: pointer;
-     text-align: center;
-     justify-content: center;
-     /* Align to the start of flex container */
-     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-     transition: background-color 0.3s;
-   }
-   
-   input[type="submit"]:hover{
-     background-color: #388e3c;
-   }
- 
-   img.background {
-     width: 50%;
-     height: 100%;
-     object-fit: cover;
-     position: fixed;
-     top: 0;
-     left: 0;
-     min-height: 100vh; /* Высота не менее 100% высоты видимой области */
-     min-width: 50vw; /* Ширина не менее 100% ширины видимой области */
-   
-     /* Дополнительные стили, если необходимо */
-   }
-   
-   /* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
-   @media screen and (max-width: 640px) {
-     img.bg {
-       left: 50%;
-       margin-left: -320px;
-     }
-   }
-   
- 
-   .overlay {
-     position: absolute;
-     top: 75%;
-     left: 25%;
-     transform: translate(-50%, -50%);
-     text-align: center;
-     color: #EF6461;
-     font-size: 3em;
-     font-family: "Century Gothic", sans-serif;
-     font-weight: bold;
-     transition: font-size 0.3s, color 0.3s;
-   }
-   
-   .overlay:hover {
-     font-size: 3.5em; /* Увеличьте размер шрифта по вашему усмотрению */
-     color: rgb(83, 215, 204); /* Измените цвет затемнения по вашему усмотрению */
-   }
-   
-   .banner{
-    padding: 15%;
-    width: 50%;
-    height: 50%;
-    text-align: center;
-    font-size: 3em;
-    font-family: Century Gothic;
-    font-weight: bold;
-   }
+  width: 100%;
+}
 
-   .leet{
-    margin-top:80%;
-    transition: all 0.5s ease-in-out;
-   }
+form {
+  width: 50%;
+  margin-right: 15%;
+  /* Отступ справа от изображения */
+  margin-top: 5%;
+  align-items: center;
+}
 
-   .leet:hover{
-    margin-top: 85%;
-    color:#858585;
-   }
-   
-   .container {
-    display: block;
-    margin-right: 0%;
-    margin-top:20%;
-    position: relative; 
+label {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+  display: block;
+  margin-top: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  font-size: 1.5em;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  height: 2em;
+  border-radius: 5px;
+  padding: 2%;
+  margin-top: 5px;
+  background-color: aliceblue;
+  transition: background-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  background-color: #8ca5e9;
+}
+
+input[type="submit"] {
+  width: 50%;
+  padding: 0.7em;
+  margin: 1em 0 4em 4em;
+  font-size: 2em;
+  font-weight: bold;
+  background-color: #4CAF50;
+  /* Light green background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  /* Align to the start of flex container */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #388e3c;
+}
+
+img.background {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  /* Высота не менее 100% высоты видимой области */
+  min-width: 50vw;
+  /* Ширина не менее 100% ширины видимой области */
+
+  /* Дополнительные стили, если необходимо */
+}
+
+/* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
+@media screen and (max-width: 640px) {
+  img.bg {
+    left: 50%;
+    margin-left: -320px;
   }
-  
-  .baton {
-    display: block;
-    height: 5px;
-    width: 150px;
-    background-color: #459fa5;
-    animation: scale 1.25s infinite linear;
-    transform-origin: 0;
-    transform: rotate(-10deg);
-    position: absolute; 
-  }
-  
-  .baton:before,
-  .baton:after {
-    content: '';
-    display: block;
-    height: 10px;
-    width: 10px;
-    background-color: #f5a51c;
-    position: absolute;
-    top: -2px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-  }
-  
-  .baton:after {
-    right: 0;
-  }
-  
-  .metronome {
-    -webkit-transform-origin: 0;
-    -moz-transform-origin: 0;
-    -ms-transform-origin: 0;
-    -o-transform-origin: 0;
-    transform-origin: 0;
-    animation: metronome 1.25s infinite linear;
-  }
-  
-  /* Создаем классы baton-0, baton-1, ..., baton-35 */
-  .baton-0 { animation-delay: 0s; transform: rotate(0deg); }
-  .baton-1 { animation-delay: -0.1429s; transform: rotate(10deg); }
-  .baton-2 { animation-delay: -0.2857s; transform: rotate(20deg); }
-  .baton-3 { animation-delay: -0.4286s; transform: rotate(30deg); }
-  .baton-4 { animation-delay: -0.5714s; transform: rotate(40deg); }
-  .baton-5 { animation-delay: -0.7143s; transform: rotate(50deg); }
-  .baton-6 { animation-delay: -0.8571s; transform: rotate(60deg); }
-  .baton-7 { animation-delay: -1s; transform: rotate(70deg); }
-  .baton-8 { animation-delay: -1.1429s; transform: rotate(80deg); }
-  .baton-9 { animation-delay: -1.2857s; transform: rotate(90deg); }
-  .baton-10 { animation-delay: -1.4286s; transform: rotate(100deg); }
-  .baton-11 { animation-delay: -1.5714s; transform: rotate(110deg); }
-  .baton-12 { animation-delay: -1.7143s; transform: rotate(120deg); }
-  .baton-13 { animation-delay: -1.8571s; transform: rotate(130deg); }
-  .baton-14 { animation-delay: -2s; transform: rotate(140deg); }
-  .baton-15 { animation-delay: -2.1429s; transform: rotate(150deg); }
-  .baton-16 { animation-delay: -2.2857s; transform: rotate(160deg); }
-  .baton-17 { animation-delay: -2.4286s; transform: rotate(170deg); }
-  .baton-18 { animation-delay: -2.5714s; transform: rotate(180deg); }
-  .baton-19 { animation-delay: -2.7143s; transform: rotate(190deg); }
-  .baton-20 { animation-delay: -2.8571s; transform: rotate(200deg); }
-  .baton-21 { animation-delay: -3s; transform: rotate(210deg); }
-  .baton-22 { animation-delay: -3.1429s; transform: rotate(220deg); }
-  .baton-23 { animation-delay: -3.2857s; transform: rotate(230deg); }
-  .baton-24 { animation-delay: -3.4286s; transform: rotate(240deg); }
-  .baton-25 { animation-delay: -3.5714s; transform: rotate(250deg); }
-  .baton-26 { animation-delay: -3.7143s; transform: rotate(260deg); }
-  .baton-27 { animation-delay: -3.8571s; transform: rotate(270deg); }
-  .baton-28 { animation-delay: -4s; transform: rotate(280deg); }
-  .baton-29 { animation-delay: -4.1429s; transform: rotate(290deg); }
-  .baton-30 { animation-delay: -4.2857s; transform: rotate(300deg); }
-  .baton-31 { animation-delay: -4.4286s; transform: rotate(310deg); }
-  .baton-32 { animation-delay: -4.5714s; transform: rotate(320deg); }
-  .baton-33 { animation-delay: -4.7143s; transform: rotate(330deg); }
-  .baton-34 { animation-delay: -4.8571s; transform: rotate(340deg); }
-  .baton-35 { animation-delay: -5s; transform: rotate(350deg); }
+}
 
 
-  
-  
-  /* ... и так далее до .baton-35 */
-  
-  @keyframes metronome {
-    0% {
-      -webkit-transform: rotate(-25deg);
-      -moz-transform: rotate(-25deg);
-      -ms-transform: rotate(-25deg);
-      -o-transform: rotate(-25deg);
-      transform: rotate(-25deg);
-    }
-    50% {
-      -webkit-transform: rotate(25deg);
-      -moz-transform: rotate(25deg);
-      -ms-transform: rotate(25deg);
-      -o-transform: rotate(25deg);
-      transform: rotate(25deg);
-    }
-    100% {
-      -webkit-transform: rotate(-25deg);
-      -moz-transform: rotate(-25deg);
-      -ms-transform: rotate(-25deg);
-      -o-transform: rotate(-25deg);
-      transform: rotate(-25deg);
-    }
-  }
-  
+.overlay {
+  position: absolute;
+  top: 75%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #EF6461;
+  font-size: 3em;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  transition: font-size 0.3s, color 0.3s;
+}
 
-  @keyframes scale {
-    0% {
-      -webkit-transform: scaleX(1);
-      -moz-transform: scaleX(1);
-      -ms-transform: scaleX(1);
-      -o-transform: scaleX(1);
-      transform: scaleX(1);
-    }
-    10% {
-      -webkit-transform: scaleX(0.9);
-      -moz-transform: scaleX(0.9);
-      -ms-transform: scaleX(0.9);
-      -o-transform: scaleX(0.9);
-      transform: scaleX(0.9);
-    }
-    20% {
-      -webkit-transform: scaleX(0.8);
-      -moz-transform: scaleX(0.8);
-      -ms-transform: scaleX(0.8);
-      -o-transform: scaleX(0.8);
-      transform: scaleX(0.8);
-    }
-    30% {
-      -webkit-transform: scaleX(0.7);
-      -moz-transform: scaleX(0.7);
-      -ms-transform: scaleX(0.7);
-      -o-transform: scaleX(0.7);
-      transform: scaleX(0.7);
-    }
-    40% {
-      -webkit-transform: scaleX(0.9);
-      -moz-transform: scaleX(0.9);
-      -ms-transform: scaleX(0.9);
-      -o-transform: scaleX(0.9);
-      transform: scaleX(0.9);
-    }
-    50% {
-      -webkit-transform: scaleX(1);
-      -moz-transform: scaleX(1);
-      -ms-transform: scaleX(1);
-      -o-transform: scaleX(1);
-      transform: scaleX(1);
-    }
-    60% {
-      -webkit-transform: scaleX(1.2);
-      -moz-transform: scaleX(1.2);
-      -ms-transform: scaleX(1.2);
-      -o-transform: scaleX(1.2);
-      transform: scaleX(1.2);
-    }
-    70% {
-      -webkit-transform: scaleX(1.4);
-      -moz-transform: scaleX(1.4);
-      -ms-transform: scaleX(1.4);
-      -o-transform: scaleX(1.4);
-      transform: scaleX(1.4);
-    }
-    80% {
-      -webkit-transform: scaleX(1.2);
-      -moz-transform: scaleX(1.2);
-      -ms-transform: scaleX(1.2);
-      -o-transform: scaleX(1.2);
-      transform: scaleX(1.2);
-    }
-    100% {
-      -webkit-transform: scaleX(1);
-      -moz-transform: scaleX(1);
-      -ms-transform: scaleX(1);
-      -o-transform: scaleX(1);
-      transform: scaleX(1);
-    }
+.overlay:hover {
+  font-size: 3.5em;
+  /* Увеличьте размер шрифта по вашему усмотрению */
+  color: rgb(83, 215, 204);
+  /* Измените цвет затемнения по вашему усмотрению */
+}
+
+.banner {
+  padding: 15%;
+  width: 50%;
+  height: 50%;
+  text-align: center;
+  font-size: 3em;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.leet {
+  margin-top: 71%;
+  transition: all 0.5s ease-in-out;
+}
+
+.leet:hover {
+  margin-top: 76%;
+  color: #858585;
+}
+
+.leet h1 {
+  font-size: 1.5em;
+}
+
+.container {
+  display: block;
+  margin-right: 0%;
+  margin-top: 20%;
+  position: relative;
+}
+
+.baton {
+  display: block;
+  height: 5px;
+  width: 150px;
+  background-color: #459fa5;
+  animation: scale 1.25s infinite linear;
+  transform-origin: 0;
+  transform: rotate(-10deg);
+  position: absolute;
+}
+
+.baton:before,
+.baton:after {
+  content: '';
+  display: block;
+  height: 10px;
+  width: 10px;
+  background-color: #f5a51c;
+  position: absolute;
+  top: -2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.baton:after {
+  right: 0;
+}
+
+.metronome {
+  -webkit-transform-origin: 0;
+  -moz-transform-origin: 0;
+  -ms-transform-origin: 0;
+  -o-transform-origin: 0;
+  transform-origin: 0;
+  animation: metronome 1.25s infinite linear;
+}
+
+/* Создаем классы baton-0, baton-1, ..., baton-35 */
+.baton-0 {
+  animation-delay: 0s;
+  transform: rotate(0deg);
+}
+
+.baton-1 {
+  animation-delay: -0.1429s;
+  transform: rotate(10deg);
+}
+
+.baton-2 {
+  animation-delay: -0.2857s;
+  transform: rotate(20deg);
+}
+
+.baton-3 {
+  animation-delay: -0.4286s;
+  transform: rotate(30deg);
+}
+
+.baton-4 {
+  animation-delay: -0.5714s;
+  transform: rotate(40deg);
+}
+
+.baton-5 {
+  animation-delay: -0.7143s;
+  transform: rotate(50deg);
+}
+
+.baton-6 {
+  animation-delay: -0.8571s;
+  transform: rotate(60deg);
+}
+
+.baton-7 {
+  animation-delay: -1s;
+  transform: rotate(70deg);
+}
+
+.baton-8 {
+  animation-delay: -1.1429s;
+  transform: rotate(80deg);
+}
+
+.baton-9 {
+  animation-delay: -1.2857s;
+  transform: rotate(90deg);
+}
+
+.baton-10 {
+  animation-delay: -1.4286s;
+  transform: rotate(100deg);
+}
+
+.baton-11 {
+  animation-delay: -1.5714s;
+  transform: rotate(110deg);
+}
+
+.baton-12 {
+  animation-delay: -1.7143s;
+  transform: rotate(120deg);
+}
+
+.baton-13 {
+  animation-delay: -1.8571s;
+  transform: rotate(130deg);
+}
+
+.baton-14 {
+  animation-delay: -2s;
+  transform: rotate(140deg);
+}
+
+.baton-15 {
+  animation-delay: -2.1429s;
+  transform: rotate(150deg);
+}
+
+.baton-16 {
+  animation-delay: -2.2857s;
+  transform: rotate(160deg);
+}
+
+.baton-17 {
+  animation-delay: -2.4286s;
+  transform: rotate(170deg);
+}
+
+.baton-18 {
+  animation-delay: -2.5714s;
+  transform: rotate(180deg);
+}
+
+.baton-19 {
+  animation-delay: -2.7143s;
+  transform: rotate(190deg);
+}
+
+.baton-20 {
+  animation-delay: -2.8571s;
+  transform: rotate(200deg);
+}
+
+.baton-21 {
+  animation-delay: -3s;
+  transform: rotate(210deg);
+}
+
+.baton-22 {
+  animation-delay: -3.1429s;
+  transform: rotate(220deg);
+}
+
+.baton-23 {
+  animation-delay: -3.2857s;
+  transform: rotate(230deg);
+}
+
+.baton-24 {
+  animation-delay: -3.4286s;
+  transform: rotate(240deg);
+}
+
+.baton-25 {
+  animation-delay: -3.5714s;
+  transform: rotate(250deg);
+}
+
+.baton-26 {
+  animation-delay: -3.7143s;
+  transform: rotate(260deg);
+}
+
+.baton-27 {
+  animation-delay: -3.8571s;
+  transform: rotate(270deg);
+}
+
+.baton-28 {
+  animation-delay: -4s;
+  transform: rotate(280deg);
+}
+
+.baton-29 {
+  animation-delay: -4.1429s;
+  transform: rotate(290deg);
+}
+
+.baton-30 {
+  animation-delay: -4.2857s;
+  transform: rotate(300deg);
+}
+
+.baton-31 {
+  animation-delay: -4.4286s;
+  transform: rotate(310deg);
+}
+
+.baton-32 {
+  animation-delay: -4.5714s;
+  transform: rotate(320deg);
+}
+
+.baton-33 {
+  animation-delay: -4.7143s;
+  transform: rotate(330deg);
+}
+
+.baton-34 {
+  animation-delay: -4.8571s;
+  transform: rotate(340deg);
+}
+
+.baton-35 {
+  animation-delay: -5s;
+  transform: rotate(350deg);
+}
+
+
+
+
+/* ... и так далее до .baton-35 */
+
+@keyframes metronome {
+  0% {
+    -webkit-transform: rotate(-25deg);
+    -moz-transform: rotate(-25deg);
+    -ms-transform: rotate(-25deg);
+    -o-transform: rotate(-25deg);
+    transform: rotate(-25deg);
   }
-  
-  .error{
-    background-color: #EF6461;
-    font-size: 2em;
-    font-weight: bold;
+
+  50% {
+    -webkit-transform: rotate(25deg);
+    -moz-transform: rotate(25deg);
+    -ms-transform: rotate(25deg);
+    -o-transform: rotate(25deg);
+    transform: rotate(25deg);
   }
- 
-   
- 
-  
+
+  100% {
+    -webkit-transform: rotate(-25deg);
+    -moz-transform: rotate(-25deg);
+    -ms-transform: rotate(-25deg);
+    -o-transform: rotate(-25deg);
+    transform: rotate(-25deg);
+  }
+}
+
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  10% {
+    -webkit-transform: scaleX(0.9);
+    -moz-transform: scaleX(0.9);
+    -ms-transform: scaleX(0.9);
+    -o-transform: scaleX(0.9);
+    transform: scaleX(0.9);
+  }
+
+  20% {
+    -webkit-transform: scaleX(0.8);
+    -moz-transform: scaleX(0.8);
+    -ms-transform: scaleX(0.8);
+    -o-transform: scaleX(0.8);
+    transform: scaleX(0.8);
+  }
+
+  30% {
+    -webkit-transform: scaleX(0.7);
+    -moz-transform: scaleX(0.7);
+    -ms-transform: scaleX(0.7);
+    -o-transform: scaleX(0.7);
+    transform: scaleX(0.7);
+  }
+
+  40% {
+    -webkit-transform: scaleX(0.9);
+    -moz-transform: scaleX(0.9);
+    -ms-transform: scaleX(0.9);
+    -o-transform: scaleX(0.9);
+    transform: scaleX(0.9);
+  }
+
+  50% {
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  60% {
+    -webkit-transform: scaleX(1.2);
+    -moz-transform: scaleX(1.2);
+    -ms-transform: scaleX(1.2);
+    -o-transform: scaleX(1.2);
+    transform: scaleX(1.2);
+  }
+
+  70% {
+    -webkit-transform: scaleX(1.4);
+    -moz-transform: scaleX(1.4);
+    -ms-transform: scaleX(1.4);
+    -o-transform: scaleX(1.4);
+    transform: scaleX(1.4);
+  }
+
+  80% {
+    -webkit-transform: scaleX(1.2);
+    -moz-transform: scaleX(1.2);
+    -ms-transform: scaleX(1.2);
+    -o-transform: scaleX(1.2);
+    transform: scaleX(1.2);
+  }
+
+  100% {
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+}
+
+.error {
+  background-color: #EF6461;
+  font-size: 2em;
+  font-weight: bold;
+}
