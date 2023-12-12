@@ -14,11 +14,13 @@
   </header>
   <div class="sort-container">
     <span>Sort by:</span>
-    <select id="sortOptions" class="sort-select" onchange="sortBy(this.value)">
-      <option value="">Select</option>
-      <option value="success_rate">Success rate</option>
-      <option value="total_exercises_completed">Amount</option>
-    </select>
+    <div class="custom-dropdown">
+      <div class="selected-option" onclick="toggleDropdown()">Success rate</div>
+      <ul id="dropdown-options">
+        <li value="success_rate" onclick="selectOption(this)">Success rate</li>
+        <li value="total_exercises_completed" onclick="selectOption(this)">Amount</li>
+      </ul>
+    </div>
   </div>
   <table>
     <thead>
@@ -32,6 +34,18 @@
     <tbody id="statisticsTable"></tbody>
   </table>
   <script>
+    function toggleDropdown() {
+      const dropdownOptions = document.getElementById('dropdown-options');
+      dropdownOptions.classList.toggle('show');
+    }
+
+    function selectOption(option) {
+      const selectedOption = document.querySelector('.selected-option');
+      selectedOption.textContent = option.textContent;
+      toggleDropdown(); // Скрыть выпадающий список после выбора опции
+      sortBy(option.getAttribute('value')); // Добавлен вызов sortBy
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       fetch('/api/statistics')
         .then(response => {

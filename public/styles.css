@@ -1,7 +1,7 @@
 /* styles.css */
 
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Consolas', Courier, monospace;
     margin: 0;
     padding: 0;
     background-color: #121212;
@@ -14,9 +14,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10px;
+    padding-right: 10px; 
+    padding-left: 10px; 
+    padding-top: 0;
+    padding-bottom: 0;
     background-color: #1c1c1c;
-    /* Slightly lighter dark shade for header */
+    margin-top: 0; 
+    margin-bottom: 0; 
 }
 
 h1 {
@@ -24,8 +28,26 @@ h1 {
     margin-left: 20px;
 }
 
-.nav-buttons button,
+.nav-buttons {
+    margin-top: 0; /* Добавьте эту строку */
+    margin-bottom: 0; /* Добавьте эту строку */
+}
+
+.nav-buttons button{
+    font-size: 1.4em;
+    background-color: #1c1c1c;
+    /* Dark grey background for buttons */
+    color: #ffffff;
+    /* White text color */
+    border: none;
+    padding: 15px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 .login-register button {
+    font-size: 1.4em;
     background-color: #333333;
     /* Dark grey background for buttons */
     color: #ffffff;
@@ -44,25 +66,3 @@ h1 {
     /* Lighter grey background on hover */
 }
 
-
-
-/* Responsive design adjustments */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-    }
-
-    .nav-buttons,
-    .login-register {
-        width: 100%;
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    .nav-buttons button,
-    .login-register button {
-        flex-grow: 1;
-        /* Buttons will expand to fill space evenly */
-    }
-}

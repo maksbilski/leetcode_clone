@@ -19,11 +19,5 @@ const pool = postgres({
   },
 });
 
-async function getPgVersion() {
-  const result = await pool`select version()`;
-  console.log(result);
-}
-
-getPgVersion();
 
 module.exports = pool;

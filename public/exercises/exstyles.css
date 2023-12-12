@@ -1,8 +1,29 @@
 /* exstyles.css */
+html
+{
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
 
+*::-webkit-scrollbar,
+html *::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+*::-webkit-scrollbar-track,
+html *::-webkit-scrollbar-track {
+  background: orange;
+}
+*::-webkit-scrollbar-thumb,
+html *::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 5px;
+  border: 3px solid orange;
+}
 /* Apply a global font and remove default margins */
 body {
-	font-family: 'Courier New', Courier, monospace;
+	font-family: 'Consolas', Courier, monospace;
+	font-weight: bold;
 	margin: 0;
 	padding: 0;
 	color: #ccc;
@@ -38,13 +59,12 @@ h1 {
 
 .home-link:hover {
 	text-decoration: none;
-	color: #927347;
+	color: #c0ae96;
 }
 
 /* Sorting container styles */
 .sort-container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	/* Center sorting buttons */
 	padding: 10px;
@@ -59,37 +79,50 @@ h1 {
 	/* Slightly larger text for the sort label */
 }
 
-/* Sorting dropdown styles */
-.sort-select {
-	text-align: center;
+
+/* Custom dropdown styles */
+.custom-dropdown {
+	display: inline-block;
 	background-color: #333333;
-	/* Orange background */
-	color: #ffffff;
-	/* Blue text color */
-	border: none;
 	border-radius: 5px;
-	padding: 10px 10px;
-	margin-right: auto;
+	padding: 10px;
 	cursor: pointer;
+	color: #ffffff;
 	transition: background-color 0.3s;
-	-webkit-appearance: none;
-	/* Removes default styling on webkit browsers */
-	-moz-appearance: none;
-	/* Removes default styling on Firefox */
-	appearance: none;
-	/* Removes default dropdown arrow */
-}
-
-.sort-select:hover {
+  }
+  
+  .custom-dropdown:hover {
 	background-color: #927347;
-	/* Pink background on hover */
-}
-
-/* You can add a custom arrow indicator to the dropdown */
-.sort-select {
-	background-position: right 10px center;
-	background-repeat: no-repeat;
-}
+  }
+  
+  ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	background-color: #333333;
+	border-radius: 6px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	display: none;
+  }
+  
+  li {
+	width:10em;
+	text-align: center;
+	padding: 10px;
+	color: #ffffff;
+	transition: background-color 0.3s;
+	cursor: pointer;
+  }
+  
+  li:hover {
+	background-color: #927347;
+  }
+  
+  /* Show the options when the parent is hovered */
+  .custom-dropdown:hover ul {
+	display: block;
+  }
 
 /* Table styles */
 table {
@@ -103,6 +136,7 @@ table {
 
 th,
 td {
+	font-size: 1.4em;
 	font-weight: bold;
 	text-align: left;
 	padding: 15px;
@@ -181,4 +215,8 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+span{
+	color: #a8a8a8;
 }

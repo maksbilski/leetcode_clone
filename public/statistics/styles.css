@@ -1,7 +1,8 @@
 /* styles.css */
 
 body {
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-family: 'Consolas', Tahoma, Geneva, Verdana, sans-serif;
+   font-weight: bold;
    margin: 0;
    padding: 0;
    color: #ccc;
@@ -16,6 +17,49 @@ header {
    padding: 10px 10px;
    background-color: #1c1c1c;
 }
+
+.custom-dropdown {
+	display: inline-block;
+	background-color: #333333;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+	color: #ffffff;
+	transition: background-color 0.3s;
+  }
+  
+  .custom-dropdown:hover {
+	background-color: #927347;
+  }
+  
+  ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	background-color: #333333;
+	border-radius: 6px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	display: none;
+  }
+  
+  li {
+	width:10em;
+	text-align: center;
+	padding: 10px;
+	color: #ffffff;
+	transition: background-color 0.3s;
+	cursor: pointer;
+  }
+  
+  li:hover {
+	background-color: #927347;
+  }
+  
+  /* Show the options when the parent is hovered */
+  .custom-dropdown:hover ul {
+	display: block;
+  }
 
 h1 {
    text-align: center;
@@ -36,7 +80,6 @@ h1 {
 
 .sort-container {
    display: flex;
-   justify-content: center;
    align-items: center;
    padding: 10px;
    margin-top: 10px;
@@ -81,10 +124,12 @@ table {
 
 th,
 td {
-   font-weight: bold;
-   text-align: left;
-   padding: 15px;
-   border-bottom: 1px solid #252526;
+	font-size: 1.4em;
+	font-weight: bold;
+	text-align: left;
+	padding: 15px;
+	border-bottom: 1px solid #252526;
+	/* Light border for rows */
 }
 
 th {
