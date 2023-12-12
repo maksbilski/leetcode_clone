@@ -9,15 +9,13 @@ const login_user = async (req, res) => {
       console.log(`Email: ${email}`);
       console.log(`Password: ${password}`);
   
-      const result = await pool.query(
-        'SELECT * FROM users WHERE email = $1 AND password = $2',
-        [email, password]
-      );
+      const result = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
   
-      console.log('Result.rows:', result.rows);
+      console.log(result)
+      console.log('Result.rows:', result.length);
   
-      if (result.rows.length > 0) {
-        const userId = result.rows[0].user_id; // Замените .id на .user_id
+      if (result.length > 0) {
+        const userId = result[0].user_id; // Замените .id на .user_id
         console.log('User ID:', userId);
         req.session.userId = userId;
   

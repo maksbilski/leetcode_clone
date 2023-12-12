@@ -4,7 +4,7 @@ const sort_statistics = async (req, res) => {
     try {
   
       const {key} = req.query;
-      const result = await pool.query(`
+      const result = await pool`
       SELECT 
           users.name,
           COUNT(ex_users.exercise_id) AS total_exercises_attempted,
@@ -16,8 +16,8 @@ const sort_statistics = async (req, res) => {
           ex_users ON users.user_id = ex_users.user_id
          GROUP BY 
           users.name
-        order by ${key} DESC;`);
-      res.json(result.rows);
+        order by ${key} DESC;`;
+      res.json(result);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -26,7 +26,7 @@ const sort_statistics = async (req, res) => {
   
    const get_statistics = async (req, res) => {
     try {
-      const result = await pool.query(`
+      const result = await pool`
       SELECT 
           users.name,
           COUNT(ex_users.exercise_id) AS total_exercises_attempted,
@@ -38,8 +38,8 @@ const sort_statistics = async (req, res) => {
           ex_users ON users.user_id = ex_users.user_id
          GROUP BY 
           users.name
-        order by total_exercises_completed DESC;`);
-      res.json(result.rows);
+        order by total_exercises_completed DESC;`;
+      res.json(result);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
