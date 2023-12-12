@@ -23,4 +23,21 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         },
         body: JSON.stringify(data)
        })
+       .then(response => {
+        if (!response.ok) {
+          throw new Error('You already have an account on leetcode');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        document.getElementById('error-message').textContent = '';
+  
+        window.location.href = '/exercises';
+      })
+      .catch(error => {
+        console.error(error.message);
+        
+        document.getElementById('error-message').textContent = error.message;
+      });
  });
