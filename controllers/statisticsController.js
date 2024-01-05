@@ -1,6 +1,7 @@
 const pool = require('../db')
 
 const sort_statistics = async (req, res) => {
+    console.log(req.session.userId)
     try {
       const validKeys = ["total_exercises_completed", "success_rate", "average_percentile"];
       const {key} = req.query;
