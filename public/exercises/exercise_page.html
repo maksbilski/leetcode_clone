@@ -1,87 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title id="page-title"></title>
-	<link rel="stylesheet" href="./styles.css">
-    <!-- Dodaj link do Font Awesome dla ikon -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title"></title>
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-
 <body>
-	<header>
-		<h1><a href="/" class="home-link">CodeChampions</a></h1>
-	</header>
-	<div class="content-container">
-		<div class="problem-description">
+    <header>
+        <h1><a href="/" class="home-link">CodeChampions</a></h1>
+    </header>
+    <div class="content-container">
+        <div class="problem-description">
             <div class="problem-header">
                 <h2 id="problem-title"></h2>
                 <div class="like-dislike-bar">
-                    <div id="like-bar" class="like-bar"></div>
-                    <div id="dislike-bar" class="dislike-bar"></div>
-                </div>
+					<div id="like-bar" class="like-bar"></div>
+					<div id="dislike-bar" class="dislike-bar"></div>
+				</div>
+				
+				
                 <div class="likes-dislikes-info">
-                    <div><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
-                    <div><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i></div>
-                </div>
+					<div id="like-button"><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
+					<div id="dislike-button"><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i></div>
+				</div>
+				
             </div>
-			<p id="problem-description"></p>
-		</div>
-		<div class="code-editor">
-			<textarea id="editor" placeholder="Enter your code here..."></textarea>
-			<button id="submit-btn">Submit</button>
-		</div>
-	</div>
+            <p id="problem-description"></p>
+        </div>
+        <div class="code-editor">
+            <textarea id="editor" placeholder="Enter your code here..."></textarea>
+            <button id="submit-btn">Submit</button>
+        </div>
+    </div>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const pathArray = window.location.pathname.split('/');
-			const exerciseId = pathArray[pathArray.length - 1];
-			fetch(`/api/exercises/${exerciseId}`)
-				.then(response => {
-					if (!response.ok) {
-						throw new Error('Failed to fetch exercise page');
-					}
-					return response.json();
-				})
-				.then(exercise => {
-					document.getElementById('page-title').innerText = exercise.name
-					document.getElementById('problem-title').innerText = exercise.name;
-					document.getElementById('problem-description').innerText = exercise.content;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pathArray = window.location.pathname.split('/');
+            const exerciseId = pathArray[pathArray.length - 1];
 
-					const likes = exercise.likes; // Załóżmy, że otrzymujesz liczbę polubień
-            		const dislikes = exercise.dislikes; // i niepolubień z backendu
-            		updateLikesDislikes(likes, dislikes);	
-				})
-				.catch(error => {
-					console.error(error);
-				});
-			document.getElementById('submit-btn').addEventListener('click', function () {
-				const code = document.getElementById('editor').value;
-			});
-		
+            // Pobierz dane ćwiczenia
+            fetch(`/api/exercises/${exerciseId}`)
+                .then(response => response.json())
+                .then(exercise => {
+                    document.getElementById('page-title').innerText = exercise.name;
+                    document.getElementById('problem-title').innerText = exercise.name;
+                    document.getElementById('problem-description').innerText = exercise.content;
 
-			function updateLikesDislikes(likes, dislikes) {
-				const totalVotes = likes + dislikes;
-				const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0;
-				const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0;
+                    // Teraz pobieramy liczniki polubień i niepolubień
+                    return fetch(`/api/exercises/get_like/${exerciseId}`);
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateLikesDislikes(data.likes, data.dislikes);
+                })
+                .catch(error => console.error('Error:', error));
 
-				document.getElementById('like-bar').style.width = `${likeRatio}%`;
-				document.getElementById('dislike-bar').style.width = `${dislikeRatio}%`;
-				document.getElementById('likes-count').innerText = likes;
-				document.getElementById('dislikes-count').innerText = dislikes;
-		}
+				function updateLikesDislikes(likes, dislikes) {
+    				const totalVotes = likes + dislikes;
+					const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0; // Procent polubień
+					const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0; // Procent niepolubień
 
-			// Przycisk wysyłający
-			document.getElementById('submit-btn').addEventListener('click', function () {
-				const code = document.getElementById('editor').value;
-				// Tutaj logika przesyłania kodu
-    		});
-		});
-	</script>
+					const likeBar = document.getElementById('like-bar');
+					const dislikeBar = document.getElementById('dislike-bar');
 
+					likeBar.style.height = `${likeRatio}%`;
+					dislikeBar.style.height = `${dislikeRatio}%`;
+
+					document.getElementById('likes-count').innerText = likes;
+					document.getElementById('dislikes-count').innerText = dislikes;
+}
+
+
+            // Obsługa kliknięcia przycisku "like"
+            document.getElementById('like-button').addEventListener('click', function () {
+                sendVote(exerciseId, 1);
+            });
+
+            // Obsługa kliknięcia przycisku "dislike"
+            document.getElementById('dislike-button').addEventListener('click', function () {
+                sendVote(exerciseId, -1);
+            });
+
+            function sendVote(exerciseId, voteType) {
+                fetch(`/api/exercises/post_like/${exerciseId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ vote: voteType }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    updateLikesDislikes(data.likes, data.dislikes);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
 </body>
-
 </html>

@@ -12,6 +12,12 @@ const get_exercises = async (req, res) => {
     }
 };
    
+const post_like = async (req, res) => {
+  const exerciseId = req.params.exerciseId;
+  const vote = req.body.vote;
+
+  res.json({ success: true, likes: updatedLikes, dislikes: updatedDislikes });
+}
 const sort_exercises = async (req, res) => {
     try {
       const validKeys = ["exercise_id", "name", "category", "difficulty"];
