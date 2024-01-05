@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title id="page-title"></title>
 	<link rel="stylesheet" href="./styles.css">
+    <!-- Dodaj link do Font Awesome dla ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
 <body>
@@ -14,7 +16,17 @@
 	</header>
 	<div class="content-container">
 		<div class="problem-description">
-			<h2 id="problem-title"></h2>
+            <div class="problem-header">
+                <h2 id="problem-title"></h2>
+                <div class="like-dislike-bar">
+                    <div id="like-bar" class="like-bar"></div>
+                    <div id="dislike-bar" class="dislike-bar"></div>
+                </div>
+                <div class="likes-dislikes-info">
+                    <div><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
+                    <div><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i></div>
+                </div>
+            </div>
 			<p id="problem-description"></p>
 		</div>
 		<div class="code-editor">
@@ -38,6 +50,10 @@
 					document.getElementById('page-title').innerText = exercise.name
 					document.getElementById('problem-title').innerText = exercise.name;
 					document.getElementById('problem-description').innerText = exercise.content;
+
+					const likes = exercise.likes; // Załóżmy, że otrzymujesz liczbę polubień
+            		const dislikes = exercise.dislikes; // i niepolubień z backendu
+            		updateLikesDislikes(likes, dislikes);	
 				})
 				.catch(error => {
 					console.error(error);
@@ -45,6 +61,24 @@
 			document.getElementById('submit-btn').addEventListener('click', function () {
 				const code = document.getElementById('editor').value;
 			});
+		
+
+			function updateLikesDislikes(likes, dislikes) {
+				const totalVotes = likes + dislikes;
+				const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0;
+				const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0;
+
+				document.getElementById('like-bar').style.width = `${likeRatio}%`;
+				document.getElementById('dislike-bar').style.width = `${dislikeRatio}%`;
+				document.getElementById('likes-count').innerText = likes;
+				document.getElementById('dislikes-count').innerText = dislikes;
+		}
+
+			// Przycisk wysyłający
+			document.getElementById('submit-btn').addEventListener('click', function () {
+				const code = document.getElementById('editor').value;
+				// Tutaj logika przesyłania kodu
+    		});
 		});
 	</script>
 
