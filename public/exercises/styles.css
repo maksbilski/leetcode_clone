@@ -1,23 +1,24 @@
-html
-{
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
+html {
+	scrollbar-width: thin;
+	scrollbar-color: blue orange;
 }
 
 *::-webkit-scrollbar,
 html *::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
+	height: 12px;
+	width: 12px;
 }
+
 *::-webkit-scrollbar-track,
 html *::-webkit-scrollbar-track {
-  background: orange;
+	background: orange;
 }
+
 *::-webkit-scrollbar-thumb,
 html *::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 5px;
-  border: 3px solid orange;
+	background-color: blue;
+	border-radius: 5px;
+	border: 3px solid orange;
 }
 
 body {
@@ -73,7 +74,7 @@ h1 {
 }
 
 .problem-description {
-	
+
 	flex: 3;
 	height: calc(100vh - 120px);
 	overflow-y: auto;
@@ -88,19 +89,101 @@ h1 {
 	margin-left: 10px;
 }
 
+.CodeMirror {
+	height: calc(100vh - 120px);
+	border-radius: 10px;
+	display: flex;
+	flex: 3;
+	flex-direction: column;
+	margin: 10px;
+	background-color: #1c1c1c;
+	border: 2px groove #31748f;
+	width: 97.5%;
+	color: #dcdcdc;
+	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.CodeMirror-gutters {
+	background: #1c1c1c;
+	border-right: 1px solid #31748f;
+}
+
+.CodeMirror-cursor {
+	border-left: 1px solid #d4d4d4;
+}
+
+.CodeMirror-selected {
+	background: rgba(255, 255, 255, 0.1) !important;
+	;
+}
+
+.CodeMirror-activeline-background {
+	background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.CodeMirror .cm-keyword {
+	color: #31748f;
+}
+
+.CodeMirror .cm-operator {
+	color: #e3e42e;
+}
+
+.CodeMirror .cm-variable {
+	color: #ffffff;
+}
+
+.CodeMirror .cm-variable-2 {
+	color: #ebbcba;
+}
+
+.CodeMirror .cm-builtin {
+	color: #f6c177;
+}
+
+.CodeMirror .cm-number {
+	color: #B5CEA8;
+}
+
+.CodeMirror .cm-def {
+	color: #ffffff;
+	font-style: italic;
+}
+
+.CodeMirror .cm-string {
+	color: #ebbcba;
+}
+
+.CodeMirror .cm-comment {
+	color: #6A9955;
+	font-style: italic;
+}
+
+.CodeMirror .cm-tag {
+	color: #569CD6;
+}
+
+.CodeMirror .cm-meta {
+	color: #ff6e34;
+}
+
+
+
 h2 {
 	font-weight: lighter;
 	font-size: 3.0em;
 	margin-top: 20.0px;
 	margin-left: 20.0px;
-	color:aliceblue;
+	color: aliceblue;
 	text-decoration: underline;
 	cursor: pointer;
 	transition: color 0.3s;
 }
 
-h2:hover{
-	color:cyan;
+h2:hover {
+	color: cyan;
 }
 
 p {
@@ -109,25 +192,6 @@ p {
 	line-height: 1.0;
 	color: #bbb;
 	/* Lighter text color for readability */
-}
-
-textarea {
-	flex-grow: 1;
-	width: 95%;
-	margin-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: 'Consolas', 'Courier New', Courier, monospace;
-	font-size: 14px;
-	border: 2px groove #31748f;
-	border-radius: 8px;
-	padding: 10px;
-	resize: none;
-	/* Disable resizing */
-	background-color: #1e1e1e;
-	/* Even darker background for contrast */
-	color: #dcdcdc;
-	/* Light text color for contrast */
 }
 
 button {

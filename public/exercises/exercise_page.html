@@ -5,7 +5,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title id="page-title"></title>
+
+	<!-- Adding CodeMirror stylesheet -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/lib/codemirror.min.css">
+
 	<link rel="stylesheet" href="./styles.css">
+
+	<!-- Adding main script of CodeMirror -->
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/lib/codemirror.js"></script>
+
+	<!-- Adding script for Python mode -->
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/mode/python/python.js"></script>
+
+	<!-- Adding main script of Brython -->
+	<script src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+
 </head>
 
 <body>
@@ -25,6 +39,18 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
+			var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+				lineNumbers: true,
+				mode: "python",
+				smartIndent: true,
+				indentUnit: 4,
+				tabSize: 4,
+				indentWithTabs: true,
+				styleActiveLine: true
+			});
+
+			brython();
+
 			const pathArray = window.location.pathname.split('/');
 			const exerciseId = pathArray[pathArray.length - 1];
 			fetch(`/api/exercises/${exerciseId}`)
