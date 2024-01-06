@@ -40,4 +40,6 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         
         document.getElementById('error-message').textContent = error.message;
       });
+
+      
  });
