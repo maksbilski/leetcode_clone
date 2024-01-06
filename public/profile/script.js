@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Aktualizacja liczby rozwiązanych problemów
             const userName = document.getElementById('username');
             userName.textContent = `${data.name}`;
-            
+
             const rozwiazaneProblemyElement = document.getElementById('stats').getElementsByTagName('h2')[0];
             rozwiazaneProblemyElement.textContent = `Rozwiązane Problemy: ${data.success_count}`;
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Oddzielne zapytanie dla danych kalendarza (bez zmian)
-    fetch('url_do_endpointu_get_z_aktywnoscia_w_ostatnim_roku')
+    fetch('/api/profile/calendar')
         .then(response => response.json())
         .then(data => {
             const calendarContainer = document.getElementById('calendar');
