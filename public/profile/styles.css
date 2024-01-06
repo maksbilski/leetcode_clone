@@ -1,3 +1,8 @@
+body {
+    background-color: #f0f0f0; /* Szary kolor tła */
+}
+
+
 #container {
     display: flex;
 }
@@ -9,6 +14,21 @@
 
 #user-info {
     text-align: center;
+}
+
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#history-table th, #history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#history-table th {
+    background-color: #f2f2f2;
 }
 
 #avatar {
