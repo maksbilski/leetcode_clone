@@ -10,6 +10,18 @@ CREATE TABLE exercises (
     category VARCHAR(255) NOT NULL,
     difficulty VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE submissions_history (
+    ID SERIAL PRIMARY KEY,
+    exercise_id INT,
+    user_id INT,
+    submission_date TIMESTAMP,
+    success BOOLEAN,
+    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
 CREATE TABLE ex_users (
     exercise_id INT,
     user_id INT,
@@ -124,3 +136,26 @@ VALUES
     (8, 'Discuss the importance of transaction management in databases.'),
     (9, 'Solve a dynamic programming problem and explain the approach.'),
     (10, 'Explain the concept of indexing and its significance in databases.');
+
+   DO $$
+DECLARE
+    i INT := 0;
+    random_date TIMESTAMP;
+    random_exercise_id INT;
+    random_user_id INT;
+    random_success BOOLEAN;
+BEGIN
+    FOR i IN 1..100 LOOP
+        -- Losowanie daty z ostatnich 10 miesięcy
+        random_date := NOW() - INTERVAL '1 day' * ROUND(RANDOM() * 300);
+        -- Losowanie exercise_id (zakres 1-10)
+        random_exercise_id := TRUNC(RANDOM() * 9 + 1)::INT;
+        -- Losowanie user_id (zakres 1-11)
+        random_user_id := TRUNC(RANDOM() * 10 + 1)::INT;
+        -- Losowy sukces (true/false)
+        random_success := RANDOM() < 0.5;
+
+        INSERT INTO user_history (exercise_id, user_id, completion_date, success)
+        VALUES (random_exercise_id, random_user_id, random_date, random_success);
+    END LOOP;
+END $$;
