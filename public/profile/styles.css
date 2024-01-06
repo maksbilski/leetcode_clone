@@ -1,0 +1,60 @@
+#container {
+    display: flex;
+}
+
+#sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+}
+
+#user-info {
+    text-align: center;
+}
+
+#avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#rank, #languages {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+#skills .skill {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+#main-content {
+    width: 80%;
+    padding: 20px;
+}
+
+#difficulty-bars .bar {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.calendar-day {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin: 1px;
+}
+
+
+.easy {
+    background-color: green;
+}
+
+.medium {
+    background-color: orange;
+}
+
+.hard {
+    background-color: red;
+}
+
+/* Dodatkowe stylizacje */
