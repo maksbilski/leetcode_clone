@@ -10,8 +10,8 @@ router.get('/login', (req, res) => {
     res.status(200).sendFile('login.html', {root: path.join(__dirname, '..', 'public', 'login') });
     });
    
-router.get('/help', (req, res) => {
-    res.status(200).sendFile('help.html', {root: path.join(__dirname, '..', 'public', 'help') });
+router.get('/profile', (req, res) => {
+    res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
     });
    
 router.get('/statistics', (req, res) => {
