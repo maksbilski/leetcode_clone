@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/profile/aggregate')
         .then(response => response.json())
         .then(data => {
@@ -6,14 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const userName = document.getElementById('username');
             userName.textContent = `${data.name}`;
 
+            const rank = document.getElementById('rank');
+            rank.textContent = `User rank: ${data.user_rank} / ${data.total_users}`;
+
+
             const rozwiazaneProblemyElement = document.getElementById('stats').getElementsByTagName('h2')[0];
             rozwiazaneProblemyElement.textContent = `Rozwiązane Problemy: ${data.success_count}`;
 
             // Aktualizacja pasków trudności
             const difficultyBars = document.getElementById('difficulty-bars').getElementsByClassName('bar');
-            difficultyBars[0].textContent = `Łatwe: ${data.easy_count}`;
-            difficultyBars[1].textContent = `Średnie: ${data.medium_count}`;
-            difficultyBars[2].textContent = `Trudne: ${data.hard_count}`;
+            difficultyBars[0].textContent = `Łatwe: ${data.easy_count} / ${data.total_easy}`;
+            difficultyBars[1].textContent = `Średnie: ${data.medium_count} /${data.total_medium}`;
+            difficultyBars[2].textContent = `Trudne: ${data.hard_count}/ ${ data.total_hard}`;
 
             // Aktualizacja umiejętności
             const skills = document.getElementById('skills').getElementsByClassName('skill');
