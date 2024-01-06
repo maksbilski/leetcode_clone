@@ -23,15 +23,19 @@ app.use(session({
 
 app.use('/api/exercises', checkAuthentication);
 app.use('/api/statistics', checkAuthentication);
+app.use('/api/profile', checkAuthentication);
 
 //setup routers
+const profileRouter = require('./routers/profile')
 const exercisesRouter = require('./routers/exercises');
 const statisticsRouter = require('./routers/statistics')
 const pagesRouter = require('./routers/SSR_pages')
 const registerRouter = require('./routers/register')
 const exercisePageRouter = require('./routers/exercisePage')
-const login = require('./routers/login')
+const login = require('./routers/login');
+const { profile } = require('console');
 
+app.use('/api/profile', profileRouter)
 app.use('/api/exercises', exercisesRouter)
 app.use('/api/statistics', statisticsRouter)
 app.use('/api/login', login)
