@@ -1,14 +1,36 @@
 const pool = require('../db');
 
+    const toggle_state = async (req, res) => {
+        console.log('togglestate');
+        try {
+
+            const userIdFromBody = req.body.user_id;
+            const userIdFromSession = req.session.userId;
+            console.log(userIdFromBody);
+            console.log(userIdFromSession);
+
+            if (userIdFromBody !== userIdFromSession && userIdFromBody) {
+                // Użytkownik nie ma uprawnień do zmiany tego profilu
+                return res.status(403).json({ error: 'Brak uprawnień' });
+            }
+
+            const result = await pool `
+            UPDATE users
+            SET private = NOT private
+            WHERE user_id = 1`;
+            res.json(result);
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+    }
 const get_calendar = async (req, res) => {
     const userId = req.session.userId
-    console.log('calendar')
     try {
         const result = await pool`
         SELECT DISTINCT TO_CHAR(submission_date, 'YYYY-MM-DD') AS formatted_date
         FROM submissions_history
         WHERE user_id = 1`;
-            console.log(result);
             res.json(result);
       } catch (error) {
         console.error(error);
@@ -49,6 +71,7 @@ const get_aggregate_stats = async (req, res) => {
       const result = await pool`
       SELECT 
         u.name as name,
+        u.private as private,
         COUNT(eu.exercise_id) AS iloscRozwiazanychProblemow,
         SUM(CASE WHEN eu.success = true THEN 1 ELSE 0 END) AS success_count,
         SUM(CASE WHEN (e.difficulty = 'Easy') AND (eu.success = true) THEN 1 ELSE 0 END) AS easy_count,
@@ -86,4 +109,5 @@ module.exports = {
     get_aggregate_stats,
     get_history,
     get_calendar,
+    toggle_state,
 }
