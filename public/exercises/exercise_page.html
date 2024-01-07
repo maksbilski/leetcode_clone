@@ -109,7 +109,8 @@
 						return response.json();
 					})
 					.then(data => {
-						console.log('Code saved:', data);
+						const consoleLabel = document.getElementById('console-label');
+						consoleLabel.textContent = data.output;
 					})
 					.catch(error => {
 						console.error('Could not save the code:', error);
