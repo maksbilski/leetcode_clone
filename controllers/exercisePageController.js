@@ -25,16 +25,12 @@ const runCode = async (req, res) => {
 	try {
 		const userId = req.session.userId;
 		const { exerciseId, code } = req.body;
-		const testPath = await pool`
-		SELECT tests
-		FROM exercises e
-		WHERE e.exercise_id = ${exerciseId}`;
 		const programPath = await createTemporaryFile(code, exerciseId, userId);
-		const result = await runDockerContainer(testPath, programPath);
-		res.json({ 
-			message: 'Code executed', 
-			output: result.stdout, 
-			errorOutput: result.stderr 
+		const result = await runDockerContainer(exerciseId, programPath);
+		res.json({
+			message: 'Code executed',
+			output: result.stdout,
+			errorOutput: result.stderr
 		});
 	} catch (error) {
 		console.error(error);
@@ -50,9 +46,9 @@ async function createTemporaryFile(code, exerciseId, userId) {
 	return filePath;
 }
 
-function runDockerContainer(testPath, programPath) {
+function runDockerContainer(exerciseId, programPath) {
 	return new Promise((resolve, reject) => {
-		const command = `docker run --rm -v "${programPath}:/app/code.py" -v "${testPath}:/app/test.py" docker-image` //change the name of docker image after implementing docker file
+		const command = `docker run -v "${programPath}:/app/code.py" -v "tests/${exerciseId}.py:/app/test.py" test-container` //change the name of docker image after implementing docker file
 
 		exec(command, async (error, stdout, stderr) => {
 			try {
