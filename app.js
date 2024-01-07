@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const session = require('express-session'); // Добавим импорт express-session
-// Импорт функции checkAuthentication
+const session = require('express-session');
 const { checkAuthentication } = require('./controllers/loginController');
+const { pool } = require('./db');
 
 //db connection
 const pool = require('./db');
@@ -18,10 +18,14 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 const secret_key = 'PaP2023z';
+
 app.use(session({
   secret: secret_key,
   resave: false,
   saveUninitialized: true,
+  cookie: {
+    maxAge: 30000, // 30 sec in milliseconds
+  },
 }));
 
 //setInterval(checkExercisesAndSendEmail, 10000);
@@ -35,12 +39,8 @@ app.use('/help', checkAuthentication);
 const helpRouter = require('./routers/help')
 const profileRouter = require('./routers/profile')
 const exercisesRouter = require('./routers/exercises');
-const statisticsRouter = require('./routers/statistics')
-const pagesRouter = require('./routers/SSR_pages')
-const registerRouter = require('./routers/register')
-const exercisePageRouter = require('./routers/exercisePage')
-const login = require('./routers/login');
-const { profile } = require('console');
+const statisticsRouter = require('./routers/statisticsexp
+//const loginRouter = require('./routers/login');
 
 app.use('/api/profile', profileRouter)
 app.use('/api/exercises', exercisesRouter)

@@ -15,7 +15,7 @@ const login_user = async (req, res) => {
       console.log('Result.rows:', result.length);
   
       if (result.length > 0) {
-        const userId = result[0].user_id; // Замените .id на .user_id
+        const userId = result[0].user_id; 
         console.log('User ID:', userId);
         req.session.userId = userId;
   
@@ -43,7 +43,16 @@ const checkAuthentication = (req, res, next) => {
   }
 };
 
+// Добавляем эндпоинт для обновления сессии
+const refreshSession = (req, res) => {
+  console.log('Refreshing session...');
+  req.session.touch(); // Обновление времени жизни сессии
+  res.json({ message: 'Session refreshed' });
+};
+
 module.exports = {
   login_user,
-  checkAuthentication, // Экспортируем middleware для использования в других файлах
+  checkAuthentication,
+  refreshSession, // Добавляем новый эндпоинт
 };
+
