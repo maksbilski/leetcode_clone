@@ -198,19 +198,22 @@
 
       </div>
 
-      <form id="registrationForm">
-         <label for="firstName">First Name:</label><br>
-         <input type="text" id="firstName" name="firstName" placeholder="Your first name"><br>
-         <label for="surname">Surname:</label><br>
-         <input type="text" id="surname" name="surname" placeholder="Your second name"><br>
-         <label for="email">Email:</label><br>
-         <input type="email" id="email" name="email" placeholder="Your email"><br>
-         <label for="password">Password:</label><br>
-         <input type="password" id="password" name="password" placeholder="Your password"><br>
-         <input type="submit" value="REGISTER">
-      </form>
+      <div class="form">
+         <p style="font-size: 3em; font-weight: bold; margin-left: 20%; margin-bottom: 0;">Sign Up</p>
+         <p style="font-size: 1.5em; margin-left: 20%; color:rgb(106, 106, 106); margin-top: 1%;">Already have account on Code Champions? <a style ="color: #ccc;" href="/login">Log in</a></p>
+         <form id="registrationForm">
+            <label for="firstName">First Name:</label><br>
+            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="Your email" required><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" placeholder="Your password" required><br>
+            <input type="submit" value="REGISTER">
+         </form>
+         <p style="color:rgb(255, 33, 33); font-size: 2em; margin-left: 15%; margin-top: 5%;" id="error-message"></p>
+      </div>
    </div>
-   <p id="error-message"></p>
+   
 
    <script src="script.js"></script>
 </body>
