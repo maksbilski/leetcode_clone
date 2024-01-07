@@ -123,6 +123,7 @@ VALUES
     (9, 6, 30, true, true),
     (10, 7, 22, true, true);
 
+
 	 
 INSERT INTO exercise_content (exercise_id, content)
 VALUES
@@ -159,3 +160,12 @@ BEGIN
         VALUES (random_exercise_id, random_user_id, random_date, random_success);
     END LOOP;
 END $$;
+
+ALTER TABLE users
+ADD COLUMN private BOOLEAN NOT NULL,
+ADD COLUMN description VARCHAR(255);
+
+UPDATE users
+SET private = false
+WHERE private IS NULL;
+
