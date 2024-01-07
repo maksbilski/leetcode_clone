@@ -49,8 +49,22 @@ async function createTemporaryFile(code, exerciseId, userId) {
 
 function runDockerContainer(testPath, programPath) {
 	return new Promise((resolve, reject) => {
-		const command = `docker run`
-	})
+		const command = `docker run --rm -v "${programPath}:/app/code.py" -v "${testPath}:/app/test.py" docker-image` //change the name of docker image after implementing docker file
+
+		exec(command, async (error, stdout, stderr) => {
+			try {
+				await fs.unlink(programPath);
+			} catch (err) {
+				console.error("Deleting temp file not successful:", err);
+			}
+
+			if (error) {
+				reject({ error: error.message, stderr });
+			} else {
+				resolve({ stdout, stderr });
+			}
+		});
+	});
 }
 
 module.exports = {
