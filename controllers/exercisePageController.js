@@ -16,11 +16,11 @@ const get_exercise_page = async (req, res) => {
 	}
 };
 
-const submit_code = async (req, res) => {
+const run_code = async (req, res) => {
 	try {
 		const { exerciseId, code } = req.body;
 		//dockerinho
-		// res.json <--- answer here
+		console.log(code);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error' });
@@ -29,5 +29,5 @@ const submit_code = async (req, res) => {
 
 module.exports = {
 	get_exercise_page,
-	submit_code
+	run_code
 }

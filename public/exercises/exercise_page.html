@@ -33,7 +33,7 @@
 		</div>
 		<div class="code-editor">
 			<textarea id="editor" placeholder="Enter your code here..."></textarea>
-			<button id="submit-btn">Submit</button>
+			<button id="run-btn">Run</button>
 		</div>
 	</div>
 
@@ -72,7 +72,7 @@
 				.catch(error => {
 					console.error(error);
 				});
-			document.getElementById('submit-btn').addEventListener('click', function () {
+			document.getElementById('run-btn').addEventListener('click', function () {
 				const code = editor.getValue();
 				localStorage.setItem('savedCode-' + exerciseId, code);
 
@@ -81,7 +81,7 @@
 					code: code
 				};
 
-				fetch(`/api/exercises/${exerciseId}/submit`, {
+				fetch(`/api/exercises/${exerciseId}/run_code`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
