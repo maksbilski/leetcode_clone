@@ -1,5 +1,6 @@
 const pool = require('../db')
 
+
 const sort_statistics = async (req, res) => {
     console.log(req.session.userId)
     try {
@@ -21,6 +22,7 @@ const sort_statistics = async (req, res) => {
     )
     SELECT 
         users.name,
+        users.user_id,
         COUNT(ex_users.exercise_id) AS total_exercises_attempted,
         COUNT(CASE WHEN ex_users.success = true THEN 1 END) AS total_exercises_completed,
         ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate,
@@ -33,7 +35,7 @@ const sort_statistics = async (req, res) => {
     LEFT JOIN 
         UserExercisePercentiles ON users.user_id = UserExercisePercentiles.user_id
     GROUP BY 
-        users.name
+        users.user_id
     ORDER BY ${pool(key)} DESC;`;
       res.json(result);
     } catch (error) {
@@ -56,7 +58,8 @@ const sort_statistics = async (req, res) => {
         ex_users.success = true
 )
 SELECT 
-    users.name,
+    users.user_id, 
+    users.name, 
     COUNT(ex_users.exercise_id) AS total_exercises_attempted,
     COUNT(CASE WHEN ex_users.success = true THEN 1 END) AS total_exercises_completed,
     ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate,
@@ -69,7 +72,7 @@ JOIN
 LEFT JOIN 
     UserExercisePercentiles ON users.user_id = UserExercisePercentiles.user_id
 GROUP BY 
-    users.name
+    users.user_id
 ORDER BY 
     total_exercises_completed DESC;`;
       res.json(result);
