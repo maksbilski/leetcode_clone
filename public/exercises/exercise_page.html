@@ -33,6 +33,8 @@
 		</div>
 		<div class="code-editor">
 			<textarea id="editor" placeholder="Enter your code here..."></textarea>
+		</div>
+		<div>
 			<button id="submit-btn">Submit</button>
 		</div>
 	</div>
@@ -49,10 +51,14 @@
 				styleActiveLine: true
 			});
 
-			brython();
-
 			const pathArray = window.location.pathname.split('/');
 			const exerciseId = pathArray[pathArray.length - 1];
+
+			const savedCode = localStorage.getItem('savedCode-' + exerciseId);
+			if (savedCode) {
+				editor.setValue(savedCode);
+			}
+
 			fetch(`/api/exercises/${exerciseId}`)
 				.then(response => {
 					if (!response.ok) {
@@ -69,7 +75,34 @@
 					console.error(error);
 				});
 			document.getElementById('submit-btn').addEventListener('click', function () {
-				const code = document.getElementById('editor').value;
+				console.log('button click');
+				const code = editor.getValue();
+				localStorage.setItem('savedCode-' + exerciseId, code);
+
+				const data = {
+					exerciseId: exerciseId,
+					code: code
+				};
+
+				fetch(`/api/exercises/${exerciseId}/submit`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response not ok');
+						}
+						return response.json();
+					})
+					.then(data => {
+						console.log('Code saved:', data);
+					})
+					.catch(error => {
+						console.error('Could not save the code:', error);
+					});
 			});
 		});
 	</script>
