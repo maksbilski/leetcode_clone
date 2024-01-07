@@ -9,6 +9,9 @@ const { checkAuthentication } = require('./controllers/loginController');
 const pool = require('./db');
 module.exports = { pool };
 
+const {checkExercisesAndSendEmail, testSendEmail} = require('./services/emailService');
+
+
 const app = express();
 const port = 5000;
 app.use(express.static('public'));
@@ -20,6 +23,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+
+setInterval(checkExercisesAndSendEmail, 10000);
 
 app.use('/api/exercises', checkAuthentication);
 app.use('/api/statistics', checkAuthentication);
