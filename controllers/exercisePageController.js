@@ -24,8 +24,10 @@ const runCode = async (req, res) => {
 	try {
 		const userId = req.session.userId;
 		const { exerciseId, code } = req.body;
+		const relativePath = `../tests/${exerciseId}.py`
+		const filePath = getAbsolutePath(relativePath)
 		const programPath = await createTemporaryFile(code, exerciseId, userId);
-		const result = await runDockerContainer(exerciseId, programPath);
+		const result = await runDockerContainer(filePath, programPath);
 		res.json({
 			message: 'Code executed',
 			output: result.stdout,
@@ -37,6 +39,12 @@ const runCode = async (req, res) => {
 	}
 }
 
+
+function getAbsolutePath(relativePath) {
+	return path.resolve(__dirname, relativePath);
+}
+
+
 async function createTemporaryFile(code, exerciseId, userId) {
 	const tempDir = os.tmpdir();
 	const fileName = `user-${userId}_exercise-${exerciseId}_${Date.now()}.py`;
@@ -45,9 +53,10 @@ async function createTemporaryFile(code, exerciseId, userId) {
 	return filePath;
 }
 
-function runDockerContainer(exerciseId, programPath) {
+
+function runDockerContainer(testPath, programPath) {
 	return new Promise((resolve, reject) => {
-		const command = `docker run -v "${programPath}:/app/solution.py" -v "/home/mrozek/cpap2023z-z25/tests/${exerciseId}.py:/app/test.py" test-container` //change the name of docker image after implementing docker file
+		const command = `docker run -v "${programPath}:/app/solution.py" -v "${testPath}:/app/test.py" test-container`
 
 		exec(command, async (error, stdout, stderr) => {
 			try {
