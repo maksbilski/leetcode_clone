@@ -33,9 +33,9 @@ const login_user = async (req, res) => {
 
 // Middleware для проверки аутентификации
 const checkAuthentication = (req, res, next) => {
-    console.log('Checking authentication...');
+    /*console.log('Checking authentication...');
     console.log('req.session:', req.session);
-    console.log('req.session.userId:', req.session.userId);
+    console.log('req.session.userId:', req.session.userId);*/
   if (req.session.userId) {
     next();
   } else {

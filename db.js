@@ -1,10 +1,10 @@
 const postgres = require('postgres');
 
 
-PGHOST='ep-muddy-field-58353771.us-east-2.aws.neon.tech'
-PGDATABASE='leetcode'
-PGUSER='sofianasekajlo4'
-PGPASSWORD='cCp1hn8YOWQL'
+PGHOST='127.0.0.1'
+PGDATABASE='pap-project'
+PGUSER='postgres'
+PGPASSWORD='postgres'
 ENDPOINT_ID='ep-muddy-field-58353771'
 
 const pool = postgres({
@@ -13,10 +13,10 @@ const pool = postgres({
   username: PGUSER,
   password: PGPASSWORD,
   port: 5432,
-  ssl: 'require',
+  /*ssl: 'require',
   connection: {
     options: `project=${ENDPOINT_ID}`,
-  },
+  },*/
 });
 
 
