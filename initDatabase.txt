@@ -156,16 +156,37 @@ BEGIN
         -- Losowy sukces (true/false)
         random_success := RANDOM() < 0.5;
 
-        INSERT INTO user_history (exercise_id, user_id, completion_date, success)
+        INSERT INTO submissions_history (exercise_id, user_id, submission_date, success)
         VALUES (random_exercise_id, random_user_id, random_date, random_success);
     END LOOP;
 END $$;
 
 ALTER TABLE users
-ADD COLUMN private BOOLEAN NOT NULL,
+ADD COLUMN private BOOLEAN,
 ADD COLUMN description VARCHAR(255);
 
 UPDATE users
 SET private = false
 WHERE private IS NULL;
+
+-- Add new column
+ALTER TABLE exercises
+ADD COLUMN date_added date;
+
+-- Set a random date in 2023 for existing records
+UPDATE exercises
+SET date_added = DATE '2023-01-01' + (floor(random() * 365)::int);
+
+-- Add new column
+ALTER TABLE users
+ADD COLUMN last_login date;
+
+-- Set a random date in 2023 for existing records
+UPDATE users
+
+SET last_login = DATE '2023-01-01' + (floor(random() * 365)::int);
+
+ALTER TABLE users
+ALTER COLUMN private SET DATA TYPE BOOLEAN,
+ALTER COLUMN private SET NOT NULL;
 
