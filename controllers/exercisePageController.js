@@ -1,8 +1,12 @@
 
 const pool = require('../db')
 const { exec } = require('child_process')
+const fs = require('fs/promises')
+const os = require('os')
+const path = require('path')
+const crypto = require('crypto')
 
-const get_exercise_page = async (req, res) => {
+const getExercisePage = async (req, res) => {
 	try {
 		const exerciseId = req.params.exercise_id;
 		const result = await pool`
@@ -17,10 +21,17 @@ const get_exercise_page = async (req, res) => {
 	}
 };
 
-const run_code = async (req, res) => {
+const runCode = async (req, res) => {
 	try {
+		const userId = req.session.userId;
 		const { exerciseId, code } = req.body;
-		//dockerinho
+		const testPath = await pool`
+		SELECT tests
+		FROM exercises e
+		WHERE e.exercise_id = ${exerciseId}`;
+		const programPath = await createTemporaryFile(code, exerciseId, userId);
+		runDockerContainer(testPath, programPath);
+		
 		console.log(code);
 	} catch (error) {
 		console.error(error);
@@ -28,27 +39,21 @@ const run_code = async (req, res) => {
 	}
 }
 
-const { exec } = require('child_process');
+async function createTemporaryFile(code, exerciseId, userId) {
+	const tempDir = os.tmpdir();
+	const fileName = `user-${userId}_exercise-${exerciseId}_${Date.now()}.py`;
+	const filePath = path.join(tempDir, fileName);
+	await fs.writeFile(filePath, code, 'utf8');
+	return filePath;
+}
 
-const run_docker_container = (req, res) => {
-	const dockerCommand = 'docker run -d your-docker-image';
-	exec(dockerCommand, (error, stdout, stderr) => {
-			if (error) {
-					console.error(`exec error: ${error}`);
-					return res.status(500).json({ error: 'Internal server error' });
-			}
-			console.log(`stdout: ${stdout}`);
-			console.error(`stderr: ${stderr}`);
-			res.status(200).json({ message: 'Docker container started' });
-	});
-};
-
-module.exports = {
-    run_docker_container,
-};
-
+function runDockerContainer(testPath, programPath) {
+	return new Promise((resolve, reject) => {
+		const command = `docker run`
+	})
+}
 
 module.exports = {
-	get_exercise_page,
-	run_code
+	getExercisePage,
+	runCode
 }
