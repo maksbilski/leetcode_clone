@@ -1,4 +1,7 @@
  document.addEventListener('DOMContentLoaded', function() {
+    const pathArray = window.location.pathname.split('/');
+    const userId = pathArray[pathArray.length - 1];
+    //console.log(exerciseId);
     fetch('/api/profile/aggregate')
         .then(response => response.json())
         .then(data => {
@@ -85,4 +88,38 @@
             });
         })
         .catch(error => console.error('Błąd pobierania historii:', error));
+
+        const toggleButton = document.getElementById('toggleButton');
+
+        toggleButton.addEventListener('click', function() {
+            const isOn = toggleButton.classList.contains('on');
+        
+            fetch('/api/profile/toggleState', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: userId })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        console.error('Brak uprawnień do zmiany tego profilu');
+                        throw new Error('Brak uprawnień');
+                    }
+                    throw new Error('Wystąpił problem z żądaniem');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Aktualizacja stanu przycisku
+                toggleButton.textContent = isOn ? 'Off' : 'On';
+                toggleButton.classList.toggle('on');
+                console.log("Zapytanie wysłane", data);
+            })
+            .catch(error => {
+                console.error('Błąd:', error);
+                // Nie zmieniaj stanu przycisku, jeśli nie masz uprawnień
+            });
+        });
 });

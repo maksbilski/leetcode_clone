@@ -11,6 +11,27 @@ body {
     width: 20%;
     background-color: #f0f0f0;
 }
+.private-profile-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.private-profile-label {
+    margin-right: 10px;
+}
+
+.toggle-button {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.toggle-button.on {
+    background-color: green;
+    color: white;
+}
 
 #user-info {
     text-align: center;
