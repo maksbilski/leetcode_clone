@@ -4,7 +4,6 @@ const { exec } = require('child_process')
 const fs = require('fs/promises')
 const os = require('os')
 const path = require('path')
-const crypto = require('crypto')
 
 const getExercisePage = async (req, res) => {
 	try {
@@ -48,7 +47,7 @@ async function createTemporaryFile(code, exerciseId, userId) {
 
 function runDockerContainer(exerciseId, programPath) {
 	return new Promise((resolve, reject) => {
-		const command = `docker run -v "${programPath}:/app/code.py" -v "tests/${exerciseId}.py:/app/test.py" test-container` //change the name of docker image after implementing docker file
+		const command = `docker run -v "${programPath}:/app/solution.py" -v "/home/mrozek/cpap2023z-z25/tests/${exerciseId}.py:/app/test.py" test-container` //change the name of docker image after implementing docker file
 
 		exec(command, async (error, stdout, stderr) => {
 			try {
@@ -58,6 +57,9 @@ function runDockerContainer(exerciseId, programPath) {
 			}
 
 			if (error) {
+				console.error("Docker command failed:", command);
+				console.error("Error:", error);
+				console.error("Stderr:", stderr);
 				reject({ error: error.message, stderr });
 			} else {
 				resolve({ stdout, stderr });
