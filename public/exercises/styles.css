@@ -58,43 +58,141 @@ h1 {
 	color: #927347;
 }
 
-
 .content-container {
 	display: flex;
 	flex-grow: 1;
 }
 
 .problem-description,
-.code-editor {
+.code-editor,
+.console-and-buttons {
 	box-sizing: border-box;
 	border-radius: 10px;
 	background-color: #252526;
 	/* Dark gray background */
-	margin: 10px;
+	margin-top: 10px;
 }
 
 .problem-description {
-
-	flex: 3;
+	flex: 2;
 	height: calc(100vh - 120px);
 	overflow-y: auto;
+	margin-left: 10px;
+	margin-right: 0px;
+}
+
+h2 {
+	font-weight: lighter;
+	font-size: 3.0em;
+	margin-top: 20.0px;
+	margin-left: 20.0px;
+	color: aliceblue;
+	cursor: pointer;
+}
+
+p {
+	font-size: 1.3em;
+	margin-left: 20.0px;
+	line-height: 1.0;
+	color: #bbb;
+	/* Lighter text color for readability */
+}
+
+.code-editor-and-buttons {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
 	margin-right: 10px;
 }
 
 .code-editor {
-	flex: 3;
+	flex: 1;
 	height: calc(100vh - 120px);
 	display: flex;
 	flex-direction: column;
-	margin-left: 10px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.run-submit-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.console-and-buttons {
+	position: relative;
+}
+
+.console {
+	display: none;
+	padding: 10px;
+	background-color: #1E1E1E;
+	color: #ccc;
+	border-radius: 5px;
+}
+
+.console-visible {
+	display: block;
+	bottom: 50px;
+	opacity: 1;
+}
+
+button {
+	font-size: 0.9em;
+	width: 5em;
+	padding: 6px;
+	/* Light green background */
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	align-self: flex-start;
+	/* Align to the start of flex container */
+
+}
+
+#console-btn {
+	background-color: #252526;
+	color: #7f7f7f;
+	transition: color 0.3s;
+}
+
+#console-btn:hover {
+	color: #bababa;
+}
+
+#run-btn {
+	background-color: #5a5a5a;
+	color: #bababa;
+	transition: background-color 0.3s;
+}
+
+#run-btn:hover {
+	background-color: #8b8b8b;
+}
+
+#submit-btn {
+	background-color: #29AD4B;
+	color: white;
+	margin-left: 8px;
+	transition: background-color 0.3s;
+}
+
+#submit-btn:hover {
+	background-color: #B5CEA8;
 }
 
 .CodeMirror {
 	height: calc(100vh - 120px);
 	border-radius: 10px;
+	flex: 1;
 	display: flex;
-	flex: 3;
-	flex-direction: column;
 	margin: 10px;
 	background-color: #1c1c1c;
 	border: 2px groove #31748f;
@@ -107,7 +205,7 @@ h1 {
 
 .CodeMirror-gutters {
 	background: #1c1c1c;
-	border-right: 1px solid #31748f;
+	border-right: 1px solid #1c1c1c;
 }
 
 .CodeMirror-cursor {
@@ -171,54 +269,4 @@ h1 {
 
 .CodeMirror .cm-meta {
 	color: #ff6e34;
-}
-
-
-
-h2 {
-	font-weight: lighter;
-	font-size: 3.0em;
-	margin-top: 20.0px;
-	margin-left: 20.0px;
-	color: aliceblue;
-	text-decoration: underline;
-	cursor: pointer;
-	transition: color 0.3s;
-}
-
-h2:hover {
-	color: cyan;
-}
-
-p {
-	font-size: 1.3em;
-	margin-left: 20.0px;
-	line-height: 1.0;
-	color: #bbb;
-	/* Lighter text color for readability */
-}
-
-button {
-	font-size: 1.5em;
-	font-weight: bold;
-	width: 10em;
-	padding: 15px;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	background-color: #29AD4B;
-	/* Light green background */
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	align-self: flex-start;
-	/* Align to the start of flex container */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	transition: background-color 0.3s;
-}
-
-button:hover {
-	background-color: #31748f;
 }

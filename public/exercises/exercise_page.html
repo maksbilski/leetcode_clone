@@ -31,10 +31,24 @@
 			<h2 id="problem-title"></h2>
 			<p id="problem-description"></p>
 		</div>
-		<div class="code-editor">
-			<textarea id="editor" placeholder="Enter your code here..."></textarea>
-			<button id="run-btn">Run</button>
+		<div class="code-editor-and-buttons">
+			<div class="code-editor">
+				<textarea id="editor" placeholder="Enter your code here..."></textarea>
+			</div>
+			<div class="console-and-buttons">
+				<div class="console" id="console">
+					<span id="console-label">You must run the code first.</span>
+				</div>
+				<div class="buttons">
+					<button id="console-btn">Console</button>
+					<div class="run-submit-container">
+						<button id="run-btn">Run</button>
+						<button id="submit-btn">Submit</button>
+					</div>
+				</div>
+			</div>
 		</div>
+
 	</div>
 
 	<script>
@@ -101,6 +115,10 @@
 						console.error('Could not save the code:', error);
 					});
 			});
+			document.getElementById('console-btn').addEventListener('click', function () {
+				const consoleElement = document.getElementById('console');
+				consoleElement.style.display = consoleElement.style.display === 'none' ? 'block' : 'none';
+			})
 		});
 	</script>
 
