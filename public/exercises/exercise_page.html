@@ -33,8 +33,6 @@
 		</div>
 		<div class="code-editor">
 			<textarea id="editor" placeholder="Enter your code here..."></textarea>
-		</div>
-		<div>
 			<button id="submit-btn">Submit</button>
 		</div>
 	</div>
@@ -75,7 +73,6 @@
 					console.error(error);
 				});
 			document.getElementById('submit-btn').addEventListener('click', function () {
-				console.log('button click');
 				const code = editor.getValue();
 				localStorage.setItem('savedCode-' + exerciseId, code);
 
