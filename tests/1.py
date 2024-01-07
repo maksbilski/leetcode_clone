@@ -1,7 +1,7 @@
 # flake8: noqa
 # mypy: ignore-errors
 
-from code import Solution
+from solution import Solution
 import pytest
 
 
