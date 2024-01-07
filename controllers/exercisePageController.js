@@ -31,10 +31,11 @@ const runCode = async (req, res) => {
 		WHERE e.exercise_id = ${exerciseId}`;
 		const programPath = await createTemporaryFile(code, exerciseId, userId);
 		const result = await runDockerContainer(testPath, programPath);
-		if (result.stderr) {
-			return res.status(400).json({ message: 'Error executing code', output: result.stderr });
-		}
-		res.json({ message: 'Code executed successfully', output: result.stdout });
+		res.json({ 
+			message: 'Code executed', 
+			output: result.stdout, 
+			errorOutput: result.stderr 
+		});
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error' });
