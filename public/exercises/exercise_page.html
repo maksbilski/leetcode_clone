@@ -109,8 +109,14 @@
 						return response.json();
 					})
 					.then(data => {
-						const consoleLabel = document.getElementById('console-label');
-						consoleLabel.textContent = data.output;
+						const output = [
+							'stdout:',
+							data.output || 'No stdout output.',
+							'--------------------------',
+							'stderr:',
+							data.errorOutput || 'No stderr output.'
+						].join('\n');
+						document.getElementById('console-label').textContent = output;
 					})
 					.catch(error => {
 						console.error('Could not save the code:', error);
