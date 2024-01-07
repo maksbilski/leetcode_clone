@@ -1,8 +1,8 @@
  document.addEventListener('DOMContentLoaded', function() {
     const pathArray = window.location.pathname.split('/');
     const userId = pathArray[pathArray.length - 1];
-    //console.log(exerciseId);
-    fetch('/api/profile/aggregate')
+    console.log(userId);
+    fetch(`/api/profile/aggregate?userId=${userId}`)
         .then(response => response.json())
         .then(data => {
             // Aktualizacja liczby rozwiązanych problemów
@@ -29,7 +29,7 @@
             // Dodaj więcej aktualizacji umiejętności, jeśli są dostępne
         });
     // Oddzielne zapytanie dla danych kalendarza (bez zmian)
-    fetch('/api/profile/calendar')
+    fetch(`/api/profile/calendar?userId=${userId}`)
         .then(response => response.json())
         .then(calendarDataArray => {
             const calendarData = calendarDataArray.reduce((acc, item) => {
@@ -64,7 +64,7 @@
             });
         });
 
-        fetch('/api/profile/history')
+        fetch(`/api/profile/history?userId=${userId}`)
         .then(response => response.json())
         .then(historyData => {
             const tableBody = document.getElementById('history-table').getElementsByTagName('tbody')[0];

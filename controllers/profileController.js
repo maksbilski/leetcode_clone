@@ -17,7 +17,7 @@ const pool = require('../db');
             const result = await pool `
             UPDATE users
             SET private = NOT private
-            WHERE user_id = 1`;
+            WHERE user_id = ${userIdFromSession}`;
             res.json(result);
             } catch (error) {
                 console.error(error);
@@ -25,12 +25,22 @@ const pool = require('../db');
             }
     }
 const get_calendar = async (req, res) => {
-    const userId = req.session.userId
+    let userId;
+
+    if (req.query.userId) {
+        console.log('bb');
+        userId = req.query.userId;
+    } else {
+        console.log('aa');
+        userId = req.session.userId;
+    }
+    console.log(userId)
+
     try {
         const result = await pool`
         SELECT DISTINCT TO_CHAR(submission_date, 'YYYY-MM-DD') AS formatted_date
         FROM submissions_history
-        WHERE user_id = 1`;
+        WHERE user_id = ${userId}`;
             res.json(result);
       } catch (error) {
         console.error(error);
@@ -39,7 +49,17 @@ const get_calendar = async (req, res) => {
 
 }
 const get_history = async (req, res) => {
-    const userId = req.session.userId
+    let userId;
+
+    if (req.query.userId) {
+        console.log('bb');
+        userId = req.query.userId;
+    } else {
+        console.log('aa');
+        userId = req.session.userId;
+    }
+    console.log(userId)
+        
     try {
       const result = await pool`
       SELECT 
@@ -51,7 +71,7 @@ const get_history = async (req, res) => {
         JOIN 
             exercises e ON sh.exercise_id = e.exercise_id
         WHERE 
-            sh.user_id = 1  -- Zastąp {user_id} identyfikatorem konkretnego użytkownika
+            sh.user_id = ${userId}  -- Zastąp {user_id} identyfikatorem konkretnego użytkownika
         ORDER BY 
             sh.submission_date DESC
         LIMIT 10;`;
@@ -66,7 +86,16 @@ const get_history = async (req, res) => {
 
 
 const get_aggregate_stats = async (req, res) => {
-    const userId = req.session.userId
+    let userId;
+
+    if (req.query.userId) {
+        console.log('bb');
+        userId = req.query.userId;
+    } else {
+        console.log('aa');
+        userId = req.session.userId;
+    }
+    console.log(userId)
     try {
       const result = await pool`
       SELECT 
@@ -94,7 +123,7 @@ const get_aggregate_stats = async (req, res) => {
       LEFT JOIN 
           exercises e ON eu.exercise_id = e.exercise_id
       WHERE 
-          u.user_id = 1 -- Tutaj podstawiasz identyfikator użytkownika
+          u.user_id = ${userId} -- Tutaj podstawiasz identyfikator użytkownika
       GROUP BY 
           u.user_id;`;
           //console.log(result[0]);
