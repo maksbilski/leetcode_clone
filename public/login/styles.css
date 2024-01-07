@@ -1,13 +1,15 @@
 body {
   margin: 0;
   padding: 0;
+  padding-right: 10%;
   display: flex;
   justify-content: flex-end;
   /* Форма справа */
   align-items: center;
   height: 100vh;
   color: #ccc;
-  background-color: #121212;
+  background-color: #1f1f1f;
+  font-family: 'Consolas', Courier, monospace;
 }
 
 form {
@@ -18,9 +20,9 @@ form {
 }
 
 label {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Consolas', Courier, monospace;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   display: block;
   margin-top: 20px;
 }
@@ -28,35 +30,37 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-  width: 100%;
+  color: #ccc;
+  width: 97%;
   font-size: 1.5em;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Consolas', Courier, monospace;
   font-weight: bold;
-  height: 2em;
-  border-radius: 5px;
-  padding: 2%;
-  margin-top: 5px;
-  background-color: aliceblue;
+  height: 1.5em;
+  border-radius: 10px;
+  padding: 1%;
+  margin-top: 0;
+  background-color: rgb(14, 14, 14);
   transition: background-color 0.3s;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-  background-color: #8ca5e9;
+  background-color: #9fb6f4;
+  color:#292929;
 }
 
 input[type="submit"] {
-  width: 50%;
-  padding: 0.7em;
-  margin: 1em 0 4em 4em;
-  font-size: 2em;
+  width: 100%;
+  padding: 1em;
+  font-size: 1em;
+  margin-top: 5%;
   font-weight: bold;
-  background-color: #4CAF50;
+  background-color: #5a7bff;
   /* Light green background */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   cursor: pointer;
   text-align: center;
   justify-content: center;
@@ -66,7 +70,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #388e3c;
+  background-color: #384da1;
 }
 
 img.background {
@@ -101,7 +105,7 @@ img.background {
   text-align: center;
   color: #EF6461;
   font-size: 3em;
-  font-family: "Courier New, Courier, monospace", sans-serif;
+  font-family: 'Consolas', Courier, monospace;
   font-weight: bold;
   transition: font-size 0.3s, color 0.3s;
 }

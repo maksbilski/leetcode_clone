@@ -39,7 +39,37 @@
     <tbody id="exerciseList"></tbody>
   </table>
 
+  <!-- Notification and Log In button -->
+  <div id="notification-container" style="display: none;">
+  
+    <div class="session-expired-notification">
+      <div class="logo">
+        <img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
+        <h3>CodeChampions</h3>
+      </div>
+      <div>
+      <p>Your session is over!</p>
+      <p style="font-size: 0.7em;color: rgb(163, 163, 163)"> Please sign in or if you don't have account, sign up</p>
+        <p class="button" onclick="redirectToLoginPage()">SIGN IN</p>
+        <p class="or">———— OR ————</p>
+        <p class="button" onclick="redirectToMainPage()">SIGN UP</p>
+      </div>
+    </div>
+    
+    <button id="login-button" style="display: none;" onclick="redirectToLoginPage()">Log in</button>
+</div>
+
   <script>
+
+    function redirectToLoginPage() {
+        window.location.href = '/login';
+    }
+
+    function redirectToMainPage() {
+    window.location.href = '/register';
+    }
+
+
     function toggleDropdown() {
       const dropdownOptions = document.getElementById('dropdown-options');
       dropdownOptions.classList.toggle('show');
@@ -122,6 +152,85 @@
           // Handle error (e.g., show an error message to the user)
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const sessionTimeout = 30000; // 5 minutes in milliseconds
+      let sessionTimer;
+
+      // Функция, которая отправляет запрос на сервер для обновления сессии
+      function refreshSession() {
+        fetch('/api/refresh-session') // Предполагаемый эндпоинт для обновления сессии
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Failed to refresh session');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Session refreshed:', data);
+            resetSessionTimer();
+          })
+          .catch(error => {
+            console.error('Error refreshing session:', error);
+            // Обработка ошибки (например, показать сообщение пользователю)
+          });
+      }
+
+      // Функция, которая показывает уведомление о завершении сессии
+      function showSessionExpiredNotification() {
+        // Скрываем таблицу с заданиями
+        const exerciseTable = document.querySelector('table');
+        if (exerciseTable) {
+          exerciseTable.style.display = 'none';
+        }
+
+        const notificationContainer = document.getElementById('notification-container');
+        if (notificationContainer) {
+          notificationContainer.style.display = 'block';
+        }
+      }
+
+      // Функция для закрытия уведомления
+      window.closeNotificationBanner = function () {
+        // Показываем таблицу с заданиями
+        const exerciseTable = document.querySelector('table');
+        if (exerciseTable) {
+          exerciseTable.style.display = 'table';
+        }
+
+        const notificationContainer = document.getElementById('notification-container');
+        if (notificationContainer) {
+          notificationContainer.style.display = 'none';
+        }
+      };
+
+      function redirectToLoginPage() {
+        window.location.href = '/login';
+      }
+
+      function resetSessionTimer() {
+        clearTimeout(sessionTimer);
+
+        // Запустить таймер заново
+        sessionTimer = setTimeout(() => {
+          showSessionExpiredNotification();
+        }, sessionTimeout);
+      }
+
+      // Запускаем таймер при загрузке страницы
+      resetSessionTimer();
+
+      // Запускать функцию обновления сессии каждые 4 минуты
+      const refreshInterval = setInterval(refreshSession, 240000); // 4 minutes in milliseconds
+
+      document.addEventListener('mousemove', resetSessionTimer);
+      document.addEventListener('keydown', resetSessionTimer);
+
+      // Остановить таймер обновления сессии при закрытии страницы
+      window.addEventListener('beforeunload', function () {
+        clearInterval(refreshInterval);
+      });
+    });
   </script>
 </body>
 
