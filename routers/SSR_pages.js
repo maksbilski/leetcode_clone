@@ -13,6 +13,10 @@ router.get('/login', (req, res) => {
 router.get('/profile', (req, res) => {
     res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
     });
+
+    router.get('/profile/:user_id', (req, res) => {
+        res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
+        });
    
 router.get('/statistics', (req, res) => {
      res.status(200).sendFile('statistics.html', {root: path.join(__dirname, '..', 'public', 'statistics') });
@@ -32,6 +36,8 @@ router.get('/exercises/:exercise_id', (req, res) => {
     console.log('exercise_page')
     res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercise_page.html'));
     });
+
+
 
 
 module.exports = router
