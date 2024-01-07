@@ -10,8 +10,9 @@ const register_user =  async (req, res) => {
      const is_exist = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
      console.log(is_exist)
      if (is_exist.length == 0) {
-        const result = await pool`INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${password})`;
+        const result = await pool`INSERT INTO users (name, email, password, private, last_login) VALUES (${name}, ${email}, ${password}, false, '2023-06-18')`;
         const check = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
+        console.log(check);
         const userId = check[0].user_id;
         req.session.userId = userId;
         res.status(200).json('aaa');
