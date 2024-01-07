@@ -6,7 +6,6 @@ const { checkAuthentication } = require('./controllers/loginController');
 const { pool } = require('./db');
 
 //db connection
-const pool = require('./db');
 module.exports = { pool };
 
 const {checkExercisesAndSendEmail, testSendEmail} = require('./services/emailService');
@@ -39,13 +38,16 @@ app.use('/help', checkAuthentication);
 const helpRouter = require('./routers/help')
 const profileRouter = require('./routers/profile')
 const exercisesRouter = require('./routers/exercises');
-const statisticsRouter = require('./routers/statisticsexp
-//const loginRouter = require('./routers/login');
+const statisticsRouter = require('./routers/statistics');
+const loginRouter = require('./routers/login');
+const exercisePageRouter = require('./routers/exercisePage')
+const registerRouter = require('./routers/register')
+const pagesRouter = require('./routers/SSR_pages')
 
 app.use('/api/profile', profileRouter)
 app.use('/api/exercises', exercisesRouter)
 app.use('/api/statistics', statisticsRouter)
-app.use('/api/login', login)
+app.use('/api/login', loginRouter)
 app.use('/', pagesRouter)
 app.use('/api/register', registerRouter)
 app.use(`/api/exercises`, exercisePageRouter)
