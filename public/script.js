@@ -16,6 +16,10 @@ document.getElementById('exercises').addEventListener('click', function() {
     window.location.href = '/login';
   });
 
+  document.getElementById('help').addEventListener('click', function() {
+    window.location.href = '/help';
+  });
+
   document.getElementById('profile').addEventListener('click', function() {
     window.location.href = '/profile';
   });

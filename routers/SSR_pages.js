@@ -37,6 +37,11 @@ router.get('/exercises/:exercise_id', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercise_page.html'));
     });
 
+router.get('/help', (req, res) => {
+    console.log('helo')
+    res.sendFile(path.join(__dirname, '..', 'public', 'help', 'help.html'));
+    });
+
 
 
 

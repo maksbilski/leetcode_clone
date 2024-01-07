@@ -24,13 +24,15 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-setInterval(checkExercisesAndSendEmail, 10000);
+//setInterval(checkExercisesAndSendEmail, 10000);
 
-app.use('/api/exercises', checkAuthentication);
-app.use('/api/statistics', checkAuthentication);
-app.use('/api/profile', checkAuthentication);
+app.use('/exercises', checkAuthentication);
+app.use('/statistics', checkAuthentication);
+app.use('/profile', checkAuthentication);
+app.use('/help', checkAuthentication);
 
 //setup routers
+const helpRouter = require('./routers/help')
 const profileRouter = require('./routers/profile')
 const exercisesRouter = require('./routers/exercises');
 const statisticsRouter = require('./routers/statistics')
@@ -47,6 +49,7 @@ app.use('/api/login', login)
 app.use('/', pagesRouter)
 app.use('/api/register', registerRouter)
 app.use(`/api/exercises`, exercisePageRouter)
+app.use('/api/help', helpRouter)
 
 
 
