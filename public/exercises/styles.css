@@ -143,12 +143,16 @@ h1 {
 	color: #f6c177;
 }
 
+.CodeMirror .cm-property {
+	color: #ff6e34;
+}
+
 .CodeMirror .cm-number {
 	color: #B5CEA8;
 }
 
 .CodeMirror .cm-def {
-	color: #ffffff;
+	color: #e3e42e;
 	font-style: italic;
 }
 

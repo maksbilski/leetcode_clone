@@ -16,6 +16,17 @@ const get_exercise_page = async (req, res) => {
 	}
 };
 
+const run_code = async (req, res) => {
+	try {
+		const { exerciseId, code } = req.body;
+		//dockerinho
+		console.log(code);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Internal server error' });
+	}
+}
+
 const { exec } = require('child_process');
 
 const run_docker_container = (req, res) => {
@@ -38,4 +49,5 @@ module.exports = {
 
 module.exports = {
 	get_exercise_page,
+	run_code
 }
