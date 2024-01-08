@@ -34,7 +34,7 @@
 			</div>
 			<div class="console-and-buttons">
 				<div class="console" id="console">
-					<span id="console-label">You must run the code first.</span>
+					<pre id="console-label">You must run the code first.</pre>
 				</div>
 				<div class="buttons">
 					<button id="console-btn">Console</button>
@@ -59,6 +59,8 @@
 				indentWithTabs: true,
 				styleActiveLine: true
 			});
+
+			document.getElementById('console').style.display = 'none';
 
 			const pathArray = window.location.pathname.split('/');
 			const exerciseId = pathArray[pathArray.length - 1];
@@ -108,6 +110,7 @@
 					.then(data => {
 						const output = data.output;
 						document.getElementById('console-label').textContent = output;
+						document.getElementById('console').style.display = 'block';
 					})
 					.catch(error => {
 						console.error('Could not save the code:', error);
