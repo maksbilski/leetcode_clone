@@ -132,6 +132,8 @@ p {
 
 .console {
 	display: none;
+	max-height: 200px;
+	overflow-y: auto;
 	padding: 10px;
 	background-color: #1E1E1E;
 	color: #ccc;
