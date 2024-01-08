@@ -55,7 +55,7 @@ async function createTemporaryFile(code, exerciseId, userId) {
 
 
 function runDockerContainer(testPath, programPath) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const command = `docker run -v "${programPath}:/app/solution.py" -v "${testPath}:/app/test.py" test-container`
 
 		exec(command, async (error, stdout, stderr) => {
@@ -69,10 +69,8 @@ function runDockerContainer(testPath, programPath) {
 				console.error("Docker command failed:", command);
 				console.error("Error:", error);
 				console.error("Stderr:", stderr);
-				reject({ error: error.message, stderr });
-			} else {
-				resolve({ stdout, stderr });
 			}
+			resolve({ stdout, stderr, error });
 		});
 	});
 }
