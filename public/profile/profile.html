@@ -5,56 +5,84 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>CodeChampions</h1>
+        <div class="nav-buttons">
+            <div><p id="exercises">Exercises</p></div>
+            <div> <p id="statistics">Statistics</p></div>
+            <div><p id="profile">Profile</p></div>
+            <div><p id="help">Help</p></div>
+        </div>
+    </header>
     <div id="container">
         <div id="sidebar">
             <div id="user-info">
-                <h1 id="username">NazwaUżytkownika</h1>
-                <div id="rank">Ranga: #1</div>
+                <div style="display: flex; margin-left: 5%;margin-top: 5%;">
+                    <img style="border-radius: 2em; width:7em; height: 7em;" src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/a88c0c05ac096922986cc4b4d2c5837f~c5_100x100.jpeg?lk3s=a5d48078&x-expires=1704924000&x-signature=D6oPOAvdbo70Gr74SaIJyxHqnYc%3D"> 
+                    <div>
+                        <h1 id="username">Username</h1>
+                        <div id="rank">Ranga: #1</div>
+                    </div>
+                    
+                </div>
+                <div style="border-bottom:2px solid; margin-left: 5%; font-size:2em;width:90%;height: 1em; margin-right: 5%;"></div>
             </div>
             <div id="skills">
                 <!-- Przykładowe umiejętności -->
-                <h5>Tematyka:</h5>
-                <div class="skill">Algorytmy: 10/50</div>
-                <div class="skill">Struktury Danych: 20/50</div>
+                <h5>Skills:</h5>
+                <div class="skill">Algorithms: 10/50</div>
+                <div class="skill">Data structure: 20/50</div>
                 <!-- Więcej umiejętności -->
                 <div class="private-profile-section">
-                    <span class="private-profile-label">Private Profile:</span>
-                    <button id="toggleButton" class="toggle-button">Off</button>
+                    <span class="private-profile-label">Private Profile</span>
+                    
+                    <!-- Добавлены стили для анимации -->
+                <button id="toggleButton" class="toggle-button">
+                    Off
+                </button>
+  
                 </div>
             </div>
         </div>
         <div id="main-content">
-            <div id="stats">
-                <h2>Rozwiązane Problemy: 100</h2>
-                <div id="difficulty-bars">
-                    <div class="bar easy">Łatwe: 30/50</div>
-                    <div class="bar medium">Średnie: 40/70</div>
-                    <div class="bar hard">Trudne: 30/50</div>
+            <div id="stats-calendar">
+                <div id="stats">
+                    <h2>Solved problems: 100</h2>
+                    <div id="difficulty-bars">
+                        <p class = "label">Easy: 30/50</p>
+                        <div class="bar easy">          </div>
+                        <p class = "label">Medium: 40/70</p>
+                        <div class="bar medium">            </div>
+                        <p class = "label">Hard: 30/50</p>
+                        <div class="bar hard">          </div>
+                    </div>
                 </div>
+                <div id="activity-calendar">
+                    <!-- Tutaj kalendarz aktywności -->
+                    <h3>Recent activity</h3>
+                    <!-- Kalendarz generowany przez JavaScript -->
+                    <div id="calendar"></div>
+                </div> 
             </div>
-            <div id="activity-calendar">
-                <!-- Tutaj kalendarz aktywności -->
-                <h3>Aktywność w Ostatnim Roku</h3>
-                <!-- Kalendarz generowany przez JavaScript -->
-                <div id="calendar"></div>
-            </div>
+            
             <div id="recent-submissions">
-                <h3>Ostatnie Rozwiązania</h3>
+                <h3>Recent submissions</h3>
                 <!-- Tutaj ostatnie rozwiązania -->
-            </div>
-            <div id="history">
-                <table id="history-table">
-                    <thead>
-                        <tr>
-                            <th>Nazwa Zadania</th>
-                            <th>Sukces</th>
-                            <th>Data Wysłania</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Wiersze tabeli będą dodawane przez JavaScript -->
-                    </tbody>
-                </table>
+    
+                <div id="history">
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th >Problem name</th>
+                                <th>Succes</th>
+                                <th>Sent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Wiersze tabeli będą dodawane przez JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
