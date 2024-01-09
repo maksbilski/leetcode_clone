@@ -31,8 +31,8 @@ app.use(session({
 
 app.use('/exercises', checkAuthentication);
 app.use('/statistics', checkAuthentication);
-// app.use('/profile', checkAuthentication);
-// app.use('/help', checkAuthentication);
+app.use('/profile', checkAuthentication);
+app.use('/help', checkAuthentication);
 
 //setup routers
 const helpRouter = require('./routers/help')
