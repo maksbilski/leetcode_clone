@@ -10,7 +10,8 @@ const register_user =  async (req, res) => {
      const is_exist = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
      console.log(is_exist)
      if (is_exist.length == 0) {
-        const result = await pool`INSERT INTO users (name, email, password, private, last_login) VALUES (${name}, ${email}, ${password}, false, '2023-06-18')`;
+        const current_date = new Date().toISOString();
+        const result = await pool`INSERT INTO users (name, email, password, private, last_login) VALUES (${name}, ${email}, ${password}, false, ${current_date});`;
         const check = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
         console.log(check);
         const userId = check[0].user_id;
