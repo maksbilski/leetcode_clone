@@ -23,7 +23,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 30000, // 30 sec in milliseconds
+    maxAge: 300000, // 30 sec in milliseconds
   },
 }));
 
@@ -31,8 +31,8 @@ app.use(session({
 
 app.use('/exercises', checkAuthentication);
 app.use('/statistics', checkAuthentication);
-app.use('/profile', checkAuthentication);
-app.use('/help', checkAuthentication);
+// app.use('/profile', checkAuthentication);
+// app.use('/help', checkAuthentication);
 
 //setup routers
 const helpRouter = require('./routers/help')
