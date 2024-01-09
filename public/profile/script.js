@@ -1,3 +1,21 @@
+document.getElementById('exercises').addEventListener('click', function() {
+    console.log('dsa')
+    window.location.href = '/exercises';
+  });
+  
+  document.getElementById('statistics').addEventListener('click', function() {
+    window.location.href = '/statistics';
+  });
+  
+  document.getElementById('help').addEventListener('click', function() {
+    window.location.href = '/help';
+  });
+
+  document.getElementById('profile').addEventListener('click', function() {
+    window.location.href = '/profile';
+  });
+ 
+ 
  document.addEventListener('DOMContentLoaded', function() {
     const pathArray = window.location.pathname.split('/');
     const userId = pathArray[pathArray.length - 1];
@@ -22,18 +40,18 @@
 
 
             const rozwiazaneProblemyElement = document.getElementById('stats').getElementsByTagName('h2')[0];
-            rozwiazaneProblemyElement.textContent = `Rozwiązane Problemy: ${data.success_count}`;
+            rozwiazaneProblemyElement.textContent = `Solved problems: ${data.success_count}`;
 
             // Aktualizacja pasków trudności
-            const difficultyBars = document.getElementById('difficulty-bars').getElementsByClassName('bar');
-            difficultyBars[0].textContent = `Łatwe: ${data.easy_count} / ${data.total_easy}`;
-            difficultyBars[1].textContent = `Średnie: ${data.medium_count} /${data.total_medium}`;
-            difficultyBars[2].textContent = `Trudne: ${data.hard_count}/ ${ data.total_hard}`;
+            const difficultyBars = document.getElementById('difficulty-bars').getElementsByClassName('label');
+            difficultyBars[0].textContent = `Easy: ${data.easy_count} / ${data.total_easy}`;
+            difficultyBars[1].textContent = `Medium: ${data.medium_count} /${data.total_medium}`;
+            difficultyBars[2].textContent = `Hard: ${data.hard_count}/ ${ data.total_hard}`;
 
             // Aktualizacja umiejętności
             const skills = document.getElementById('skills').getElementsByClassName('skill');
-            skills[0].textContent = `Bazy Danych: ${data.database_count}`;
-            skills[1].textContent = `Algorytmy: ${data.algorithms_count}`;
+            skills[0].textContent = `Data bases: ${data.database_count}`;
+            skills[1].textContent = `Algorithms: ${data.algorithms_count}`;
             // Dodaj więcej aktualizacji umiejętności, jeśli są dostępne
         });
     // Oddzielne zapytanie dla danych kalendarza (bez zmian)
@@ -56,7 +74,7 @@
                     const year = dateObj.getFullYear();
                     const monthElement = document.createElement('div');
                     monthElement.className = 'calendar-month';
-                    monthElement.textContent = `${monthName} ${year}`;
+                    monthElement.textContent = `${monthName}`;
 
                     const daysInMonth = new Date(year, dateObj.getMonth() + 1, 0).getDate();
                     for (let i = 1; i <= daysInMonth; i++) {
@@ -99,35 +117,49 @@
 
         const toggleButton = document.getElementById('toggleButton');
 
-        toggleButton.addEventListener('click', function() {
+        toggleButton.addEventListener('click', function (event) {
+            event.preventDefault();
+        
             const isOn = toggleButton.classList.contains('on');
+        
+            toggleButton.classList.toggle('on');
+            toggleButton.classList.toggle('reverse');
+        
+            toggleButton.classList.add('animate');
+        
+            toggleButton.textContent = isOn ? 'On' : 'Off';
         
             fetch('/api/profile/toggleState', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user_id: userId })
+                body: JSON.stringify({ user_id: userId }),
             })
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 403) {
-                        console.error('Brak uprawnień do zmiany tego profilu');
-                        throw new Error('Brak uprawnień');
+                .then((response) => {
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            console.error('Brak uprawnień do zmiany tego profilu');
+                            throw new Error('Brak uprawnień');
+                        }
+                        throw new Error('Wystąpił problem z żądaniem');
                     }
-                    throw new Error('Wystąpił problem z żądaniem');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Aktualizacja stanu przycisku
-                toggleButton.textContent = isOn ? 'Off' : 'On';
-                toggleButton.classList.toggle('on');
-                console.log("Zapytanie wysłane", data);
-            })
-            .catch(error => {
-                console.error('Błąd:', error);
-                // Nie zmieniaj stanu przycisku, jeśli nie masz uprawnień
-            });
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('Zapytanie wysłane', data);
+                })
+                .catch((error) => {
+                    console.error('Błąd:', error);
+                })
+                .finally(() => {
+                    // Удалите класс 'animate' после завершения анимации
+                    setTimeout(() => {
+                        toggleButton.classList.remove('animate');
+                    }, 500);
+                });
         });
+        
+
+        
 });

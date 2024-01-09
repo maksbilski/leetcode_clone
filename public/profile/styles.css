@@ -1,16 +1,117 @@
-body {
-    background-color: #f0f0f0; /* Szary kolor tła */
+html{
+    height: auto;
+    padding: 0;
 }
 
+body {
+    background-color: #1f1f1f;
+    font-family: 'Consolas', Courier, monospace;
+    color: #ccc;
+    padding:0;
+    height:100%;
+    margin:0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px; 
+    padding-left: 10px; 
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #1c1c1c;
+    margin-top: 0; 
+    margin-bottom: 0; 
+}
+
+.nav-buttons {
+    padding:0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0; /* Добавьте эту строку */
+    margin-bottom: 0; /* Добавьте эту строку */
+    margin-right: 50%;
+}
+
+.nav-buttons p{
+    margin:0;
+    font-size: 1.4em;
+    background-color: #1c1c1c;
+    /* Dark grey background for buttons */
+    color: #646464;
+    /* White text color */
+    border: none;
+    padding: 15px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+} 
+
+.nav-buttons p:hover {
+    color: #f5f5f5;
+    /* Lighter grey background on hover */
+}
 
 #container {
+    margin-top: 5%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 5%;
     display: flex;
+    width:85%;
+    height: 90%;
+    padding-top:1%;
 }
 
+
+
 #sidebar {
-    width: 20%;
-    background-color: #f0f0f0;
+    width: 30%;
+    height:auto;
+    background-color: #2a2a2a;
+    border-radius: 10px;
 }
+
+#stats-calendar{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+#username{
+    color:white;
+    font-size:2em;
+    margin-left: 5%;
+}
+
+h5{
+    font-size:1.4em;
+    font-weight: bolder;
+}
+
+#stats{
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    margin-left:3%;
+    padding-top: 5%;
+    padding-left: 5%;
+    width:35%;
+}
+
+#activity-calendar{
+    background-color:  #2a2a2a;
+    border-radius: 10px;
+    padding:2%;
+    margin-left:3%;
+    width:60%;
+}
+
+#recent-submissions{
+    background-color:  #2a2a2a;
+    border-radius: 10px;
+    padding:5%;
+    margin-left:3%;
+}
+
 .private-profile-section {
     display: flex;
     align-items: center;
@@ -18,38 +119,91 @@ body {
 }
 
 .private-profile-label {
+    margin-top: 5%;
+    font-size: 1.4em;
     margin-right: 10px;
 }
 
+/* styles.css */
+
+/* Стили для кнопки Toggle */
 .toggle-button {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
+    position: relative;
     cursor: pointer;
-}
+    font-weight: bold;
+    font-size: 1em;
+    padding: 8px 16px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    margin-left: 3%;
+  }
+  
+
 
 .toggle-button.on {
-    background-color: green;
-    color: white;
+    background-color: #2ecc71;
 }
 
-#user-info {
-    text-align: center;
+
+.toggle-button.reverse {
+    background-color: #e74c3c; 
 }
+
+
+.toggle-button:hover {
+    background-color: #2980b9;
+}
+
+/* Анимация для изменения цвета кнопки при активации (клике) */
+.toggle-button:active {
+    background-color: #2ecc71;
+}
+
+@keyframes moveRightLeft {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate {
+    animation: moveRightLeft 0.5s ease-in-out;
+}
+
+
 
 #history-table {
+    margin-top: 6.5%;
     width: 100%;
     border-collapse: collapse;
+    border-radius: 2em;
 }
 
 #history-table th, #history-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 3%;
     text-align: left;
+    background-color: #2323234c;
 }
 
+
 #history-table th {
-    background-color: #f2f2f2;
+    background-color: #0000004c;
+}
+
+h1 {
+    color: #31748f;
+    margin-left: 20px;
 }
 
 #avatar {
@@ -58,31 +212,71 @@ body {
     border-radius: 50%;
 }
 
-#rank, #languages {
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
+h2{
+  color: rgb(168, 168, 168); 
+  font-size: 1.1em; 
+  margin:0;
+  margin-bottom: 5%;
+}
+
+h3{
+    color: rgb(168, 168, 168); 
+    font-size: 1.5em; 
+    margin:0;
+    margin-bottom: 5%;
+}
+
+#rank{
+    color:rgb(185, 185, 185);
+    font-size:1.1em;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#skills{
+    width:90%;
+    margin-left: 5%;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 #skills .skill {
     padding: 5px;
     border-bottom: 1px solid #ddd;
+    margin-bottom: 5%;
 }
 
 #main-content {
     width: 80%;
-    padding: 20px;
+    height: fit-content;
 }
 
 #difficulty-bars .bar {
-    padding: 5px;
-    margin: 5px 0;
+    width:90%;
+    height: 0.6em;
+    margin-bottom: 10%;
+    border-radius: 20px;
 }
 
+#difficulty-bars .label{
+    color:rgb(159, 159, 159);
+    font-weight: bold;
+    margin:0;
+    margin-bottom: 2%;
+}
+
+.calendar-month{
+    margin-bottom: 2%;
+}
+
+
 .calendar-day {
-    width: 10px;
-    height: 10px;
+    border-radius: 0.5em;
+    width: 0.8em;
+    height: 0.8em;
     display: inline-block;
     margin: 1px;
+    margin-left: 0.8%;
 }
 
 
@@ -99,3 +293,4 @@ body {
 }
 
 /* Dodatkowe stylizacje */
+
