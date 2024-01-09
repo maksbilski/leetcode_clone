@@ -24,14 +24,14 @@ document.getElementById('exercises').addEventListener('click', function() {
         .then(response => response.json())
         .then(data => {
             const toggleButton = document.getElementById('toggleButton');
-            if (data.private) { // Zakładając, że odpowiedź zawiera pole 'is_private'
+            if (data.private) { 
                 toggleButton.classList.add('on');
                 toggleButton.textContent = 'On';
             } else {
                 toggleButton.classList.remove('on');
                 toggleButton.textContent = 'Off';
             }
-            // Aktualizacja liczby rozwiązanych problemów
+            
             const userName = document.getElementById('username');
             userName.textContent = `${data.name}`;
 
