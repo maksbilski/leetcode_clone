@@ -27,7 +27,7 @@ app.use(session({
   },
 }));
 
-//setInterval(checkExercisesAndSendEmail, 10000);
+//setInterval(checkExercisesAndSendEmail, 20000);
 
 app.use('/exercises', checkAuthentication);
 app.use('/statistics', checkAuthentication);

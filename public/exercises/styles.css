@@ -68,7 +68,6 @@ h1 {
 	box-sizing: border-box;
 	border-radius: 10px;
 	background-color: #252526;
-	/* Dark gray background */
 	margin: 10px;
 }
 
@@ -82,11 +81,11 @@ h1 {
 
 .like-dislike-bar {
     width: 20px;
-    height: 100px; /* Stała wysokość */
+    height: 100px; 
     border: 1px solid #ccc;
     display: flex;
-    flex-direction: column-reverse; /* Czerwony pasek na dole */
-    overflow: hidden; /* Zapobiega wyświetlaniu się poza kontenerem */
+    flex-direction: column-reverse; 
+    overflow: hidden; 
 }
 
 .like-bar, .dislike-bar {

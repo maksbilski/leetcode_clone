@@ -40,7 +40,7 @@
             const pathArray = window.location.pathname.split('/');
             const exerciseId = pathArray[pathArray.length - 1];
 
-            // Pobierz dane ćwiczenia
+            
             fetch(`/api/exercises/${exerciseId}`)
                 .then(response => response.json())
                 .then(exercise => {
@@ -48,7 +48,7 @@
                     document.getElementById('problem-title').innerText = exercise.name;
                     document.getElementById('problem-description').innerText = exercise.content;
 
-                    // Teraz pobieramy liczniki polubień i niepolubień
+                    
                     return fetch(`/api/exercises/get_like/${exerciseId}`);
                 })
                 .then(response => response.json())
@@ -59,8 +59,8 @@
 
 				function updateLikesDislikes(likes, dislikes) {
     				const totalVotes = likes + dislikes;
-					const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0; // Procent polubień
-					const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0; // Procent niepolubień
+					const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0; 
+					const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0; 
 
 					const likeBar = document.getElementById('like-bar');
 					const dislikeBar = document.getElementById('dislike-bar');
@@ -73,12 +73,10 @@
 }
 
 
-            // Obsługa kliknięcia przycisku "like"
             document.getElementById('like-button').addEventListener('click', function () {
                 sendVote(exerciseId, 1);
             });
 
-            // Obsługa kliknięcia przycisku "dislike"
             document.getElementById('dislike-button').addEventListener('click', function () {
                 sendVote(exerciseId, -1);
             });

@@ -7,5 +7,4 @@ router.route('/calendar').get(get_calendar);
 router.route('/history').get(get_history);
 router.route('/toggleState').post(toggle_state);
 
-
 module.exports = router

@@ -3,7 +3,7 @@ document.getElementById('feedbackForm').addEventListener('submit', function(even
     const message = this.message.value;
     console.log('Wiadomość:', message);
 
-    fetch('/api/help/sendForm', { // Zastąp 'URL_SERWERA' adresem URL, na który chcesz wysłać zapytanie POST
+    fetch('/api/help/sendForm', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -13,14 +13,14 @@ document.getElementById('feedbackForm').addEventListener('submit', function(even
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        // Możesz tutaj obsłużyć odpowiedź, np. wyświetlić potwierdzenie
+       
     })
     .catch((error) => {
         console.error('Error:', error);
-        // Obsługa błędów
+        
     });
 
-    // Opcjonalnie, możesz wyczyścić formularz po wysłaniu
+
     this.reset();
 
     
