@@ -24,9 +24,23 @@
 		<h1><a href="/" class="home-link">CodeChampions</a></h1>
 	</header>
 	<div class="content-container">
-		<div class="problem-description">
-			<h2 id="problem-title"></h2>
-			<p id="problem-description"></p>
+		<div class="problem-description-and-comments">
+			<div class="problem-description">
+				<h2 id="problem-title"></h2>
+				<p id="problem-description"></p>
+				<button id="discussion-btn">Discussion</button>
+			</div>
+			<div class="discussion-container" id="discussion-container">
+				<div class="add-comment">
+					<textarea id="comment-text" rows="4" placeholder="Type comment here..."></textarea>
+					<button id="add-comment-btn">Comment</button>
+				</div>
+				<div class="existing-comments">
+					<ul id="comment-list">
+
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div class="code-editor-and-buttons">
 			<div class="code-editor">
@@ -36,7 +50,7 @@
 				<div class="console" id="console">
 					<pre id="console-label">You must run the code first.</pre>
 				</div>
-				<div class="buttons">
+				<div class="code-editor-buttons-container">
 					<button id="console-btn">Console</button>
 					<div class="run-submit-container">
 						<button id="run-btn">Run</button>
@@ -61,6 +75,7 @@
 			});
 
 			document.getElementById('console').style.display = 'none';
+			document.getElementById('discussion-container').style.display = 'none';
 
 			const pathArray = window.location.pathname.split('/');
 			const exerciseId = pathArray[pathArray.length - 1];
@@ -85,6 +100,11 @@
 				.catch(error => {
 					console.error(error);
 				});
+			document.getElementById('discussion-btn').addEventListener('click', function () {
+				console.log('discussion button clicked');
+				const discussionContainer = document.getElementById('discussion-container');
+				discussionContainer.style.display = discussionContainer.style.display === 'none' ? 'block' : 'none';
+			})
 			document.getElementById('run-btn').addEventListener('click', function () {
 				const code = editor.getValue();
 				localStorage.setItem('savedCode-' + exerciseId, code);
@@ -115,7 +135,7 @@
 					.catch(error => {
 						console.error('Could not save the code:', error);
 					});
-			});
+			})
 			document.getElementById('console-btn').addEventListener('click', function () {
 				const consoleElement = document.getElementById('console');
 				consoleElement.style.display = consoleElement.style.display === 'none' ? 'block' : 'none';
