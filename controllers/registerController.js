@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const register_user = async (req, res) => {
+const registerUser = async (req, res) => {
   console.log('Trying to register');
   try {
     console.log(req.body);
@@ -31,5 +31,5 @@ const register_user = async (req, res) => {
 };
 
 module.exports = {
-  register_user,
+  registerUser,
 };

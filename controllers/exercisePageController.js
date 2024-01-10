@@ -143,6 +143,6 @@ module.exports = {
 	getExercisePage,
 	getExerciseComments,
 	runCode,
-  	postLike,
-  	getLike,
+  postLike,
+  getLike,
 };
