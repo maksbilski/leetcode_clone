@@ -5,5 +5,6 @@ const {getExercisePage, runCode} = require('../controllers/exercisePageControlle
 
 router.route('/:exercise_id').get(getExercisePage);
 router.route('/:exercise_id/run_code').post(runCode);
+router.route('/:exercise_id/comments').get
 
 module.exports = router

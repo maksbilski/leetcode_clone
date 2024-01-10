@@ -20,6 +20,20 @@ const getExercisePage = async (req, res) => {
 	}
 };
 
+const getExerciseComments = async (req, res) => {
+	try {
+		const exerciseId = req.params.exercise_id;
+		const result = await pool`
+		SELECT *
+		FROM comments
+		WHERE exercise_id = ${exerciseId}`;
+		res.json(result);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Internal server error'});
+	}
+}
+
 const runCode = async (req, res) => {
 	try {
 		const userId = req.session.userId;
@@ -77,5 +91,6 @@ function runDockerContainer(testPath, programPath) {
 
 module.exports = {
 	getExercisePage,
+	getExerciseComments,
 	runCode
 }
