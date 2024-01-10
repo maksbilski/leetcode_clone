@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const sort_statistics = async (req, res) => {
+const sortStatistics = async (req, res) => {
   console.log(req.session.userId);
   try {
     const validKeys = ["total_exercises_completed", "success_rate", "average_percentile"];
@@ -43,7 +43,7 @@ const sort_statistics = async (req, res) => {
   }
 };
 
-const get_statistics = async (req, res) => {
+const getStatistics = async (req, res) => {
   try {
     const result = await pool`
       WITH UserExercisePercentiles AS (
@@ -82,6 +82,6 @@ const get_statistics = async (req, res) => {
 };
 
 module.exports = {
-  get_statistics,
-  sort_statistics
+  getStatistics,
+  sortStatistics
 };
