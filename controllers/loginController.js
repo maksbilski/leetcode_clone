@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const login_user = async (req, res) => {
+const loginUser = async (req, res) => {
   console.log('Trying to login');
   try {
     const { email, password } = req.body;
@@ -52,7 +52,7 @@ const refreshSession = (req, res) => {
 };
 
 module.exports = {
-  login_user,
+  loginUser,
   checkAuthentication,
   refreshSession,
 };
