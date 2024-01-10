@@ -304,8 +304,13 @@
 						return response.json();
 					})
 					.then(data => {
-						const output = data.output;
+						let output = data.output;
 						document.getElementById('console-label').textContent = output;
+						if (data.isSuccessfulSubmition) {
+							let roundedPercentage = Math.round(data.percentageOfWorstSolutions);
+							document.getElementById('console-label').textContent = output
+							+ `Your passed all the tests!\nYou solution was better than ${roundedPercentage}% of other people's submissions`;
+						}
 						document.getElementById('console').style.display = 'block';
 					})
 					.catch(error => {
