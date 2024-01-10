@@ -160,9 +160,9 @@
 			fetch(`/api/exercises/${exerciseId}`)
 				.then(response => response.json())
 				.then(exercise => {
-					document.getElementById('page-title').innerText = exercise.name;
-					document.getElementById('problem-title').innerText = exercise.name;
-					document.getElementById('problem-description').innerText = exercise.content;
+					document.getElementById('page-title').innerHTML = exercise.name;
+					document.getElementById('problem-title').innerHTML = exercise.name;
+					document.getElementById('problem-description').innerHTML = exercise.content;
 
 
 					return fetch(`/api/exercises/${exerciseId}/get_like`);
@@ -229,6 +229,37 @@
 				};
 
 				fetch(`/api/exercises/${exerciseId}/run_code`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response not ok');
+						}
+						return response.json();
+					})
+					.then(data => {
+						const output = data.output;
+						document.getElementById('console-label').textContent = output;
+						document.getElementById('console').style.display = 'block';
+					})
+					.catch(error => {
+						console.error('Could not save the code:', error);
+					});
+			})
+			document.getElementById('submit-btn').addEventListener('click', function () {
+				const code = editor.getValue();
+				localStorage.setItem('savedCode-' + exerciseId, code);
+
+				const data = {
+					exerciseId: exerciseId,
+					code: code
+				};
+
+				fetch(`/api/exercises/${exerciseId}/submit_code`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
