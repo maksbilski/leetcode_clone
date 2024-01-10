@@ -13,7 +13,7 @@ const sortStatistics = async (req, res) => {
         SELECT 
           ex_users.user_id,
           ex_users.exercise_id,
-          ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.speed) * 100) AS exercise_percentile
+          ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.run_time) * 100) AS exercise_percentile
         FROM 
           ex_users 
         WHERE 
@@ -50,7 +50,7 @@ const getStatistics = async (req, res) => {
         SELECT 
           ex_users.user_id,
           ex_users.exercise_id,
-          ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.speed) * 100) AS exercise_percentile
+          ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.run_time) * 100) AS exercise_percentile
         FROM 
           ex_users 
         WHERE 
