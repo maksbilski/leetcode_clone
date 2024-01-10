@@ -55,13 +55,13 @@ const getLike = async (req, res) => {
   console.log('sadsadasdsc x');
   try {
     const exerciseId = req.params.exercise_id;
+    console.log(exerciseId)
     const result = await pool`
       SELECT 
-        SUM(CASE WHEN vote = 1 THEN 1 ELSE 0 END) AS likes,
-        SUM(CASE WHEN vote = -1 THEN 1 ELSE 0 END) AS dislikes
+        COALESCE(SUM(CASE WHEN vote = 1 THEN 1 ELSE 0 END), 0) AS likes,
+        COALESCE(SUM(CASE WHEN vote = -1 THEN 1 ELSE 0 END), 0) AS dislikes
       FROM ex_users
-      GROUP BY EXERCISE_ID
-      HAVING EXERCISE_ID = ${exerciseId};`;
+      WHERE EXERCISE_ID = ${exerciseId};`;
     console.log(result[0]);
     res.json(result[0]);
   } catch (error) {
