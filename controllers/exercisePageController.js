@@ -106,10 +106,7 @@ const runCode = async (req, res) => {
 	try {
 		const userId = req.session.userId;
 		const { exerciseId, code } = req.body;
-		const relativePath = `../tests/${exerciseId}.py`
-		const filePath = getAbsolutePath(relativePath)
-		const programPath = await createTemporaryFile(code, exerciseId, userId);
-		const result = await runDockerContainer(filePath, programPath);
+		const result = executeCode(userId, exerciseId, code);
 		res.json({
 			message: 'Code executed',
 			output: result.stdout,
@@ -119,6 +116,14 @@ const runCode = async (req, res) => {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error' });
 	}
+}
+
+const executeCode = async (userId, exerciseId, code) => {
+  const relativePath = `../tests/test_${exerciseId}.py`
+  const filePath = getAbsolutePath(relativePath)
+  const programPath = await createTemporaryFile(code, exerciseId, userId);
+  const result = await runDockerContainer(filePath, programPath);
+  return result;
 }
 
 
