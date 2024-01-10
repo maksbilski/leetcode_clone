@@ -209,9 +209,9 @@ h1 {
 
 table {
    width: 90%;
-   border-collapse: collapse;
-   margin-top: 10px;
-   margin-left: 100px;
+	border-collapse: collapse;
+	margin-top: 10px;
+	margin-left: 100px;
 }
 
 th,
