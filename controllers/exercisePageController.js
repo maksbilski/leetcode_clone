@@ -112,6 +112,14 @@ const addComment = async (req, res) => {
 }
 
 
+const executeCode = async (userId, exerciseId, code) => {
+  const relativePath = `../tests/test_${exerciseId}.py`
+  const filePath = getAbsolutePath(relativePath)
+  const programPath = await createTemporaryFile(code, exerciseId, userId);
+  const result = await runDockerContainer(filePath, programPath);
+  return result;
+}
+
 const runCode = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -128,14 +136,6 @@ const runCode = async (req, res) => {
 	}
 }
 
-const executeCode = async (userId, exerciseId, code) => {
-  const relativePath = `../tests/test_${exerciseId}.py`
-  const filePath = getAbsolutePath(relativePath)
-  const programPath = await createTemporaryFile(code, exerciseId, userId);
-  const result = await runDockerContainer(filePath, programPath);
-  return result;
-}
-
 const submitCode = async (req, res) => {
 	try {
 		const userId = req.session.userId;
@@ -145,10 +145,7 @@ const submitCode = async (req, res) => {
     const regex = /Total runtime: (\d+\.\d+)/;
     const match = output.match(regex);
     const runTime = parseFloat(match[1]);
-    console.log(runTime);
-    console.log(exerciseId);
-    console.log(userId);
-    console.log(!result.error);
+    console.log('userId:', userId);
     const insert = await pool
     `INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
     VALUES (${userId}, ${exerciseId}, ${runTime}, ${true}, ${!result.error})
