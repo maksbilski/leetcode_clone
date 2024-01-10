@@ -1,25 +1,27 @@
 /* exstyles.css */
-html
-{
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
+html {
+	scrollbar-width: thin;
+	scrollbar-color: blue orange;
 }
 
 *::-webkit-scrollbar,
 html *::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
+	height: 12px;
+	width: 12px;
 }
+
 *::-webkit-scrollbar-track,
 html *::-webkit-scrollbar-track {
-  background: orange;
+	background: orange;
 }
+
 *::-webkit-scrollbar-thumb,
 html *::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 5px;
-  border: 3px solid orange;
+	background-color: blue;
+	border-radius: 5px;
+	border: 3px solid orange;
 }
+
 /* Apply a global font and remove default margins */
 body {
 	font-family: 'Consolas', Courier, monospace;
@@ -31,110 +33,119 @@ body {
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 10px; 
-    padding-left: 10px; 
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: #1c1c1c;
-    margin-top: 0; 
-    margin-bottom: 0; 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 0;
+	padding-bottom: 0;
+	background-color: #1c1c1c;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .nav-buttons {
-    padding:0;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
-    margin-right: 35%;
-    margin-left: 10%;
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0;
+	/* Добавьте эту строку */
+	margin-bottom: 0;
+	/* Добавьте эту строку */
+	margin-right: 35%;
+	margin-left: 10%;
 }
 
-.login-register{
-    
-    padding:0;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
-    margin-right: 10%;
+.login-register {
+
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0;
+	/* Добавьте эту строку */
+	margin-bottom: 0;
+	/* Добавьте эту строку */
+	margin-right: 10%;
 }
 
-.logo{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 2%;
+.logo {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 2%;
 }
 
-.logo:hover{
-    cursor: pointer;
+.logo:hover {
+	cursor: pointer;
 }
 
-.logo h1{
-    color:darkorange;
+.logo h1 {
+	color: darkorange;
 	margin-left: 0;
 }
 
-.logo h1:hover{
-    color:rgb(254, 177, 83);
+.logo h1:hover {
+	color: rgb(254, 177, 83);
 }
 
 
-.logo img{
-    width:2em;
-    height: 2em;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 3%;
+.logo img {
+	width: 2em;
+	height: 2em;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 3%;
 }
 
 
 
-.login-register p{
-    width:5em;
-    margin:0;
-    margin-right: 5%;
-    font-size: 1.4em;
-    background-color: #1c1c1c;
-    /* Dark grey background for buttons */
-    color: #646464;
-    /* White text color */
-    border: none;
-    padding: 15px 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.login-register p {
+	width: 5em;
+	margin: 0;
+	margin-right: 5%;
+	font-size: 1.4em;
+	background-color: #1c1c1c;
+	/* Dark grey background for buttons */
+	color: #646464;
+	/* White text color */
+	border: none;
+	padding: 15px 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .login-register p:hover {
-    color: #f5f5f5;
-    /* Lighter grey background on hover */
+	color: #f5f5f5;
+	/* Lighter grey background on hover */
 }
 
-.nav-buttons p{
-    margin:0;
-    font-size: 1.4em;
-    background-color: #1c1c1c;
-    /* Dark grey background for buttons */
-    color: #646464;
-    /* White text color */
-    border: none;
-    padding: 15px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-} 
+.nav-buttons p {
+	margin: 0;
+	font-size: 1.4em;
+	background-color: #1c1c1c;
+	/* Dark grey background for buttons */
+	color: #646464;
+	/* White text color */
+	border: none;
+	padding: 15px 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
 
 .nav-buttons p:hover {
-    color: #f5f5f5;
-    /* Lighter grey background on hover */
+	color: #f5f5f5;
+	/* Lighter grey background on hover */
 }
 
 /* Style for the main heading */
 h1 {
 	text-align: center;
 	color: #31748f;
+	margin-left: 20px;
+}
+
+.fa-check {
+	color: green;
 	margin-left: 20px;
 }
 
@@ -181,13 +192,13 @@ h1 {
 	cursor: pointer;
 	color: #ffffff;
 	transition: background-color 0.3s;
-  }
-  
-  .custom-dropdown:hover {
+}
+
+.custom-dropdown:hover {
 	background-color: #927347;
-  }
-  
-  ul {
+}
+
+ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -196,25 +207,25 @@ h1 {
 	border-radius: 6px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	display: none;
-  }
-  
-  li {
-	width:10em;
+}
+
+li {
+	width: 10em;
 	text-align: center;
 	padding: 10px;
 	color: #ffffff;
 	transition: background-color 0.3s;
 	cursor: pointer;
-  }
-  
-  li:hover {
+}
+
+li:hover {
 	background-color: #927347;
-  }
-  
-  /* Show the options when the parent is hovered */
-  .custom-dropdown:hover ul {
+}
+
+/* Show the options when the parent is hovered */
+.custom-dropdown:hover ul {
 	display: block;
-  }
+}
 
 /* Table styles */
 table {
@@ -309,17 +320,17 @@ a:hover {
 	text-decoration: underline;
 }
 
-span{
+span {
 	color: #a8a8a8;
 }
 
 
 
-.button{
-	background-color:#3CB371;
-	width:60%;
-	padding:0.5em;
-	color:#ffffff;
+.button {
+	background-color: #3CB371;
+	width: 60%;
+	padding: 0.5em;
+	color: #ffffff;
 	font-weight: bold;
 	text-align: center;
 	margin-top: 10%;
@@ -333,32 +344,32 @@ span{
 }
 
 
-.image{
-	scale:calc(0.7);
+.image {
+	scale: calc(0.7);
 	margin-left: 0%;
-	margin-top:2%;
+	margin-top: 2%;
 }
 
-.logo{
-	height:10%;
-	width:50%;
+.logo {
+	height: 10%;
+	width: 50%;
 	display: flex;
-	color:rgb(140, 140, 140);
+	color: rgb(140, 140, 140);
 }
 
-h3{
-	margin-top:6%;
+h3 {
+	margin-top: 6%;
 	margin-bottom: 0;
-	font-size:0.7em;
+	font-size: 0.7em;
 }
 
-.or{
+.or {
 	align-items: center;
 	text-align: center;
-	color:rgb(81, 81, 81);
+	color: rgb(81, 81, 81);
 }
 
-.button:hover{
+.button:hover {
 	background-color: rgb(228, 38, 0);
 	color: #cfcfcf;
 }
@@ -366,24 +377,24 @@ h3{
 .session-expired-notification {
 	background-color: rgb(37, 37, 37);
 	color: white;
-	text-align: left;	
+	text-align: left;
 	top: 30%;
 	margin-left: auto;
 	margin-right: auto;
-	left:33%;
+	left: 33%;
 	position: fixed;
-	padding:1%;
+	padding: 1%;
 	padding-left: 2%;
 	width: 30%;
 	height: 60%;
 	z-index: 1000;
 	font-size: 2em;
-  }
-  
-  .close-notification {
+}
+
+.close-notification {
 	cursor: pointer;
 	position: absolute;
 	top: 5px;
 	right: 10px;
 	font-size: 20px;
-  }
+}
