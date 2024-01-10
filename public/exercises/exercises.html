@@ -12,7 +12,21 @@
 
 <body>
   <header>
-    <h1><a href="/" class="home-link">CodeChampions</a></h1>
+    <div class="logo">
+      <img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
+      <h1 id="home">CodeChampions</h1>
+    </div>
+    
+    <div class="nav-buttons">
+      <div><p id="exercises">Exercises</p></div>
+      <div> <p id="statistics">Statistics</p></div>
+      <div><p id="profile">Profile</p></div>
+      <div><p id="help">Help</p></div>
+  </div>
+    <div class="login-register">
+      <div><p id="login">Sign in</p></div>
+      <div><p id="register">Sign up</p></div>
+    </div>
   </header>
   <!-- Sorting buttons -->
   <div class="sort-container">
@@ -60,6 +74,35 @@
 </div>
 
   <script>
+    document.getElementById('exercises').addEventListener('click', function() {
+    console.log('dsa')
+    window.location.href = '/exercises';
+  });
+  
+  document.getElementById('statistics').addEventListener('click', function() {
+    window.location.href = '/statistics';
+  });
+  
+  document.getElementById('register').addEventListener('click', function() {
+    window.location.href = '/register';
+  });
+
+  document.getElementById('home').addEventListener('click', function() {
+    window.location.href = '/';
+  });
+
+  document.getElementById('login').addEventListener('click', function() {
+    window.location.href = '/login';
+  });
+
+  document.getElementById('help').addEventListener('click', function() {
+    window.location.href = '/help';
+  });
+
+  document.getElementById('profile').addEventListener('click', function() {
+    window.location.href = '/profile';
+  });
+
 
     function redirectToLoginPage() {
         window.location.href = '/login';
