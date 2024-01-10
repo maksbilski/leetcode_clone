@@ -146,11 +146,6 @@ const submitCode = async (req, res) => {
     const match = output.match(regex);
     const runTime = parseFloat(match[1]);
     console.log('userId:', userId);
-    const insert = await pool
-    `INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
-    VALUES (${userId}, ${exerciseId}, ${runTime}, ${true}, ${!result.error})
-    ON CONFLICT (user_id, exercise_id) DO UPDATE
-    SET run_time = ${runTime}, done = ${true}, success = ${!result.error};`;
     const countOfWorseSolutions = await pool
     `
     SELECT COUNT(exercise_id) AS count
@@ -163,12 +158,22 @@ const submitCode = async (req, res) => {
     FROM ex_users
     WHERE exercise_id = ${exerciseId} AND success = ${true};
     `;
+    const insert = await pool
+    `INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
+    VALUES (${userId}, ${exerciseId}, ${runTime}, ${true}, ${!result.error})
+    ON CONFLICT (user_id, exercise_id) DO UPDATE
+    SET run_time = ${runTime}, done = ${true}, success = ${!result.error};`;
     console.log(countOfWorseSolutions[0].count);
     console.log(countOfSolutions[0].count);
+    const percentageOfWorstSolutions = (
+      countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
+    console.log(percentageOfWorstSolutions[0]);
 		res.json({
 			message: 'Code executed',
+      isSuccessfulSubmition: !result.error,
 			output: result.stdout,
-			errorOutput: result.stderr
+			errorOutput: result.stderr,
+      percentageOfWorstSolutions: percentageOfWorstSolutions
 		});
 	} catch (error) {
 		console.error(error);
