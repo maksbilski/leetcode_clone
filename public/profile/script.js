@@ -7,6 +7,18 @@ document.getElementById('exercises').addEventListener('click', function() {
     window.location.href = '/statistics';
   });
   
+  document.getElementById('register').addEventListener('click', function() {
+    window.location.href = '/register';
+  });
+
+  document.getElementById('login').addEventListener('click', function() {
+    window.location.href = '/login';
+  });
+
+  document.getElementById('home').addEventListener('click', function() {
+    window.location.href = '/';
+  });
+
   document.getElementById('help').addEventListener('click', function() {
     window.location.href = '/help';
   });
@@ -20,6 +32,11 @@ document.getElementById('exercises').addEventListener('click', function() {
     const pathArray = window.location.pathname.split('/');
     const userId = pathArray[pathArray.length - 1];
     console.log(userId);
+    
+    if (userId.trim() != ""){
+        const privateProfileSection = document.querySelector('.private-profile-section');
+        privateProfileSection.style.display = 'none';
+    } else{
     fetch(`/api/profile/aggregate?userId=${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -30,6 +47,7 @@ document.getElementById('exercises').addEventListener('click', function() {
             } else {
                 toggleButton.classList.remove('on');
                 toggleButton.textContent = 'Off';
+                toggleButton.classList.add('reverse')
             }
             
             const userName = document.getElementById('username');
@@ -54,6 +72,7 @@ document.getElementById('exercises').addEventListener('click', function() {
             skills[1].textContent = `Algorithms: ${data.algorithms_count}`;
             // Dodaj więcej aktualizacji umiejętności, jeśli są dostępne
         });
+    }
     // Oddzielne zapytanie dla danych kalendarza (bez zmian)
     fetch(`/api/profile/calendar?userId=${userId}`)
         .then(response => response.json())
@@ -127,7 +146,7 @@ document.getElementById('exercises').addEventListener('click', function() {
         
             toggleButton.classList.add('animate');
         
-            toggleButton.textContent = isOn ? 'On' : 'Off';
+            toggleButton.textContent = isOn ? 'Off' : 'On';
         
             fetch('/api/profile/toggleState', {
                 method: 'POST',

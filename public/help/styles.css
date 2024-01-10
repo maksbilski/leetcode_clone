@@ -10,14 +10,101 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding-right: 10px; 
+    padding-left: 10px; 
+    padding-top: 0;
+    padding-bottom: 0;
     background-color: #1c1c1c;
+    margin-top: 0; 
+    margin-bottom: 0; 
 }
 
 .nav-buttons {
+    padding:0;
     display: flex;
     justify-content: space-between;
-    margin-right: 50%;
+    margin-top: 0; /* Добавьте эту строку */
+    margin-bottom: 0; /* Добавьте эту строку */
+    margin-right: 35%;
+    margin-left: 10%;
+}
+
+.login-register{
+    
+    padding:0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0; /* Добавьте эту строку */
+    margin-bottom: 0; /* Добавьте эту строку */
+    margin-right: 10%;
+}
+
+.logo{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2%;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.logo h1{
+    color:darkorange;
+    margin-left: 0;
+}
+
+.logo h1:hover{
+    color:rgb(254, 177, 83);
+}
+
+
+.logo img{
+    width:2em;
+    height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 3%;
+}
+
+
+
+.login-register p{
+    width:5em;
+    margin:0;
+    margin-right: 5%;
+    font-size: 1.4em;
+    background-color: #1c1c1c;
+    /* Dark grey background for buttons */
+    color: #646464;
+    /* White text color */
+    border: none;
+    padding: 15px 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-register p:hover {
+    color: #f5f5f5;
+    /* Lighter grey background on hover */
+}
+
+.nav-buttons p{
+    margin:0;
+    font-size: 1.4em;
+    background-color: #1c1c1c;
+    /* Dark grey background for buttons */
+    color: #646464;
+    /* White text color */
+    border: none;
+    padding: 15px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+} 
+
+.nav-buttons p:hover {
+    color: #f5f5f5;
+    /* Lighter grey background on hover */
 }
 
 h1 {
@@ -26,19 +113,7 @@ h1 {
     font-weight: bold;
 }
 
-.nav-buttons p {
-    font-size: 1.4em;
-    background-color: #1c1c1c;
-    color: #646464;
-    border: none;
-    padding: 15px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
-.nav-buttons p:hover {
-    color: #f5f5f5;
-}
 
 .container {
     /* display: flex;
