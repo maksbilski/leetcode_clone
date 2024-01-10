@@ -1,12 +1,17 @@
 /* styles.css */
 
 body {
-   font-family: 'Consolas', Tahoma, Geneva, Verdana, sans-serif;
+   font-family: 'Consolas', Courier, monospace;
    font-weight: bold;
    margin: 0;
    padding: 0;
    color: #ccc;
    background-color: #121212;
+}
+
+a{
+   color:#ffffff;
+   text-decoration: none;
 }
 
 header {
