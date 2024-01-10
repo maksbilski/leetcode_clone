@@ -172,12 +172,14 @@ h1 {
 
 .problem-description-and-comments {
 	flex: 3;
+	display: flex;
+	flex-direction: column;
 	overflow-y: auto;
+	max-height: calc(100vh - 120px);
 }
 
 .problem-description {
 	height: calc(100vh - 120px);
-	overflow-y: auto;
 	margin-left: 10px;
 	display: flex;
 	flex-direction: column;
@@ -256,8 +258,7 @@ p {
 	padding: 15px 20px;
 	margin-left: 15px;
 	margin-right: 15px;
-	margin-bottom: 10px;
-	margin-top: auto;
+	margin-bottom: auto;
 	cursor: pointer;
 	background-color: #252526;
 	border-top: 2px solid #424242;
@@ -285,7 +286,8 @@ p {
 }
 
 .discussion-container {
-	margin-top: 20px;
+	flex: 1;
+	margin-top: 260px;
 	display: none;
 	padding: 10px;
 }
@@ -312,6 +314,36 @@ p {
 	border: none;
 	outline: none;
 	color: #969696;
+}
+
+#comment-list {
+	list-style: none;
+	padding: 0;
+}
+
+.comment-item {
+	background-color: #2f2f31;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #121212;
+	padding: 20px 20px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.comment-content {
+	font-size: 16px;
+}
+
+.comment-user {
+	font-size: 14px;
+	color: #fff;
+}
+
+.comment-date {
+	font-size: 12px;
+	color: #999;
 }
 
 #add-comment-btn {

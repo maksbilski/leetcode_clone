@@ -122,7 +122,7 @@ document.getElementById('exercises').addEventListener('click', function() {
                 row.appendChild(exerciseNameCell);
 
                 const successCell = document.createElement('td');
-                successCell.textContent = item.success ? 'Tak' : 'Nie';
+                successCell.textContent = item.success ? 'Yes' : 'No';
                 row.appendChild(successCell);
 
                 const submissionDateCell = document.createElement('td');

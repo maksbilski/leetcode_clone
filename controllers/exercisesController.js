@@ -2,8 +2,13 @@ const pool = require('../db');
 
 const getExercises = async (req, res) => {
   console.log('sacxz');
+  const userId = req.session.userId
   try {
-    const result = await pool`SELECT * FROM exercises`;
+    const result = await pool`
+    SELECT e.exercise_id, e.name, e.category, e.difficulty, e.date_added, exu.done, exu.success 
+    FROM exercises e 
+    LEFT JOIN ex_users exu ON (e.exercise_id = exu.exercise_id AND exu.user_id = ${userId})
+    `;
     res.json(result);
   } catch (error) {
     console.error(error);

@@ -16,16 +16,28 @@
       <img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
       <h1 id="home">CodeChampions</h1>
     </div>
-    
+
     <div class="nav-buttons">
-      <div><p id="exercises">Exercises</p></div>
-      <div> <p id="statistics">Statistics</p></div>
-      <div><p id="profile">Profile</p></div>
-      <div><p id="help">Help</p></div>
-  </div>
+      <div>
+        <p id="exercises">Exercises</p>
+      </div>
+      <div>
+        <p id="statistics">Statistics</p>
+      </div>
+      <div>
+        <p id="profile">Profile</p>
+      </div>
+      <div>
+        <p id="help">Help</p>
+      </div>
+    </div>
     <div class="login-register">
-      <div><p id="login">Sign in</p></div>
-      <div><p id="register">Sign up</p></div>
+      <div>
+        <p id="login">Sign in</p>
+      </div>
+      <div>
+        <p id="register">Sign up</p>
+      </div>
     </div>
   </header>
   <!-- Sorting buttons -->
@@ -55,61 +67,61 @@
 
   <!-- Notification and Log In button -->
   <div id="notification-container" style="display: none;">
-  
+
     <div class="session-expired-notification">
       <div class="logo">
         <img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
         <h3>CodeChampions</h3>
       </div>
       <div>
-      <p>Your session is over!</p>
-      <p style="font-size: 0.7em;color: rgb(163, 163, 163)"> Please sign in or if you don't have account, sign up</p>
+        <p>Your session is over!</p>
+        <p style="font-size: 0.7em;color: rgb(163, 163, 163)"> Please sign in or if you don't have account, sign up</p>
         <p class="button" onclick="redirectToLoginPage()">SIGN IN</p>
         <p class="or">———— OR ————</p>
         <p class="button" onclick="redirectToMainPage()">SIGN UP</p>
       </div>
     </div>
-    
+
     <button id="login-button" style="display: none;" onclick="redirectToLoginPage()">Log in</button>
-</div>
+  </div>
 
   <script>
-    document.getElementById('exercises').addEventListener('click', function() {
-    console.log('dsa')
-    window.location.href = '/exercises';
-  });
-  
-  document.getElementById('statistics').addEventListener('click', function() {
-    window.location.href = '/statistics';
-  });
-  
-  document.getElementById('register').addEventListener('click', function() {
-    window.location.href = '/register';
-  });
+    document.getElementById('exercises').addEventListener('click', function () {
+      console.log('dsa')
+      window.location.href = '/exercises';
+    });
 
-  document.getElementById('home').addEventListener('click', function() {
-    window.location.href = '/';
-  });
+    document.getElementById('statistics').addEventListener('click', function () {
+      window.location.href = '/statistics';
+    });
 
-  document.getElementById('login').addEventListener('click', function() {
-    window.location.href = '/login';
-  });
+    document.getElementById('register').addEventListener('click', function () {
+      window.location.href = '/register';
+    });
 
-  document.getElementById('help').addEventListener('click', function() {
-    window.location.href = '/help';
-  });
+    document.getElementById('home').addEventListener('click', function () {
+      window.location.href = '/';
+    });
 
-  document.getElementById('profile').addEventListener('click', function() {
-    window.location.href = '/profile';
-  });
+    document.getElementById('login').addEventListener('click', function () {
+      window.location.href = '/login';
+    });
+
+    document.getElementById('help').addEventListener('click', function () {
+      window.location.href = '/help';
+    });
+
+    document.getElementById('profile').addEventListener('click', function () {
+      window.location.href = '/profile';
+    });
 
 
     function redirectToLoginPage() {
-        window.location.href = '/login';
+      window.location.href = '/login';
     }
 
     function redirectToMainPage() {
-    window.location.href = '/register';
+      window.location.href = '/register';
     }
 
 
@@ -180,9 +192,19 @@
             const row = document.createElement('tr');
             const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
             const categoryClass = `category-${exercise.category.toLowerCase()}`;
-            const statusIcon = 'fas fa-spinner';
+            const status = exercise.success;
+            let statusIcon;
+            if (status === true) {
+              statusIcon = '<i class="fas fa-check"></i>';
+            } else if (status === false) {
+              statusIcon = '<i class="fas fa-spinner"></i>';
+            } else {
+              statusIcon = '';
+            }
+
+            // Note: Removed the <i> tag from around the ${statusIcon}
             row.innerHTML = `
-              <td> <i class="${statusIcon}"></i></td>
+              <td>${statusIcon}</td>
               <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
               <td class="${categoryClass}">${exercise.category}</td>
               <td class="${difficultyClass}">${exercise.difficulty}</td>
