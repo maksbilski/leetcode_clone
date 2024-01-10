@@ -84,6 +84,4 @@ const getStatistics = async (req, res) => {
 module.exports = {
   getStatistics,
   sortStatistics
-  get_statistics,
-  sort_statistics
 };
