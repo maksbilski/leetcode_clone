@@ -75,13 +75,31 @@ const getExerciseComments = async (req, res) => {
 		const exerciseId = req.params.exercise_id;
 		const result = await pool`
 		SELECT *
-		FROM comments
-		WHERE exercise_id = ${exerciseId}`;
+		FROM comments c
+    JOIN users u ON (c.user_id = u.user_id)
+		WHERE c.exercise_id = ${exerciseId}
+    ORDER BY c.comment_date DESC
+    FETCH FIRST 5 ROWS ONLY`;
 		res.json(result);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error'});
 	}
+}
+
+const addComment = async (req, res) => {
+  try {
+    const exerciseId = req.params.exercise_id;
+    const userId = req.session.userId;
+    const { commentContent } = req.body;
+    const insertComment = await pool`
+    INSERT INTO comments(exercise_id, user_id, comment_date, comment_content)
+    VALUES(${exerciseId}, ${userId}, NOW(), ${commentContent});
+    `;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error'});
+  }
 }
 
 const runCode = async (req, res) => {
@@ -142,6 +160,7 @@ function runDockerContainer(testPath, programPath) {
 module.exports = {
 	getExercisePage,
 	getExerciseComments,
+  addComment,
 	runCode,
   postLike,
   getLike,
