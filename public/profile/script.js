@@ -36,7 +36,7 @@ document.getElementById('exercises').addEventListener('click', function() {
     if (userId.trim() != ""){
         const privateProfileSection = document.querySelector('.private-profile-section');
         privateProfileSection.style.display = 'none';
-    } else{
+    } 
     fetch(`/api/profile/aggregate?userId=${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -49,6 +49,7 @@ document.getElementById('exercises').addEventListener('click', function() {
                 toggleButton.textContent = 'Off';
                 toggleButton.classList.add('reverse')
             }
+            console.log(data);
             
             const userName = document.getElementById('username');
             userName.textContent = `${data.name}`;
@@ -72,7 +73,7 @@ document.getElementById('exercises').addEventListener('click', function() {
             skills[1].textContent = `Algorithms: ${data.algorithms_count}`;
             // Dodaj więcej aktualizacji umiejętności, jeśli są dostępne
         });
-    }
+    
     // Oddzielne zapytanie dla danych kalendarza (bez zmian)
     fetch(`/api/profile/calendar?userId=${userId}`)
         .then(response => response.json())

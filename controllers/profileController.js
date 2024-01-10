@@ -28,10 +28,8 @@ const getCalendar = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
-    console.log('bb');
     userId = req.query.userId;
   } else {
-    console.log('aa');
     userId = req.session.userId;
   }
   console.log(userId);
@@ -52,10 +50,8 @@ const getHistory = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
-    console.log('bb');
     userId = req.query.userId;
   } else {
-    console.log('aa');
     userId = req.session.userId;
   }
   console.log(userId);
@@ -85,10 +81,8 @@ const getAggregateStats = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
-    console.log('bb');
     userId = req.query.userId;
   } else {
-    console.log('aa');
     userId = req.session.userId;
   }
   console.log(userId);
