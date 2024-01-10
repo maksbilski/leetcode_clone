@@ -281,6 +281,37 @@
 						console.error('Could not save the code:', error);
 					});
 			})
+			document.getElementById('submit-btn').addEventListener('click', function () {
+				const code = editor.getValue();
+				localStorage.setItem('savedCode-' + exerciseId, code);
+
+				const data = {
+					exerciseId: exerciseId,
+					code: code
+				};
+
+				fetch(`/api/exercises/${exerciseId}/submit_code`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response not ok');
+						}
+						return response.json();
+					})
+					.then(data => {
+						const output = data.output;
+						document.getElementById('console-label').textContent = output;
+						document.getElementById('console').style.display = 'block';
+					})
+					.catch(error => {
+						console.error('Could not save the code:', error);
+					});
+			})
 			document.getElementById('console-btn').addEventListener('click', function () {
 				const consoleElement = document.getElementById('console');
 				consoleElement.style.display = consoleElement.style.display === 'none' ? 'block' : 'none';

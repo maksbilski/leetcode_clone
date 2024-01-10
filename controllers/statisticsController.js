@@ -14,9 +14,9 @@ const sortStatistics = async (req, res) => {
           ex_users.user_id,
           ex_users.exercise_id,
           ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.run_time) * 100) AS exercise_percentile
-        FROM 
-          ex_users 
-        WHERE 
+        FROM
+          ex_users
+        WHERE
           ex_users.success = true
       )
       SELECT
@@ -51,9 +51,9 @@ const getStatistics = async (req, res) => {
           ex_users.user_id,
           ex_users.exercise_id,
           ROUND(PERCENT_RANK() OVER (PARTITION BY ex_users.exercise_id ORDER BY ex_users.run_time) * 100) AS exercise_percentile
-        FROM 
-          ex_users 
-        WHERE 
+        FROM
+          ex_users
+        WHERE
           ex_users.success = true
       )
       SELECT

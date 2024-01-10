@@ -6,9 +6,11 @@ WORKDIR /app
 
 # Skopiuj pliki z bieżącego katalogu do katalogu roboczego w kontenerze
 COPY ./requirements.txt /app
+COPY ./tests/conftest.py /app
+COPY ./x.txt /app
 
 # Zainstaluj zależności (jeśli potrzebujesz)
 RUN pip install -r requirements.txt
 
 # Polecenie, które zostanie wykonane, gdy kontener zostanie uruchomiony
-CMD ["pytest", "/app/test.py"]
+CMD pytest -qq /app/test.py 2> /app/x.txt
