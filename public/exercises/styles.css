@@ -389,7 +389,7 @@ p {
 	color: #dcdcdc;
 	height: 670px;
 	width: 685px;
-	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-family: 'Consolas', Courier, monospace;
 	font-size: 14px;
 	line-height: 1.5;
 }
@@ -414,7 +414,7 @@ p {
 
 
 #console-label {
-	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-family: 'Consolas', Courier, monospace;
 	font-size: 0.9em;
 	margin-left: 20px;
 }
