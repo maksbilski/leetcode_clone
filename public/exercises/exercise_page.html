@@ -162,7 +162,7 @@
 				.then(exercise => {
 					document.getElementById('page-title').innerText = exercise.name;
 					document.getElementById('problem-title').innerText = exercise.name;
-					document.getElementById('problem-description').innerText = exercise.content;
+					document.getElementById('problem-description').innerHTML  = exercise.content;
 
 
 					return fetch(`/api/exercises/${exerciseId}/get_like`);

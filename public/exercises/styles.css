@@ -343,13 +343,12 @@ p {
 }
 
 .code-editor {
-	flex: 1;
 	height: calc(100vh - 120px);
-	display: flex;
 	flex-direction: column;
+	display: inline-block;
 }
 
-.code-editor-buttons-container {
+.buttons-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -437,14 +436,12 @@ p {
 }
 
 .CodeMirror {
-	height: calc(100vh - 120px);
 	border-radius: 10px;
-	flex: 1;
-	display: flex;
-	margin: 10px;
 	background-color: #1c1c1c;
 	border: 2px groove #31748f;
-	width: 96.5%;
+	width: 700px;
+	height: 700px;
+	margin: auto;
 	color: #dcdcdc;
 	font-family: 'Consolas', 'Courier New', Courier, monospace;
 	font-size: 14px;
