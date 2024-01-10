@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const get_exercises = async (req, res) => {
+const getExercises = async (req, res) => {
   console.log('sacxz');
   try {
     const result = await pool`SELECT * FROM exercises`;
@@ -11,7 +11,7 @@ const get_exercises = async (req, res) => {
   }
 };
 
-const sort_exercises = async (req, res) => {
+const sortExercises = async (req, res) => {
   try {
     const validKeys = ["exercise_id", "name", "category", "difficulty"];
     const { key } = req.query;
@@ -30,6 +30,6 @@ const sort_exercises = async (req, res) => {
 };
 
 module.exports = {
-  get_exercises,
-  sort_exercises,
+  getExercises,
+  sortExercises,
 };
