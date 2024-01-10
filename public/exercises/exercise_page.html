@@ -54,7 +54,7 @@
 		<div class="problem-description-and-comments">
 			<div class="problem-description">
 				<div class="problem-header">
-					<h2 id="problem-title"></h2>
+					<h2 id="problem-title" style="font-size: 2.3em; font-weight: bold;"></h2>
 					<div class="likes-dislikes-info">
 						<div id="like-button">
 							<span id="likes-count"></span>
@@ -93,7 +93,7 @@
 				<div class="console" id="console">
 					<pre id="console-label">You must run the code first.</pre>
 				</div>
-				<div class="code-editor-buttons-container">
+				<div class="buttons-container">
 					<button id="console-btn">Console</button>
 					<div class="run-submit-container">
 						<button id="run-btn">Run</button>
@@ -160,8 +160,8 @@
 			fetch(`/api/exercises/${exerciseId}`)
 				.then(response => response.json())
 				.then(exercise => {
-					document.getElementById('page-title').innerHTML = exercise.name;
-					document.getElementById('problem-title').innerHTML = exercise.name;
+					document.getElementById('page-title').innerText = exercise.name;
+					document.getElementById('problem-title').innerText = exercise.name;
 					document.getElementById('problem-description').innerHTML = exercise.content;
 
 
@@ -203,21 +203,52 @@
 					})
 					.catch(error => console.error('Error:', error));
 			}
-			//fetch(`/api/exercises/${exerciseId}/comments`)
-			//	.then(response => {
-			//		if (!response.ok) {
-			//			throw new Error('Failed to load comments')
-			//		}
-			//		return response.json();
-			//	})
-			//	.then(comments => {
-			//
-			//	})
+			fetch(`/api/exercises/${exerciseId}/comments`)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Failed to load comments')
+					}
+					return response.json();
+				})
+				.then(comments => {
+					insertComments(comments);
+				})
+				.catch(error => {
+					console.error('Error fetching comments:', error);
+				});
 			document.querySelector('.discussion-header').addEventListener('click', function () {
 				var expanded = this.getAttribute('aria-expanded') === 'true';
 				this.setAttribute('aria-expanded', !expanded);
 				const discussionContainer = document.getElementById('discussion-container');
 				discussionContainer.style.display = discussionContainer.style.display === 'none' ? 'block' : 'none';
+			})
+			document.getElementById('add-comment-btn').addEventListener('click', function () {
+				const commentContent = document.getElementById('comment-text').value;
+
+				const data = {
+					commentContent: commentContent
+				};
+
+				fetch(`/api/exercises/${exerciseId}/add_comment`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network comment response not ok')
+						}
+						return response.json();
+					})
+					.then(comments => {
+						insertComments(comments);
+					})
+					.catch(error => {
+						console.error('Error fetching comments:', error);
+					});
+
 			})
 			document.getElementById('run-btn').addEventListener('click', function () {
 				const code = editor.getValue();
@@ -286,6 +317,22 @@
 				consoleElement.style.display = consoleElement.style.display === 'none' ? 'block' : 'none';
 			})
 		});
+
+		function insertComments(comments) {
+			const listElement = document.getElementById('comment-list');
+			listElement.innerHTML = '';
+
+			comments.forEach(comment => {
+				const listItem = document.createElement('li');
+				listItem.classList.add('comment-item');
+				listItem.innerHTML = `
+							<div class="comment-content">${comment.comment_content}</div>
+							<div class="comment-user">${comment.name}</div>
+							<div class="comment-date">${new Date(comment.comment_date).toLocaleString()}</div>
+						`;
+				listElement.appendChild(listItem);
+			})
+		};
 	</script>
 
 </body>

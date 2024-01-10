@@ -1,6 +1,6 @@
 const pool = require('../db');
 
-const toggle_state = async (req, res) => {
+const toggleState = async (req, res) => {
   console.log('togglestate');
   try {
     const userIdFromBody = req.body.user_id;
@@ -24,7 +24,7 @@ const toggle_state = async (req, res) => {
   }
 };
 
-const get_calendar = async (req, res) => {
+const getCalendar = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
@@ -48,7 +48,7 @@ const get_calendar = async (req, res) => {
   }
 };
 
-const get_history = async (req, res) => {
+const getHistory = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
@@ -81,7 +81,7 @@ const get_history = async (req, res) => {
   }
 };
 
-const get_aggregate_stats = async (req, res) => {
+const getAggregateStats = async (req, res) => {
   let userId;
 
   if (req.query.userId) {
@@ -129,8 +129,8 @@ const get_aggregate_stats = async (req, res) => {
 };
 
 module.exports = {
-  get_aggregate_stats,
-  get_history,
-  get_calendar,
-  toggle_state,
+  getAggregateStats,
+  getHistory,
+  getCalendar,
+  toggleState,
 };

@@ -55,13 +55,13 @@ const getLike = async (req, res) => {
   console.log('sadsadasdsc x');
   try {
     const exerciseId = req.params.exercise_id;
+    console.log(exerciseId)
     const result = await pool`
       SELECT
-        SUM(CASE WHEN vote = 1 THEN 1 ELSE 0 END) AS likes,
-        SUM(CASE WHEN vote = -1 THEN 1 ELSE 0 END) AS dislikes
+        COALESCE(SUM(CASE WHEN vote = 1 THEN 1 ELSE 0 END), 0) AS likes,
+        COALESCE(SUM(CASE WHEN vote = -1 THEN 1 ELSE 0 END), 0) AS dislikes
       FROM ex_users
-      GROUP BY EXERCISE_ID
-      HAVING EXERCISE_ID = ${exerciseId};`;
+      WHERE EXERCISE_ID = ${exerciseId};`;
     console.log(result[0]);
     res.json(result[0]);
   } catch (error) {
@@ -75,13 +75,40 @@ const getExerciseComments = async (req, res) => {
 		const exerciseId = req.params.exercise_id;
 		const result = await pool`
 		SELECT *
-		FROM comments
-		WHERE exercise_id = ${exerciseId}`;
+		FROM comments c
+    JOIN users u ON (c.user_id = u.user_id)
+		WHERE c.exercise_id = ${exerciseId}
+    ORDER BY c.comment_date DESC
+    FETCH FIRST 5 ROWS ONLY`;
 		res.json(result);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ error: 'Internal server error'});
 	}
+}
+
+const addComment = async (req, res) => {
+  try {
+    const exerciseId = req.params.exercise_id;
+    const userId = req.session.userId;
+    const { commentContent } = req.body;
+    const insertComment = await pool`
+    INSERT INTO comments(exercise_id, user_id, comment_date, comment_content)
+    VALUES(${exerciseId}, ${userId}, NOW(), ${commentContent});
+    `;
+
+    const result = await pool`
+		SELECT *
+		FROM comments c
+    JOIN users u ON (c.user_id = u.user_id)
+		WHERE c.exercise_id = ${exerciseId}
+    ORDER BY c.comment_date DESC
+    FETCH FIRST 5 ROWS ONLY`;
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error'});
+  }
 }
 
 
@@ -190,8 +217,11 @@ function runDockerContainer(testPath, programPath) {
 module.exports = {
 	getExercisePage,
 	getExerciseComments,
+  addComment,
   submitCode,
 	runCode,
+  postLike,
+  getLike,
   postLike,
   getLike,
 };
