@@ -22,22 +22,47 @@
 
 <body>
 	<header>
-		<h1><a href="/" class="home-link">CodeChampions</a></h1>
+		<div class="logo">
+			<img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
+			<h1 id="home">CodeChampions</h1>
+		</div>
+
+		<div class="nav-buttons">
+			<div>
+				<p id="exercises">Exercises</p>
+			</div>
+			<div>
+				<p id="statistics">Statistics</p>
+			</div>
+			<div>
+				<p id="profile">Profile</p>
+			</div>
+			<div>
+				<p id="help">Help</p>
+			</div>
+		</div>
+		<div class="login-register">
+			<div>
+				<p id="login">Sign in</p>
+			</div>
+			<div>
+				<p id="register">Sign up</p>
+			</div>
+		</div>
 	</header>
 	<div class="content-container">
 		<div class="problem-description-and-comments">
 			<div class="problem-description">
 				<div class="problem-header">
 					<h2 id="problem-title"></h2>
-					<div class="like-dislike-bar">
-						<div id="like-bar" class="like-bar"></div>
-						<div id="dislike-bar" class="dislike-bar"></div>
-					</div>
-
-
 					<div class="likes-dislikes-info">
-						<div id="like-button"><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
-						<div id="dislike-button"><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i>
+						<div id="like-button">
+							<span id="likes-count"></span>
+							<i class="fa fa-thumbs-up"></i>
+						</div>
+						<div id="dislike-button">
+							<span id="dislikes-count"></span>
+							<i class="fa fa-thumbs-down"></i>
 						</div>
 					</div>
 
@@ -81,6 +106,35 @@
 	</div>
 
 	<script>
+		document.getElementById('exercises').addEventListener('click', function () {
+			console.log('dsa')
+			window.location.href = '/exercises';
+		});
+
+		document.getElementById('statistics').addEventListener('click', function () {
+			window.location.href = '/statistics';
+		});
+
+		document.getElementById('register').addEventListener('click', function () {
+			window.location.href = '/register';
+		});
+
+		document.getElementById('home').addEventListener('click', function () {
+			window.location.href = '/';
+		});
+
+		document.getElementById('login').addEventListener('click', function () {
+			window.location.href = '/login';
+		});
+
+		document.getElementById('help').addEventListener('click', function () {
+			window.location.href = '/help';
+		});
+
+		document.getElementById('profile').addEventListener('click', function () {
+			window.location.href = '/profile';
+		});
+
 		document.addEventListener('DOMContentLoaded', function () {
 			var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
 				lineNumbers: true,
@@ -121,14 +175,6 @@
 
 			function updateLikesDislikes(likes, dislikes) {
 				const totalVotes = likes + dislikes;
-				const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0;
-				const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0;
-
-				const likeBar = document.getElementById('like-bar');
-				const dislikeBar = document.getElementById('dislike-bar');
-
-				likeBar.style.height = `${likeRatio}%`;
-				dislikeBar.style.height = `${dislikeRatio}%`;
 
 				document.getElementById('likes-count').innerText = likes;
 				document.getElementById('dislikes-count').innerText = dislikes;
