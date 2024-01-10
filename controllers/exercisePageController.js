@@ -96,6 +96,15 @@ const addComment = async (req, res) => {
     INSERT INTO comments(exercise_id, user_id, comment_date, comment_content)
     VALUES(${exerciseId}, ${userId}, NOW(), ${commentContent});
     `;
+
+    const result = await pool`
+		SELECT *
+		FROM comments c
+    JOIN users u ON (c.user_id = u.user_id)
+		WHERE c.exercise_id = ${exerciseId}
+    ORDER BY c.comment_date DESC
+    FETCH FIRST 5 ROWS ONLY`;
+    res.json(result);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error'});
