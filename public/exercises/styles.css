@@ -1,23 +1,24 @@
-html
-{
-  scrollbar-width: thin;
-  scrollbar-color: blue orange;
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #31748f #927347;
 }
 
 *::-webkit-scrollbar,
 html *::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
+	height: 12px;
+	width: 12px;
 }
+
 *::-webkit-scrollbar-track,
 html *::-webkit-scrollbar-track {
-  background: orange;
+	background: #927347;
 }
+
 *::-webkit-scrollbar-thumb,
 html *::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 5px;
-  border: 3px solid orange;
+	background-color: #31748f;
+	border-radius: 5px;
+	border: 3px solid #927347;
 }
 
 body {
@@ -57,65 +58,76 @@ h1 {
 	color: #927347;
 }
 
-
 .content-container {
 	display: flex;
 	flex-grow: 1;
-}
-
-.problem-description,
-.code-editor {
-	box-sizing: border-box;
-	border-radius: 10px;
-	background-color: #252526;
 	margin: 10px;
 }
 
-.problem-description {
-	
+.problem-description-and-comments,
+.code-editor,
+.console-and-buttons {
+	box-sizing: border-box;
+	border-radius: 10px;
+	background-color: #252526;
+}
+
+
+.problem-description-and-comments {
 	flex: 3;
+	max-height: 800px;
+	overflow-y: auto;
+}
+
+.problem-description {
 	height: calc(100vh - 120px);
 	overflow-y: auto;
 	margin-right: 10px;
 }
 
 .like-dislike-bar {
-    width: 20px;
-    height: 100px; 
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column-reverse; 
-    overflow: hidden; 
+	width: 20px;
+	height: 100px;
+	border: 1px solid #ccc;
+	display: flex;
+	flex-direction: column-reverse;
+	overflow: hidden;
 }
 
-.like-bar, .dislike-bar {
-    width: 100%;
-    transition: height 0.3s;
+.like-bar,
+.dislike-bar {
+	width: 100%;
+	transition: height 0.3s;
 }
 
 .like-bar {
-    background-color: green;
-    order: 1; /* Zielony pasek na górze */
+	background-color: green;
+	order: 1;
+	/* Zielony pasek na górze */
 }
 
 .dislike-bar {
-    background-color: red;
-    order: 2; /* Czerwony pasek na dole */
+	background-color: red;
+	order: 2;
+	/* Czerwony pasek na dole */
 }
 
 .likes-dislikes-info div {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 10px; /* Dodaj odstęp między przyciskami */
+	display: inline-flex;
+	align-items: center;
+	margin-right: 10px;
+	/* Dodaj odstęp między przyciskami */
 }
 
 .likes-dislikes-info i {
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
-#likes-count, #dislikes-count {
-    font-size: 1em;
-    color: #fff; /* Zapewnia, że liczniki są widoczne */
+#likes-count,
+#dislikes-count {
+	font-size: 1em;
+	color: #fff;
+	/* Zapewnia, że liczniki są widoczne */
 }
 
 .code-editor {
@@ -123,72 +135,289 @@ h1 {
 	height: calc(100vh - 120px);
 	display: flex;
 	flex-direction: column;
-	margin-left: 10px;
+	justify-content: space-between;
 }
 
 h2 {
 	font-weight: lighter;
 	font-size: 3.0em;
-	margin-top: 20.0px;
+	margin-top: 30.0px;
 	margin-left: 20.0px;
-	color:aliceblue;
-	text-decoration: underline;
+	color: aliceblue;
 	cursor: pointer;
-	transition: color 0.3s;
-}
-
-h2:hover{
-	color:cyan;
 }
 
 p {
+	flex-grow: 1;
 	font-size: 1.3em;
 	margin-left: 20.0px;
 	line-height: 1.0;
-	color: #bbb;
-	/* Lighter text color for readability */
+	color: #ffffff;
 }
 
-textarea {
-	flex-grow: 1;
-	width: 95%;
+.discussion-header {
+	font-size: 1.0em;
+	padding: 15px 20px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	background-color: #252526;
+	border-top: 2px solid #424242;
+	border-bottom: 2px solid #424242;
+	text-align: left;
+	color: #bbb;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	transition: color 0.3s;
+}
+
+.discussion-header:hover {
+	/* Styl dla hover efektu, jeśli potrzebny */
+	color: #fff;
+}
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+.discussion-header[aria-expanded="true"] .arrow {
+	transform: rotate(180deg);
+}
+
+.discussion-container {
 	margin-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	font-family: 'Consolas', 'Courier New', Courier, monospace;
-	font-size: 14px;
-	border: 2px groove #31748f;
-	border-radius: 8px;
+	display: none;
+	padding: 10px;
+}
+
+.add-comment {
+	margin-left: 20px;
+	margin-right: 20px;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+	background-color: #2f2f31;
+	box-shadow: 0 0 10px #121212;
+}
+
+#comment-text {
+	flex-grow: 1;
 	padding: 10px;
 	resize: none;
-	/* Disable resizing */
-	background-color: #1e1e1e;
-	/* Even darker background for contrast */
-	color: #dcdcdc;
-	/* Light text color for contrast */
+	background-color: #2f2f31;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	border: none;
+	outline: none;
+	color: #969696;
 }
 
-button {
-	font-size: 1.5em;
-	font-weight: bold;
-	width: 10em;
-	padding: 15px;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: 10px;
+#add-comment-btn {
+	background-color: #1d7a34;
+	color: #bdbdbd;
+	border-radius: 10px;
+	padding: 10px 15px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
 	margin-bottom: 10px;
-	background-color: #29AD4B;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-left: auto;
+	align-self: flex-end;
+	font-size: 0.9em;
+}
+
+#add-comment-btn:hover {
+	background-color: #249640;
+	color: #ffffff;
+}
+
+.code-editor-and-buttons {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+.code-editor {
+	flex: 1;
+	height: calc(100vh - 120px);
+	display: flex;
+	flex-direction: column;
+}
+
+.code-editor-buttons-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.run-submit-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.console-and-buttons {
+	position: relative;
+	margin-top: 10px;
+}
+
+#console-label {
+	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-size: 0.9em;
+	margin-left: 20px;
+}
+
+.console {
+	display: none;
+	max-height: 200px;
+	overflow-y: auto;
+	padding: 10px;
+	background-color: #1E1E1E;
+	border: 1px solid #929292;
+	color: #ccc;
+	border-radius: 5px;
+}
+
+.console-visible {
+	display: block;
+	bottom: 50px;
+	opacity: 1;
+}
+
+#console-btn,
+#run-btn,
+#submit-btn {
+	font-size: 0.9em;
+	width: 5em;
+	padding: 6px;
 	/* Light green background */
-	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	align-self: flex-start;
 	/* Align to the start of flex container */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+#console-btn {
+	background-color: #252526;
+	color: #7f7f7f;
+	transition: color 0.3s;
+}
+
+#console-btn:hover {
+	color: #bababa;
+}
+
+#run-btn {
+	background-color: #5a5a5a;
+	color: #bababa;
 	transition: background-color 0.3s;
 }
 
-button:hover {
-	background-color: #31748f;
+#run-btn:hover {
+	background-color: #8b8b8b;
+}
+
+#submit-btn {
+	background-color: #29AD4B;
+	color: white;
+	margin-left: 8px;
+	transition: background-color 0.3s;
+}
+
+#submit-btn:hover {
+	background-color: #B5CEA8;
+}
+
+.CodeMirror {
+	height: calc(100vh - 120px);
+	border-radius: 10px;
+	flex: 1;
+	display: flex;
+	margin: 10px;
+	background-color: #1c1c1c;
+	border: 2px groove #31748f;
+	width: 96.5%;
+	color: #dcdcdc;
+	font-family: 'Consolas', 'Courier New', Courier, monospace;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.CodeMirror-gutters {
+	background: #1c1c1c;
+	border-right: 1px solid #1c1c1c;
+}
+
+.CodeMirror-cursor {
+	border-left: 1px solid #d4d4d4;
+}
+
+.CodeMirror-selected {
+	background: rgba(255, 255, 255, 0.1) !important;
+	;
+}
+
+.CodeMirror-activeline-background {
+	background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.CodeMirror .cm-keyword {
+	color: #31748f;
+}
+
+.CodeMirror .cm-operator {
+	color: #e3e42e;
+}
+
+.CodeMirror .cm-variable {
+	color: #ffffff;
+}
+
+.CodeMirror .cm-variable-2 {
+	color: #ebbcba;
+}
+
+.CodeMirror .cm-builtin {
+	color: #f6c177;
+}
+
+.CodeMirror .cm-property {
+	color: #ff6e34;
+}
+
+.CodeMirror .cm-number {
+	color: #B5CEA8;
+}
+
+.CodeMirror .cm-def {
+	color: #e3e42e;
+	font-style: italic;
+}
+
+.CodeMirror .cm-string {
+	color: #ebbcba;
+}
+
+.CodeMirror .cm-comment {
+	color: #6A9955;
+	font-style: italic;
+}
+
+.CodeMirror .cm-tag {
+	color: #569CD6;
+}
+
+.CodeMirror .cm-meta {
+	color: #ff6e34;
 }

@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-const {get_exercise_page, get_like, post_like} = require('../controllers/exercisePageController')
+const {getExercisePage, runCode, getLike, postLike} = require('../controllers/exercisePageController')
 
-router.route('/:exercise_id').get(get_exercise_page);
-router.route('/get_like/:exercise_id').get(get_like);
-router.route('/post_like/:exercise_id').post(post_like);
+router.route('/:exercise_id').get(getExercisePage);
+router.route('/:exercise_id/run_code').post(runCode);
+router.route('/:exercise_id/comments').get
+router.route('/:exercise_id/get_like').get(getLike);
+router.route('/:exercise_id/post_like').post(postLike);
 
 module.exports = router

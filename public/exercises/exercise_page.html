@@ -1,101 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title"></title>
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title id="page-title"></title>
+
+	<!-- Adding CodeMirror stylesheet -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/lib/codemirror.min.css">
+
+	<link rel="stylesheet" href="./styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+	<!-- Adding main script of CodeMirror -->
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/lib/codemirror.js"></script>
+
+	<!-- Adding script for Python mode -->
+	<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.0/mode/python/python.js"></script>
+
 </head>
+
 <body>
-    <header>
-        <h1><a href="/" class="home-link">CodeChampions</a></h1>
-    </header>
-    <div class="content-container">
-        <div class="problem-description">
-            <div class="problem-header">
-                <h2 id="problem-title"></h2>
-                <div class="like-dislike-bar">
-					<div id="like-bar" class="like-bar"></div>
-					<div id="dislike-bar" class="dislike-bar"></div>
+	<header>
+		<h1><a href="/" class="home-link">CodeChampions</a></h1>
+	</header>
+	<div class="content-container">
+		<div class="problem-description-and-comments">
+			<div class="problem-description">
+				<div class="problem-header">
+					<h2 id="problem-title"></h2>
+					<div class="like-dislike-bar">
+						<div id="like-bar" class="like-bar"></div>
+						<div id="dislike-bar" class="dislike-bar"></div>
+					</div>
+
+
+					<div class="likes-dislikes-info">
+						<div id="like-button"><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
+						<div id="dislike-button"><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i>
+						</div>
+					</div>
+
 				</div>
-				
-				
-                <div class="likes-dislikes-info">
-					<div id="like-button"><span id="likes-count"></span> <i class="fa fa-thumbs-up"></i></div>
-					<div id="dislike-button"><span id="dislikes-count"></span> <i class="fa fa-thumbs-down"></i></div>
+				<p id="problem-description"></p>
+				<div class="discussion-header" tabindex="0" aria-expanded="false" role="button">
+					Discussion
+					<span class="arrow">&#9660;</span>
 				</div>
-				
-            </div>
-            <p id="problem-description"></p>
-        </div>
-        <div class="code-editor">
-            <textarea id="editor" placeholder="Enter your code here..."></textarea>
-            <button id="submit-btn">Submit</button>
-        </div>
-    </div>
+			</div>
+			<div class="discussion-container" id="discussion-container">
+				<div class="add-comment">
+					<textarea id="comment-text" rows="4" placeholder="Type comment here..."></textarea>
+					<button id="add-comment-btn">Comment</button>
+				</div>
+				<div class="existing-comments">
+					<ul id="comment-list">
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const pathArray = window.location.pathname.split('/');
-            const exerciseId = pathArray[pathArray.length - 1];
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="code-editor-and-buttons">
+			<div class="code-editor">
+				<textarea id="editor" placeholder="Enter your code here..."></textarea>
+			</div>
+			<div class="console-and-buttons">
+				<div class="console" id="console">
+					<pre id="console-label">You must run the code first.</pre>
+				</div>
+				<div class="code-editor-buttons-container">
+					<button id="console-btn">Console</button>
+					<div class="run-submit-container">
+						<button id="run-btn">Run</button>
+						<button id="submit-btn">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-            
-            fetch(`/api/exercises/${exerciseId}`)
-                .then(response => response.json())
-                .then(exercise => {
-                    document.getElementById('page-title').innerText = exercise.name;
-                    document.getElementById('problem-title').innerText = exercise.name;
-                    document.getElementById('problem-description').innerText = exercise.content;
+	</div>
 
-                    
-                    return fetch(`/api/exercises/get_like/${exerciseId}`);
-                })
-                .then(response => response.json())
-                .then(data => {
-                    updateLikesDislikes(data.likes, data.dislikes);
-                })
-                .catch(error => console.error('Error:', error));
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			var editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+				lineNumbers: true,
+				mode: "python",
+				smartIndent: true,
+				indentUnit: 4,
+				tabSize: 4,
+				indentWithTabs: true,
+				styleActiveLine: true
+			});
 
-				function updateLikesDislikes(likes, dislikes) {
-    				const totalVotes = likes + dislikes;
-					const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0; 
-					const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0; 
+			document.getElementById('console').style.display = 'none';
+			document.getElementById('discussion-container').style.display = 'none';
 
-					const likeBar = document.getElementById('like-bar');
-					const dislikeBar = document.getElementById('dislike-bar');
+			const pathArray = window.location.pathname.split('/');
+			const exerciseId = pathArray[pathArray.length - 1];
 
-					likeBar.style.height = `${likeRatio}%`;
-					dislikeBar.style.height = `${dislikeRatio}%`;
+			const savedCode = localStorage.getItem('savedCode-' + exerciseId);
+			if (savedCode) {
+				editor.setValue(savedCode);
+			}
 
-					document.getElementById('likes-count').innerText = likes;
-					document.getElementById('dislikes-count').innerText = dislikes;
-}
+			fetch(`/api/exercises/${exerciseId}`)
+				.then(response => response.json())
+				.then(exercise => {
+					document.getElementById('page-title').innerText = exercise.name;
+					document.getElementById('problem-title').innerText = exercise.name;
+					document.getElementById('problem-description').innerText = exercise.content;
 
 
-            document.getElementById('like-button').addEventListener('click', function () {
-                sendVote(exerciseId, 1);
-            });
+					return fetch(`/api/exercises/${exerciseId}/get_like`);
+				})
+				.then(response => response.json())
+				.then(data => {
+					updateLikesDislikes(data.likes, data.dislikes);
+				})
+				.catch(error => console.error('Error:', error));
 
-            document.getElementById('dislike-button').addEventListener('click', function () {
-                sendVote(exerciseId, -1);
-            });
+			function updateLikesDislikes(likes, dislikes) {
+				const totalVotes = likes + dislikes;
+				const likeRatio = totalVotes > 0 ? (likes / totalVotes) * 100 : 0;
+				const dislikeRatio = totalVotes > 0 ? (dislikes / totalVotes) * 100 : 0;
 
-            function sendVote(exerciseId, voteType) {
-                fetch(`/api/exercises/post_like/${exerciseId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ vote: voteType }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    updateLikesDislikes(data.likes, data.dislikes);
-                })
-                .catch(error => console.error('Error:', error));
-            }
-        });
-    </script>
+				const likeBar = document.getElementById('like-bar');
+				const dislikeBar = document.getElementById('dislike-bar');
+
+				likeBar.style.height = `${likeRatio}%`;
+				dislikeBar.style.height = `${dislikeRatio}%`;
+
+				document.getElementById('likes-count').innerText = likes;
+				document.getElementById('dislikes-count').innerText = dislikes;
+			}
+
+
+			document.getElementById('like-button').addEventListener('click', function () {
+				sendVote(exerciseId, 1);
+			});
+
+			document.getElementById('dislike-button').addEventListener('click', function () {
+				sendVote(exerciseId, -1);
+			});
+
+			function sendVote(exerciseId, voteType) {
+				fetch(`/api/exercises/${exerciseId}/post_like`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ vote: voteType }),
+				})
+					.then(response => response.json())
+					.then(data => {
+						updateLikesDislikes(data.likes, data.dislikes);
+					})
+					.catch(error => console.error('Error:', error));
+			}
+			//fetch(`/api/exercises/${exerciseId}/comments`)
+			//	.then(response => {
+			//		if (!response.ok) {
+			//			throw new Error('Failed to load comments')
+			//		}
+			//		return response.json();
+			//	})
+			//	.then(comments => {
+			//
+			//	})
+			document.querySelector('.discussion-header').addEventListener('click', function () {
+				var expanded = this.getAttribute('aria-expanded') === 'true';
+				this.setAttribute('aria-expanded', !expanded);
+				const discussionContainer = document.getElementById('discussion-container');
+				discussionContainer.style.display = discussionContainer.style.display === 'none' ? 'block' : 'none';
+			})
+			document.getElementById('run-btn').addEventListener('click', function () {
+				const code = editor.getValue();
+				localStorage.setItem('savedCode-' + exerciseId, code);
+
+				const data = {
+					exerciseId: exerciseId,
+					code: code
+				};
+
+				fetch(`/api/exercises/${exerciseId}/run_code`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Network response not ok');
+						}
+						return response.json();
+					})
+					.then(data => {
+						const output = data.output;
+						document.getElementById('console-label').textContent = output;
+						document.getElementById('console').style.display = 'block';
+					})
+					.catch(error => {
+						console.error('Could not save the code:', error);
+					});
+			})
+			document.getElementById('console-btn').addEventListener('click', function () {
+				const consoleElement = document.getElementById('console');
+				consoleElement.style.display = consoleElement.style.display === 'none' ? 'block' : 'none';
+			})
+		});
+	</script>
+
 </body>
+
 </html>
