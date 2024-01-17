@@ -24,9 +24,7 @@ const sortStatistics = async (req, res) => {
         users.user_id,
         COUNT(ex_users.exercise_id) AS total_exercises_attempted,
         COUNT(CASE WHEN ex_users.success = true THEN 1 END) AS total_exercises_completed,
-        ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate,
-        CONCAT(ROUND(100 - AVG(UserExercisePercentiles.exercise_percentile)), '%') AS average_percentile
-
+        ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate
       FROM
         users
       JOIN
@@ -61,9 +59,7 @@ const getStatistics = async (req, res) => {
         users.name,
         COUNT(ex_users.exercise_id) AS total_exercises_attempted,
         COUNT(CASE WHEN ex_users.success = true THEN 1 END) AS total_exercises_completed,
-        ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate,
-        CONCAT(ROUND(100 - AVG(UserExercisePercentiles.exercise_percentile)), '%') AS average_percentile
-
+        ROUND(COUNT(CASE WHEN ex_users.done = true AND ex_users.success = true THEN 1 END) * 100.0 / COUNT(ex_users.exercise_id), 1) AS success_rate
       FROM
         users
       JOIN
