@@ -14,7 +14,7 @@
       <img class='image' src="https://cdn-icons-png.flaticon.com/512/610/610021.png">
       <h1 id="home">CodeChampions</h1>
     </div>
-    
+
     <div class="nav-buttons">
       <div><p id="exercises">Exercises</p></div>
       <div> <p id="statistics">Statistics</p></div>
@@ -37,7 +37,7 @@
       </ul>
     </div>
   </div>
-  
+
   <table>
     <thead>
       <tr>
@@ -45,21 +45,19 @@
         <th>Exercises Attempted</th>
         <th>Exercises Completed</th>
         <th>Success rate</th>
-        <th>Times percentile</th>
       </tr>
     </thead>
     <tbody id="statisticsTable"></tbody>
   </table>
   <script>
     document.getElementById('exercises').addEventListener('click', function() {
-    console.log('dsa')
     window.location.href = '/exercises';
   });
-  
+
   document.getElementById('statistics').addEventListener('click', function() {
     window.location.href = '/statistics';
   });
-  
+
   document.getElementById('register').addEventListener('click', function() {
     window.location.href = '/register';
   });
@@ -109,7 +107,6 @@
               <td>${record.total_exercises_attempted}</td>
               <td>${record.total_exercises_completed}</td>
               <td style="color: #3CB371;">${record.success_rate}%</td>
-              <td style="color:gray">${record.average_percentile}</td>
             `;
             tableBody.appendChild(row);
           });
@@ -143,7 +140,6 @@
               <td>${record.total_exercises_attempted}</td>
               <td>${record.total_exercises_completed}</td>
               <td>${record.success_rate}%</td>
-              // <td>${record.average_percentile}</td> 
             `;
             tableBody.appendChild(row);
           });
