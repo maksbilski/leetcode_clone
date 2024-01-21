@@ -120,6 +120,7 @@ const executeCode = async (userId, exerciseId, code) => {
   return result;
 }
 
+
 const runCode = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -135,6 +136,7 @@ const runCode = async (req, res) => {
 		res.status(500).json({ error: 'Internal server error' });
 	}
 }
+
 
 const submitCode = async (req, res) => {
 	try {
@@ -181,6 +183,7 @@ const submitCode = async (req, res) => {
 	}
 }
 
+
 function getAbsolutePath(relativePath) {
 	return path.resolve(__dirname, relativePath);
 }
@@ -215,6 +218,7 @@ function runDockerContainer(testPath, programPath) {
 		});
 	});
 }
+
 
 module.exports = {
 	getExercisePage,
