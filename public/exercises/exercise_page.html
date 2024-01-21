@@ -308,7 +308,7 @@
 						let output = data.output;
 						document.getElementById('console-label').textContent = output;
 						if (data.isSuccessfulSubmition) {
-							let roundedPercentage = Math.round(data.percentageOfWorstSolutions);
+							let roundedPercentage = Math.round(data.percentageOfWorseSolutions);
 							document.getElementById('console-label').textContent = output
 							+ `Your passed all the tests!\nYou solution was better than ${roundedPercentage}% of other people's submissions`;
 						}
