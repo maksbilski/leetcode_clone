@@ -1,32 +1,30 @@
 const pool = require('../db');
+const bcrypt = require('bcrypt');
 
 const loginUser = async (req, res) => {
-  console.log('Trying to login');
   try {
     const { email, password } = req.body;
 
-    console.log(`Email: ${email}`);
-    console.log(`Password: ${password}`);
-    const currentDate = new Date().toISOString().split('T')[0];
-    const result = await pool`SELECT * FROM users WHERE email = ${email} AND password = ${password}`;
-
-    console.log(result);
-    console.log('Result.rows:', result.length);
+    const result = await pool`SELECT * FROM users WHERE email = ${email}`;
 
     if (result.length > 0) {
-      console.log('Changing login');
-      const change_date = await pool`
+      const user = result[0];
+
+      const match = await bcrypt.compare(password, user.password_hash);
+      if (!match) {
+        return res.status(401).json({ error: 'Invalid email or password' });
+      }
+
+      const currentDate = new Date().toISOString().split('T')[0];
+      await pool`
         UPDATE users
         SET last_login = ${currentDate}
         WHERE email = ${email};
       `;
-      const userId = result[0].user_id;
-      console.log('User ID:', userId);
-      req.session.userId = userId;
 
-      res.status(200).json({ message: 'Login successful', userId });
+      req.session.userId = user.user_id;
+      res.status(200).json({ message: 'Login successful', userId: user.user_id });
     } else {
-      console.log('User not found');
       res.status(401).json({ error: 'Invalid email or password' });
     }
   } catch (error) {
@@ -56,4 +54,3 @@ module.exports = {
   checkAuthentication,
   refreshSession,
 };
-

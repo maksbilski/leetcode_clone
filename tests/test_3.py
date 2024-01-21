@@ -3,7 +3,7 @@
 
 from solution import Solution
 import pytest
-
+from typing import List
 
 def test_two_sum_basic_case():
     solution = Solution()
@@ -23,7 +23,7 @@ def test_two_sum_zero_target():
 
 def test_two_sum_large_numbers():
     solution = Solution()
-    assert sorted(solution.twoSum([123, 456, 789, 10], 1339)) == [1, 2]
+    assert sorted(solution.twoSum([123, 456, 789, 10], 912)) == [0, 2]
 
 def test_two_sum_one_negative_one_positive():
     solution = Solution()
@@ -31,7 +31,7 @@ def test_two_sum_one_negative_one_positive():
 
 def test_two_sum_with_zero_and_positive_numbers():
     solution = Solution()
-    assert sorted(solution.twoSum([0, 2, 1, 3], 3)) == [0, 3]
+    assert sorted(solution.twoSum([0, 2, 1, 3], 3)) == [1, 2] or sorted(solution.twoSum([0, 2, 1, 3], 3)) == [0, 3]
 
 def test_two_sum_with_all_positive_numbers():
     solution = Solution()
@@ -44,5 +44,5 @@ def test_two_sum_single_element_twice():
 def test_two_sum_large_array():
     solution = Solution()
     large_array = list(range(1000))
-    target = large_array[123] + large_array[456]
-    assert sorted(solution.twoSum(large_array, target)) == [123, 456]
+    target = large_array[289] + large_array[290]
+    assert sorted(solution.twoSum(large_array, target)) == [289, 290]

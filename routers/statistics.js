@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
 
-const {getStatistics, sortStatistics} = require('../controllers/statisticsController')
+const {getAndSortStatistics} = require('../controllers/statisticsController')
 
-router.route('/').get(getStatistics)
-router.route('/sort').get(sortStatistics)
+router.route('/').get(getAndSortStatistics)
+router.route('/sort').get(getAndSortStatistics)
 
 module.exports = router

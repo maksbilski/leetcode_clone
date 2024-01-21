@@ -4,53 +4,64 @@
 from solution import Solution
 import pytest
 
-def test_dijkstra_simple_graph():
-    solution = Solution()
-    graph = {
-        'A': {'B': 1, 'C': 4},
-        'B': {'A': 1, 'C': 2, 'D': 5},
-        'C': {'A': 4, 'B': 2, 'D': 1},
-        'D': {'B': 5, 'C': 1}
-    }
-    assert solution.dijkstra(graph, 'A') == {'A': 0, 'B': 1, 'C': 3, 'D': 4}
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-def test_dijkstra_multiple_paths():
-    solution = Solution()
-    graph = {
-        'A': {'B': 2, 'C': 5},
-        'B': {'A': 2, 'C': 3, 'D': 4},
-        'C': {'A': 5, 'B': 3, 'D': 1},
-        'D': {'B': 4, 'C': 1}
-    }
-    assert solution.dijkstra(graph, 'A') == {'A': 0, 'B': 2, 'C': 5, 'D': 6}
+def array_to_linked_list(arr):
+    head = ListNode(0)
+    current = head
+    for num in arr:
+        current.next = ListNode(num)
+        current = current.next
+    return head.next
 
-def test_dijkstra_single_node():
-    solution = Solution()
-    graph = {'A': {}}
-    assert solution.dijkstra(graph, 'A') == {'A': 0}
+def linked_list_to_array(head):
+    arr = []
+    while head:
+        arr.append(head.val)
+        head = head.next
+    return arr
 
-def test_dijkstra_unconnected_nodes():
+def test_add_two_numbers_basic_case():
     solution = Solution()
-    graph = {
-        'A': {'B': 1},
-        'B': {'A': 1},
-        'C': {}
-    }
-    assert solution.dijkstra(graph, 'A') == {'A': 0, 'B': 1, 'C': float('infinity')}
+    l1 = array_to_linked_list([2, 4, 3])
+    l2 = array_to_linked_list([5, 6, 4])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [7, 0, 8]
 
-def test_dijkstra_large_graph():
+def test_add_two_numbers_with_zeros():
     solution = Solution()
-    graph = {str(i): {str(i + 1): 1} for i in range(1, 100)}
-    graph['100'] = {}
-    result = solution.dijkstra(graph, '1')
-    expected = {str(i): i - 1 for i in range(1, 101)}
-    assert result == expected
+    l1 = array_to_linked_list([0])
+    l2 = array_to_linked_list([0])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [0]
 
-def test_dijkstra_one_path_graph():
+def test_add_two_numbers_large_numbers():
     solution = Solution()
-    graph = {
-        'A': {'B': 3},
-        'B': {'C': 4},
-        'C': {}
-    }
-    assert solution.dijkstra(graph, 'A') == {'A': 0, 'B': 3, 'C': 7}
+    l1 = array_to_linked_list([9, 9, 9, 9, 9, 9, 9])
+    l2 = array_to_linked_list([9, 9, 9, 9])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [8, 9, 9, 9, 0, 0, 0, 1]
+
+def test_add_two_numbers_different_lengths():
+    solution = Solution()
+    l1 = array_to_linked_list([1, 8])
+    l2 = array_to_linked_list([0])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [1, 8]
+
+def test_add_two_numbers_carry_over():
+    solution = Solution()
+    l1 = array_to_linked_list([9, 9])
+    l2 = array_to_linked_list([1])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [0, 0, 1]
+
+def test_add_two_numbers_single_digit():
+    solution = Solution()
+    l1 = array_to_linked_list([5])
+    l2 = array_to_linked_list([5])
+    result = solution.addTwoNumbers(l1, l2)
+    assert linked_list_to_array(result) == [0, 1]
