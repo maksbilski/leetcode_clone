@@ -6,7 +6,6 @@ const os = require('os')
 const path = require('path')
 
 const getExercisePage = async (req, res) => {
-  console.log(req.session.userid);
   try {
     const exerciseId = req.params.exercise_id;
     const result = await pool`
@@ -22,14 +21,11 @@ const getExercisePage = async (req, res) => {
 };
 
 const postLike = async (req, res) => {
-  console.log('dsad');
   try {
     const userId = req.session.userId;
     const exerciseId = req.params.exercise_id;
     const vote = req.body.vote;
-    console.log(userId);
-    console.log(exerciseId);
-    console.log(vote);
+
     const insert = await pool
       `INSERT INTO ex_users (user_id, exercise_id, vote)
       VALUES (${userId}, ${exerciseId}, ${vote})
@@ -43,7 +39,6 @@ const postLike = async (req, res) => {
       FROM ex_users
       GROUP BY EXERCISE_ID
       HAVING EXERCISE_ID = ${exerciseId};`;
-    console.log(result[0]);
     res.json(result[0]);
   } catch (error) {
     console.error(error);
@@ -52,17 +47,14 @@ const postLike = async (req, res) => {
 };
 
 const getLike = async (req, res) => {
-  console.log('sadsadasdsc x');
   try {
     const exerciseId = req.params.exercise_id;
-    console.log(exerciseId)
     const result = await pool`
       SELECT
         COALESCE(SUM(CASE WHEN vote = 1 THEN 1 ELSE 0 END), 0) AS likes,
         COALESCE(SUM(CASE WHEN vote = -1 THEN 1 ELSE 0 END), 0) AS dislikes
       FROM ex_users
       WHERE EXERCISE_ID = ${exerciseId};`;
-    console.log(result[0]);
     res.json(result[0]);
   } catch (error) {
     console.error(error);
@@ -138,56 +130,70 @@ const runCode = async (req, res) => {
 }
 
 
+async function calculatePercentageOfWorseSolutions(exerciseId, runTime) {
+  const countOfWorseSolutions = await pool`
+    SELECT COUNT(exercise_id) AS count
+    FROM ex_users
+    WHERE run_time > ${runTime} AND exercise_id = ${exerciseId} AND success = true;
+  `;
+
+  const countOfSolutions = await pool`
+    SELECT COUNT(exercise_id) AS count
+    FROM ex_users
+    WHERE exercise_id = ${exerciseId} AND success = true;
+  `;
+
+  if (countOfSolutions[0].count === 0) return 0;
+  return (countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
+}
+
+async function insertExUser(userId, exerciseId, runTime, result) {
+  await pool`
+    INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
+    VALUES (${userId}, ${exerciseId}, ${runTime}, true, ${!result.error})
+    ON CONFLICT (user_id, exercise_id) DO UPDATE
+    SET run_time = ${runTime}, done = true, success = ${!result.error};
+  `;
+}
+
+async function insertSubmissionHistory(exerciseId, userId, result) {
+  await pool`
+    INSERT INTO submissions_history (exercise_id, user_id, submission_date, success)
+    VALUES (${exerciseId}, ${userId}, NOW(), ${!result.error});
+  `;
+}
+
 const submitCode = async (req, res) => {
-	try {
-		const userId = req.session.userId;
-		const { exerciseId, code } = req.body;
-		const result = await executeCode(userId, exerciseId, code);
+  try {
+    const userId = req.session.userId;
+    const { exerciseId, code } = req.body;
+    const result = await executeCode(userId, exerciseId, code);
     const output = result.stdout;
     const regex = /Total runtime: (\d+\.\d+)/;
     const match = output.match(regex);
     const runTime = parseFloat(match[1]);
-    console.log('userId:', userId);
-    const countOfWorseSolutions = await pool
-    `
-    SELECT COUNT(exercise_id) AS count
-    FROM ex_users
-    WHERE run_time > ${runTime} AND exercise_id = ${exerciseId} AND success = ${true};
-    `;
-    const countOfSolutions = await pool
-    `
-    SELECT COUNT(exercise_id) AS count
-    FROM ex_users
-    WHERE exercise_id = ${exerciseId} AND success = ${true};
-    `;
-    const insert = await pool
-    `INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
-    VALUES (${userId}, ${exerciseId}, ${runTime}, ${true}, ${!result.error})
-    ON CONFLICT (user_id, exercise_id) DO UPDATE
-    SET run_time = ${runTime}, done = ${true}, success = ${!result.error};`;
-    console.log(countOfWorseSolutions[0].count);
-    console.log(countOfSolutions[0].count);
-    const percentageOfWorstSolutions = (
-      countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
-    console.log(percentageOfWorstSolutions[0]);
-		res.json({
-			message: 'Code executed',
+
+    await insertExUser(userId, exerciseId, runTime, result);
+    await insertSubmissionHistory(exerciseId, userId, result);
+    const percentageOfWorseSolutions = await calculatePercentageOfWorseSolutions(exerciseId, runTime);
+
+    res.json({
+      message: 'Code executed',
       isSuccessfulSubmition: !result.error,
-			output: result.stdout,
-			errorOutput: result.stderr,
-      percentageOfWorstSolutions: percentageOfWorstSolutions
-		});
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: 'Internal server error' });
-	}
+      output: result.stdout,
+      errorOutput: result.stderr,
+      percentageOfWorseSolutions: percentageOfWorseSolutions
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 
 function getAbsolutePath(relativePath) {
 	return path.resolve(__dirname, relativePath);
 }
-
 
 async function createTemporaryFile(code, exerciseId, userId) {
 	const tempDir = os.tmpdir();
