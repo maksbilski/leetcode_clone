@@ -1,72 +1,76 @@
-html{
+html {
     height: auto;
     padding: 0;
 }
 
 body {
-    background-color: #1f1f1f;
+    background-color: #121212;
     font-family: 'Consolas', Courier, monospace;
     color: #ccc;
-    padding:0;
-    height:100%;
-    margin:0;
+    padding: 0;
+    height: 100%;
+    margin: 0;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 10px; 
-    padding-left: 10px; 
+    padding-right: 10px;
+    padding-left: 10px;
     padding-top: 0;
     padding-bottom: 0;
     background-color: #1c1c1c;
-    margin-top: 0; 
-    margin-bottom: 0; 
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .nav-buttons {
-    padding:0;
+    padding: 0;
     display: flex;
     justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
+    margin-top: 0;
+    /* Добавьте эту строку */
+    margin-bottom: 0;
+    /* Добавьте эту строку */
     margin-right: 35%;
     margin-left: 10%;
 }
 
-.login-register{
-    
-    padding:0;
+.login-register {
+
+    padding: 0;
     display: flex;
     justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
+    margin-top: 0;
+    /* Добавьте эту строку */
+    margin-bottom: 0;
+    /* Добавьте эту строку */
     margin-right: 10%;
 }
 
-.logo{
+.logo {
     display: flex;
     justify-content: space-between;
     margin-left: 2%;
 }
 
-.logo:hover{
+.logo:hover {
     cursor: pointer;
 }
 
-.logo h1{
-    color:darkorange;
+.logo h1 {
+    color: darkorange;
     margin-left: 0;
 }
 
-.logo h1:hover{
-    color:rgb(254, 177, 83);
+.logo h1:hover {
+    color: rgb(254, 177, 83);
 }
 
 
-.logo img{
-    width:2em;
+.logo img {
+    width: 2em;
     height: 2em;
     margin-top: auto;
     margin-bottom: auto;
@@ -75,9 +79,9 @@ header {
 
 
 
-.login-register p{
-    width:5em;
-    margin:0;
+.login-register p {
+    width: 5em;
+    margin: 0;
     margin-right: 5%;
     font-size: 1.4em;
     background-color: #1c1c1c;
@@ -95,8 +99,8 @@ header {
     /* Lighter grey background on hover */
 }
 
-.nav-buttons p{
-    margin:0;
+.nav-buttons p {
+    margin: 0;
     font-size: 1.4em;
     background-color: #1c1c1c;
     /* Dark grey background for buttons */
@@ -106,70 +110,71 @@ header {
     padding: 15px 15px;
     cursor: pointer;
     transition: background-color 0.3s;
-} 
+}
 
 .nav-buttons p:hover {
     color: #f5f5f5;
     /* Lighter grey background on hover */
 }
+
 #container {
     margin-top: 5%;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 5%;
     display: flex;
-    width:85%;
+    width: 85%;
     height: 90%;
-    padding-top:1%;
+    padding-top: 1%;
 }
 
 
 
 #sidebar {
     width: 30%;
-    height:auto;
+    height: auto;
     background-color: #2a2a2a;
     border-radius: 10px;
 }
 
-#stats-calendar{
+#stats-calendar {
     display: flex;
     margin-bottom: 2%;
 }
 
-#username{
-    color:white;
-    font-size:2em;
+#username {
+    color: white;
+    font-size: 2em;
     margin-left: 5%;
 }
 
-h5{
-    font-size:1.4em;
+h5 {
+    font-size: 1.4em;
     font-weight: bolder;
 }
 
-#stats{
+#stats {
     background-color: #2a2a2a;
     border-radius: 10px;
-    margin-left:3%;
+    margin-left: 3%;
     padding-top: 5%;
     padding-left: 5%;
-    width:35%;
+    width: 35%;
 }
 
-#activity-calendar{
-    background-color:  #2a2a2a;
+#activity-calendar {
+    background-color: #2a2a2a;
     border-radius: 10px;
-    padding:2%;
-    margin-left:3%;
-    width:60%;
+    padding: 2%;
+    margin-left: 3%;
+    width: 60%;
 }
 
-#recent-submissions{
-    background-color:  #2a2a2a;
+#recent-submissions {
+    background-color: #2a2a2a;
     border-radius: 10px;
-    padding:5%;
-    margin-left:3%;
+    padding: 5%;
+    margin-left: 3%;
 }
 
 .private-profile-section {
@@ -202,8 +207,8 @@ h5{
     align-items: center;
     margin-top: 5%;
     margin-left: 3%;
-  }
-  
+}
+
 
 
 .toggle-button.on {
@@ -212,7 +217,7 @@ h5{
 
 
 .toggle-button.reverse {
-    background-color: #e74c3c; 
+    background-color: #e74c3c;
 }
 
 
@@ -229,9 +234,11 @@ h5{
     0% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(20px);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -250,7 +257,8 @@ h5{
     border-radius: 2em;
 }
 
-#history-table th, #history-table td {
+#history-table th,
+#history-table td {
     padding: 3%;
     text-align: left;
     background-color: #2323234c;
@@ -272,29 +280,29 @@ h1 {
     border-radius: 50%;
 }
 
-h2{
-  color: rgb(168, 168, 168); 
-  font-size: 1.1em; 
-  margin:0;
-  margin-bottom: 5%;
-}
-
-h3{
-    color: rgb(168, 168, 168); 
-    font-size: 1.5em; 
-    margin:0;
+h2 {
+    color: rgb(168, 168, 168);
+    font-size: 1.1em;
+    margin: 0;
     margin-bottom: 5%;
 }
 
-#rank{
-    color:rgb(185, 185, 185);
-    font-size:1.1em;
+h3 {
+    color: rgb(168, 168, 168);
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom: 5%;
+}
+
+#rank {
+    color: rgb(185, 185, 185);
+    font-size: 1.1em;
     margin-left: 5%;
     margin-top: 5%;
 }
 
-#skills{
-    width:90%;
+#skills {
+    width: 90%;
     margin-left: 5%;
     font-weight: bold;
     font-size: 1.1em;
@@ -312,20 +320,20 @@ h3{
 }
 
 #difficulty-bars .bar {
-    width:90%;
+    width: 90%;
     height: 0.6em;
     margin-bottom: 10%;
     border-radius: 20px;
 }
 
-#difficulty-bars .label{
-    color:rgb(159, 159, 159);
+#difficulty-bars .label {
+    color: rgb(159, 159, 159);
     font-weight: bold;
-    margin:0;
+    margin: 0;
     margin-bottom: 2%;
 }
 
-.calendar-month{
+.calendar-month {
     margin-bottom: 2%;
 }
 
@@ -353,4 +361,3 @@ h3{
 }
 
 /* Dodatkowe stylizacje */
-

@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1f1f1f;
+    background-color: #121212;
     font-family: 'Consolas', Courier, monospace;
     color: #ccc;
     margin: 0;
@@ -10,57 +10,61 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 10px; 
-    padding-left: 10px; 
+    padding-right: 10px;
+    padding-left: 10px;
     padding-top: 0;
     padding-bottom: 0;
     background-color: #1c1c1c;
-    margin-top: 0; 
-    margin-bottom: 0; 
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .nav-buttons {
-    padding:0;
+    padding: 0;
     display: flex;
     justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
+    margin-top: 0;
+    /* Добавьте эту строку */
+    margin-bottom: 0;
+    /* Добавьте эту строку */
     margin-right: 35%;
     margin-left: 10%;
 }
 
-.login-register{
-    
-    padding:0;
+.login-register {
+
+    padding: 0;
     display: flex;
     justify-content: space-between;
-    margin-top: 0; /* Добавьте эту строку */
-    margin-bottom: 0; /* Добавьте эту строку */
+    margin-top: 0;
+    /* Добавьте эту строку */
+    margin-bottom: 0;
+    /* Добавьте эту строку */
     margin-right: 10%;
 }
 
-.logo{
+.logo {
     display: flex;
     justify-content: space-between;
     margin-left: 2%;
 }
 
-.logo:hover{
+.logo:hover {
     cursor: pointer;
 }
 
-.logo h1{
-    color:darkorange;
+.logo h1 {
+    color: darkorange;
     margin-left: 0;
 }
 
-.logo h1:hover{
-    color:rgb(254, 177, 83);
+.logo h1:hover {
+    color: rgb(254, 177, 83);
 }
 
 
-.logo img{
-    width:2em;
+.logo img {
+    width: 2em;
     height: 2em;
     margin-top: auto;
     margin-bottom: auto;
@@ -69,9 +73,9 @@ header {
 
 
 
-.login-register p{
-    width:5em;
-    margin:0;
+.login-register p {
+    width: 5em;
+    margin: 0;
     margin-right: 5%;
     font-size: 1.4em;
     background-color: #1c1c1c;
@@ -89,8 +93,8 @@ header {
     /* Lighter grey background on hover */
 }
 
-.nav-buttons p{
-    margin:0;
+.nav-buttons p {
+    margin: 0;
     font-size: 1.4em;
     background-color: #1c1c1c;
     /* Dark grey background for buttons */
@@ -100,7 +104,7 @@ header {
     padding: 15px 15px;
     cursor: pointer;
     transition: background-color 0.3s;
-} 
+}
 
 .nav-buttons p:hover {
     color: #f5f5f5;
@@ -121,7 +125,8 @@ h1 {
     margin: 20px;
 }
 
-.help-text, .contact-info {
+.help-text,
+.contact-info {
     margin-left: auto;
     margin-right: auto;
     width: 30%;
@@ -135,10 +140,11 @@ h1 {
     margin-bottom: 20px;
 }
 
-.help-text h2{
+.help-text h2 {
     font-style: italic;
     font-weight: bold;
 }
+
 
 .help-text p,
 .contact-info p {
@@ -147,43 +153,60 @@ h1 {
     margin-bottom: 15px;
 }
 
-.feedback-form{
+.feedback-form {
     position: fixed;
-    left:78%;
-    width:20%;
-    top:40%;
+    display: flex;
+    flex-direction: column;
+    left: 78%;
+    width: 20%;
+    top: 40%;
 }
 
+.feedback-form p {
+    box-shadow: 0 0 10px #6b6b6b;
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+    width: 100%;
+    margin-bottom: 0;
+    background-color: rgb(0, 76, 218);
+}
 
 .feedback-form textarea {
-    color:#f5f5f5;
+    box-shadow: 0 0 10px #6b6b6b;
+    box-sizing: border-box;
+    color: #f5f5f5;
     padding-left: 3%;
     padding-top: 3%;
     font-size: 1.5em;
-    width: -webkit-fill-available;
+    width: 98.5%;
+    margin-left: 3px;
     height: 20em;
-    margin-bottom: 10px;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
     border: none;
+    resize: none;
     background-color: #464646;
 }
 
-.feedback-form textarea:focus{
-    color:#f5f5f5;
+.feedback-form textarea:focus {
+    color: #f5f5f5;
 }
 
 .feedback-form button {
+    box-shadow: 0 0 10px #6b6b6b;
     font-size: 1.5em;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    width: 100%;
     padding: 10px;
     background-color: #2ecc71;
     color: #fff;
     font-weight: bold;
-    border-radius: 2em;
-    border:none;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s;
 }

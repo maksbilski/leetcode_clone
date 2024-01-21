@@ -78,35 +78,36 @@ document.getElementById('exercises').addEventListener('click', function() {
     fetch(`/api/profile/calendar?userId=${userId}`)
         .then(response => response.json())
         .then(calendarDataArray => {
-            const calendarData = calendarDataArray.reduce((acc, item) => {
-                acc[item.formatted_date] = true; // Zakładamy aktywność w tym dniu
+            const groupedByMonth = calendarDataArray.reduce((acc, item) => {
+                const date = new Date(item.formatted_date);
+                const monthYearKey = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+                
+                if (!acc[monthYearKey]) {
+                    acc[monthYearKey] = [];
+                }
+                
+                acc[monthYearKey].push(date.getDate());
                 return acc;
             }, {});
 
             const calendarContainer = document.getElementById('calendar');
-            const currentDate = new Date();
-            const tenMonthsAgo = new Date(currentDate.getFullYear(), currentDate.getMonth() - 10, 1);
 
-            Object.keys(calendarData).sort().forEach(date => {
-                const dateObj = new Date(date);
-                if (dateObj >= tenMonthsAgo) {
-                    const monthName = dateObj.toLocaleString('default', { month: 'long' });
-                    const year = dateObj.getFullYear();
-                    const monthElement = document.createElement('div');
-                    monthElement.className = 'calendar-month';
-                    monthElement.textContent = `${monthName}`;
-
-                    const daysInMonth = new Date(year, dateObj.getMonth() + 1, 0).getDate();
-                    for (let i = 1; i <= daysInMonth; i++) {
-                        const day = `${year}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
-                        const daySquare = document.createElement('div');
-                        daySquare.className = 'calendar-day';
-                        daySquare.style.backgroundColor = calendarData[day] ? 'green' : 'grey';
-                        monthElement.appendChild(daySquare);
-                    }
-
-                    calendarContainer.appendChild(monthElement);
+            Object.keys(groupedByMonth).sort().forEach(monthYear => {
+                const [year, month] = monthYear.split('-');
+                const monthName = new Date(year, parseInt(month, 10) - 1).toLocaleString('default', { month: 'long' });
+                const monthElement = document.createElement('div');
+                monthElement.className = 'calendar-month';
+                monthElement.textContent = `${monthName} ${year}`;
+        
+                const daysInMonth = new Date(year, month, 0).getDate();
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const daySquare = document.createElement('div');
+                    daySquare.className = 'calendar-day';
+                    daySquare.style.backgroundColor = groupedByMonth[monthYear].includes(i) ? 'green' : 'grey';
+                    monthElement.appendChild(daySquare);
                 }
+        
+                calendarContainer.appendChild(monthElement);
             });
         });
 

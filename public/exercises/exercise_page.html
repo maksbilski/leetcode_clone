@@ -68,10 +68,10 @@
 
 				</div>
 				<p id="problem-description"></p>
-				<div class="discussion-header" tabindex="0" aria-expanded="false" role="button">
-					Discussion
-					<span class="arrow">&#9660;</span>
-				</div>
+			</div>
+			<div class="discussion-header" tabindex="0" aria-expanded="false" role="button">
+				Discussion
+				<span class="arrow">&#9660;</span>
 			</div>
 			<div class="discussion-container" id="discussion-container">
 				<div class="add-comment">
@@ -310,7 +310,7 @@
 						if (data.isSuccessfulSubmition) {
 							let roundedPercentage = Math.round(data.percentageOfWorstSolutions);
 							document.getElementById('console-label').textContent = output
-							+ `Your passed all the tests!\nYou solution was better than ${roundedPercentage}% of other people's submissions`;
+								+ `Your passed all the tests!\nYou solution was better than ${roundedPercentage}% of other people's submissions`;
 						}
 						document.getElementById('console').style.display = 'block';
 					})
