@@ -130,52 +130,70 @@ const runCode = async (req, res) => {
 }
 
 
+async function calculatePercentageOfWorseSolutions(exerciseId, runTime) {
+  const countOfWorseSolutions = await pool`
+    SELECT COUNT(exercise_id) AS count
+    FROM ex_users
+    WHERE run_time > ${runTime} AND exercise_id = ${exerciseId} AND success = true;
+  `;
+
+  const countOfSolutions = await pool`
+    SELECT COUNT(exercise_id) AS count
+    FROM ex_users
+    WHERE exercise_id = ${exerciseId} AND success = true;
+  `;
+
+  if (countOfSolutions[0].count === 0) return 0;
+  return (countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
+}
+
+async function insertExUser(userId, exerciseId, runTime, result) {
+  await pool`
+    INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
+    VALUES (${userId}, ${exerciseId}, ${runTime}, true, ${!result.error})
+    ON CONFLICT (user_id, exercise_id) DO UPDATE
+    SET run_time = ${runTime}, done = true, success = ${!result.error};
+  `;
+}
+
+async function insertSubmissionHistory(exerciseId, userId, result) {
+  await pool`
+    INSERT INTO submissions_history (exercise_id, user_id, submission_date, success)
+    VALUES (${exerciseId}, ${userId}, NOW(), ${!result.error});
+  `;
+}
+
 const submitCode = async (req, res) => {
-	try {
-		const userId = req.session.userId;
-		const { exerciseId, code } = req.body;
-		const result = await executeCode(userId, exerciseId, code);
+  try {
+    const userId = req.session.userId;
+    const { exerciseId, code } = req.body;
+    const result = await executeCode(userId, exerciseId, code);
     const output = result.stdout;
     const regex = /Total runtime: (\d+\.\d+)/;
     const match = output.match(regex);
     const runTime = parseFloat(match[1]);
-    const countOfWorseSolutions = await pool
-    `
-    SELECT COUNT(exercise_id) AS count
-    FROM ex_users
-    WHERE run_time > ${runTime} AND exercise_id = ${exerciseId} AND success = ${true};
-    `;
-    const countOfSolutions = await pool
-    `
-    SELECT COUNT(exercise_id) AS count
-    FROM ex_users
-    WHERE exercise_id = ${exerciseId} AND success = ${true};
-    `;
-    const insert = await pool
-    `INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
-    VALUES (${userId}, ${exerciseId}, ${runTime}, ${true}, ${!result.error})
-    ON CONFLICT (user_id, exercise_id) DO UPDATE
-    SET run_time = ${runTime}, done = ${true}, success = ${!result.error};`;
-    const percentageOfWorstSolutions = (
-      countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
-		res.json({
-			message: 'Code executed',
+
+    await insertExUser(userId, exerciseId, runTime, result);
+    await insertSubmissionHistory(exerciseId, userId, result);
+    const percentageOfWorseSolutions = await calculatePercentageOfWorseSolutions(exerciseId, runTime);
+
+    res.json({
+      message: 'Code executed',
       isSuccessfulSubmition: !result.error,
-			output: result.stdout,
-			errorOutput: result.stderr,
-      percentageOfWorstSolutions: percentageOfWorstSolutions
-		});
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: 'Internal server error' });
-	}
+      output: result.stdout,
+      errorOutput: result.stderr,
+      percentageOfWorseSolutions: percentageOfWorseSolutions
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 
 function getAbsolutePath(relativePath) {
 	return path.resolve(__dirname, relativePath);
 }
-
 
 async function createTemporaryFile(code, exerciseId, userId) {
 	const tempDir = os.tmpdir();
