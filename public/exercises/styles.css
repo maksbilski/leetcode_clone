@@ -179,7 +179,7 @@ h1 {
 }
 
 .problem-description {
-	padding: 30px 30px;
+	padding: 10px 10px;
 	line-height: 1.6;
 	color: #f5f5f5;
 	font-size: 0.85em;
@@ -188,6 +188,10 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+.text-sm {
+	font-size: 0.875em;
 }
 
 .problem-description code {
