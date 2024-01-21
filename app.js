@@ -27,7 +27,7 @@ app.use(session({
   },
 }));
 
-//setInterval(checkExercisesAndSendEmail, 20000);
+setInterval(checkExercisesAndSendEmail, 2147483647);
 
 app.use('/exercises', checkAuthentication);
 app.use('/statistics', checkAuthentication);
@@ -53,13 +53,6 @@ app.use('/api/register', registerRouter)
 app.use(`/api/exercises`, exercisePageRouter)
 app.use('/api/help', helpRouter)
 
-
-
-// app.use('/api/exercises', exercises);
-// app.use('/api/login', login);
-// app.use('/api/statistics', statistics);
-// app.use('/', pages);
-// app.use('/api/register', register);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
