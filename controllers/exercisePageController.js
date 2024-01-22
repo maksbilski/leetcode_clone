@@ -5,6 +5,13 @@ const fs = require('fs/promises')
 const os = require('os')
 const path = require('path')
 
+
+/**
+ * Fetches details of a specific exercise including its content.
+ *
+ * @param {object} req - The request object containing parameters.
+ * @param {object} res - The response object for sending back data.
+ */
 const getExercisePage = async (req, res) => {
   try {
     const exerciseId = req.params.exercise_id;
@@ -20,6 +27,13 @@ const getExercisePage = async (req, res) => {
   }
 };
 
+
+/**
+ * Records a like or dislike vote for an exercise and returns updated counts.
+ *
+ * @param {object} req - The request object containing user data and vote.
+ * @param {object} res - The response object for sending back updated counts.
+ */
 const postLike = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -46,6 +60,13 @@ const postLike = async (req, res) => {
   }
 };
 
+
+/**
+ * Retrieves the current like and dislike counts for a specific exercise.
+ *
+ * @param {object} req - The request object containing exercise ID.
+ * @param {object} res - The response object for sending back counts.
+ */
 const getLike = async (req, res) => {
   try {
     const exerciseId = req.params.exercise_id;
@@ -62,6 +83,13 @@ const getLike = async (req, res) => {
   }
 };
 
+
+/**
+ * Fetches the latest comments for a specific exercise.
+ *
+ * @param {object} req - The request object containing exercise ID.
+ * @param {object} res - The response object for sending back comments.
+ */
 const getExerciseComments = async (req, res) => {
 	try {
 		const exerciseId = req.params.exercise_id;
@@ -79,6 +107,13 @@ const getExerciseComments = async (req, res) => {
 	}
 }
 
+
+/**
+ * Adds a new comment to a specific exercise.
+ *
+ * @param {object} req - The request object containing user data and comment content.
+ * @param {object} res - The response object for sending back updated comments.
+ */
 const addComment = async (req, res) => {
   try {
     const exerciseId = req.params.exercise_id;
@@ -104,6 +139,14 @@ const addComment = async (req, res) => {
 }
 
 
+/**
+ * Executes submitted code for an exercise and returns the execution result.
+ *
+ * @param {number} userId - The ID of the user submitting the code.
+ * @param {number} exerciseId - The ID of the exercise.
+ * @param {string} code - The submitted code.
+ * @returns {Promise<object>} - The result of code execution.
+ */
 const executeCode = async (userId, exerciseId, code) => {
   const relativePath = `../tests/test_${exerciseId}.py`
   const filePath = getAbsolutePath(relativePath)
@@ -113,6 +156,12 @@ const executeCode = async (userId, exerciseId, code) => {
 }
 
 
+/**
+ * Endpoint handler for running submitted code.
+ *
+ * @param {object} req - The request object containing user data and code.
+ * @param {object} res - The response object for sending back execution result.
+ */
 const runCode = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -130,6 +179,13 @@ const runCode = async (req, res) => {
 }
 
 
+/**
+ * Calculates the percentage of solutions worse than the current submission.
+ *
+ * @param {number} exerciseId - The ID of the exercise.
+ * @param {number} runTime - The runtime of the current submission.
+ * @returns {Promise<number>} - The percentage of worse solutions.
+ */
 async function calculatePercentageOfWorseSolutions(exerciseId, runTime) {
   const countOfWorseSolutions = await pool`
     SELECT COUNT(exercise_id) AS count
@@ -147,7 +203,16 @@ async function calculatePercentageOfWorseSolutions(exerciseId, runTime) {
   return (countOfWorseSolutions[0].count / countOfSolutions[0].count) * 100;
 }
 
-async function insertExUser(userId, exerciseId, runTime, result) {
+
+/**
+ * Inserts or updates a user's submission record in 'ex_users' table.
+ *
+ * @param {number} userId - The ID of the user.
+ * @param {number} exerciseId - The ID of the exercise.
+ * @param {number} runTime - The runtime of the submission.
+ * @param {object} result - The result of the submission.
+ */
+async function insertToExUser(userId, exerciseId, runTime, result) {
   await pool`
     INSERT INTO ex_users (user_id, exercise_id, run_time, done, success)
     VALUES (${userId}, ${exerciseId}, ${runTime}, true, ${!result.error})
@@ -156,6 +221,14 @@ async function insertExUser(userId, exerciseId, runTime, result) {
   `;
 }
 
+
+/**
+ * Inserts a record of a submission into the 'submissions_history' table.
+ *
+ * @param {number} exerciseId - The ID of the exercise.
+ * @param {number} userId - The ID of the user.
+ * @param {object} result - The result of the submission.
+ */
 async function insertSubmissionHistory(exerciseId, userId, result) {
   await pool`
     INSERT INTO submissions_history (exercise_id, user_id, submission_date, success)
@@ -163,6 +236,13 @@ async function insertSubmissionHistory(exerciseId, userId, result) {
   `;
 }
 
+
+/**
+ * Submits user's code for an exercise and processes the result.
+ *
+ * @param {object} req - The request object containing user data and code.
+ * @param {object} res - The response object for sending back submission results.
+ */
 const submitCode = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -173,7 +253,7 @@ const submitCode = async (req, res) => {
     const match = output.match(regex);
     const runTime = parseFloat(match[1]);
 
-    await insertExUser(userId, exerciseId, runTime, result);
+    await insertToExUser(userId, exerciseId, runTime, result);
     await insertSubmissionHistory(exerciseId, userId, result);
     const percentageOfWorseSolutions = await calculatePercentageOfWorseSolutions(exerciseId, runTime);
 
@@ -191,10 +271,25 @@ const submitCode = async (req, res) => {
 }
 
 
+/**
+ * Gets the absolute path for a given relative path.
+ *
+ * @param {string} relativePath - The relative path.
+ * @returns {string} - The absolute path.
+ */
 function getAbsolutePath(relativePath) {
 	return path.resolve(__dirname, relativePath);
 }
 
+
+/**
+ * Creates a temporary file with the submitted code.
+ *
+ * @param {string} code - The submitted code.
+ * @param {number} exerciseId - The ID of the exercise.
+ * @param {number} userId - The ID of the user.
+ * @returns {Promise<string>} - The path to the temporary file.
+ */
 async function createTemporaryFile(code, exerciseId, userId) {
 	const tempDir = os.tmpdir();
 	const fileName = `user-${userId}_exercise-${exerciseId}_${Date.now()}.py`;
@@ -204,6 +299,13 @@ async function createTemporaryFile(code, exerciseId, userId) {
 }
 
 
+/**
+ * Runs a Docker container to execute the submitted code.
+ *
+ * @param {string} testPath - The path to the test file.
+ * @param {string} programPath - The path to the program file.
+ * @returns {Promise<object>} - The result of the Docker execution.
+ */
 function runDockerContainer(testPath, programPath) {
 	return new Promise((resolve) => {
 		const command = `docker run -v "${programPath}:/app/solution.py" -v "${testPath}:/app/test.py" test-container`

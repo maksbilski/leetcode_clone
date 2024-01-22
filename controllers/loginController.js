@@ -1,10 +1,16 @@
 const pool = require('../db');
 const bcrypt = require('bcrypt');
 
+/**
+ * Handles user login by verifying email and password.
+ * If credentials are valid, updates the last login date and sets the user session.
+ *
+ * @param {object} req - The request object containing email and password.
+ * @param {object} res - The response object for sending back the login status.
+ */
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const result = await pool`SELECT * FROM users WHERE email = ${email}`;
 
     if (result.length > 0) {
@@ -33,7 +39,14 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Middleware dla sprawdzania autentykacji
+/**
+ * Middleware for checking user authentication.
+ * If the user is authenticated, proceeds to the next middleware. Otherwise, redirects to the login page.
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @param {function} next - The next middleware function in the stack.
+ */
 const checkAuthentication = (req, res, next) => {
   if (req.session.userId) {
     next();
@@ -42,10 +55,14 @@ const checkAuthentication = (req, res, next) => {
   }
 };
 
-// Dodajemy endpoint do odświeżenia sesji
+/**
+ * Endpoint for refreshing the user's session.
+ *
+ * @param {object} req - The request object.
+ * @param {object} res - The response object for sending back the refresh status.
+ */
 const refreshSession = (req, res) => {
-  console.log('Refreshing session...');
-  req.session.touch(); // Odświeżenie czasu trwania sesji
+  req.session.touch(); // Refreshes the session duration
   res.json({ message: 'Session refreshed' });
 };
 
