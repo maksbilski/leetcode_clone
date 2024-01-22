@@ -63,9 +63,9 @@ document.getElementById('exercises').addEventListener('click', function() {
 
             // Aktualizacja pasków trudności
             const difficultyBars = document.getElementById('difficulty-bars').getElementsByClassName('label');
-            difficultyBars[0].textContent = `Easy: ${data.easy_count} / ${data.total_easy}`;
-            difficultyBars[1].textContent = `Medium: ${data.medium_count} /${data.total_medium}`;
-            difficultyBars[2].textContent = `Hard: ${data.hard_count}/ ${ data.total_hard}`;
+            difficultyBars[0].textContent = `Easy: ${data.easy_count}/${data.total_easy}`;
+            difficultyBars[1].textContent = `Medium: ${data.medium_count}/${data.total_medium}`;
+            difficultyBars[2].textContent = `Hard: ${data.hard_count}/${ data.total_hard}`;
 
             // Aktualizacja umiejętności
             const skills = document.getElementById('skills').getElementsByClassName('skill');
@@ -100,13 +100,36 @@ document.getElementById('exercises').addEventListener('click', function() {
                 monthElement.textContent = `${monthName} ${year}`;
         
                 const daysInMonth = new Date(year, month, 0).getDate();
+                const firstDayOfMonth = new Date(year, month - 1, 1).getDay();
+                const lastDayOfMonth = new Date(year, month - 1, daysInMonth).getDay();
+                let weekElement = document.createElement('div');
+                weekElement.className = 'calendar-week';
+                
+                for (let i = 0; i < firstDayOfMonth; i++) {
+                    const emptySquare = document.createElement('div');
+                    emptySquare.className = 'calendar-day empty';
+                    weekElement.appendChild(emptySquare);
+                }
+
                 for (let i = 1; i <= daysInMonth; i++) {
                     const daySquare = document.createElement('div');
                     daySquare.className = 'calendar-day';
                     daySquare.style.backgroundColor = groupedByMonth[monthYear].includes(i) ? 'green' : 'grey';
-                    monthElement.appendChild(daySquare);
+                    weekElement.appendChild(daySquare);
+                    const dayOfWeek = new Date(year, month - 1, i).getDay();
+                    if (dayOfWeek === 6 || i === daysInMonth) {
+                        if (i === daysInMonth) {
+                            for (let j = lastDayOfMonth + 1; j < 7; j++) {
+                                const emptySquare = document.createElement('div');
+                                emptySquare.className = 'calendar-day empty';
+                                weekElement.appendChild(emptySquare);
+                            }
+                        }
+                        monthElement.appendChild(weekElement);
+                        weekElement = document.createElement('div');
+                        weekElement.className = 'calendar-week';
+                    }
                 }
-        
                 calendarContainer.appendChild(monthElement);
             });
         });
