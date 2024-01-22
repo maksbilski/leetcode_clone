@@ -1,5 +1,12 @@
 const pool = require('../db');
 
+
+/**
+ * Fetches sorted statistics of users' exercise attempts and successes.
+ *
+ * @param {string} sortKey - The key used for sorting the result.
+ * @returns {Promise<Array>} - A promise that resolves to an array of user statistics.
+ */
 async function fetchSortedStatistics(sortKey) {
   const result = await pool`
     SELECT
@@ -22,6 +29,13 @@ async function fetchSortedStatistics(sortKey) {
   return result;
 }
 
+/**
+ * Endpoint handler for retrieving and sorting user statistics.
+ * Allows sorting by total exercises attempted or success rate.
+ *
+ * @param {object} req - The request object containing query parameters for sorting.
+ * @param {object} res - The response object for sending back sorted statistics.
+ */
 const getAndSortStatistics = async (req, res) => {
   console.log(req.session.userId);
   try {

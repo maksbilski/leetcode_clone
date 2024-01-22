@@ -1,6 +1,15 @@
 const pool = require('../db');
 const bcrypt = require('bcrypt');
 
+
+/**
+ * Registers a new user by adding their details to the database.
+ * This includes hashing the user's password for secure storage.
+ * If the user already exists (based on email), registration is not allowed.
+ *
+ * @param {object} req - The request object containing user registration details (firstName, email, password).
+ * @param {object} res - The response object for sending back the registration status.
+ */
 const registerUser = async (req, res) => {
   try {
     const { firstName, email, password } = req.body;
