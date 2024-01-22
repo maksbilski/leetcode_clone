@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const { checkAuthentication } = require('./controllers/loginController');
 const { pool } = require('./db');
 
-//db connection
 module.exports = { pool };
 
 const {checkExercisesAndSendEmail, testSendEmail} = require('./services/emailService');
@@ -23,9 +22,7 @@ app.use(session({
   secret: secret_key,
   resave: false,
   saveUninitialized: true,
-  cookie: {
-    maxAge: 300000, // 30 sec in milliseconds
-  },
+  cookie: {},
 }));
 
 setInterval(checkExercisesAndSendEmail, 2147483647);
@@ -35,7 +32,6 @@ app.use('/statistics', checkAuthentication);
 app.use('/profile', checkAuthentication);
 app.use('/help', checkAuthentication);
 
-//setup routers
 const helpRouter = require('./routers/help')
 const profileRouter = require('./routers/profile')
 const exercisesRouter = require('./routers/exercises');

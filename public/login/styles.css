@@ -4,7 +4,6 @@ body {
   padding-right: 10%;
   display: flex;
   justify-content: flex-end;
-  /* Форма справа */
   align-items: center;
   height: 100vh;
   color: #ccc;
@@ -12,12 +11,13 @@ body {
   font-family: 'Consolas', Courier, monospace;
 }
 
+
 form {
   width: 500px;
   margin-right: 10%;
-  /* Отступ справа от изображения */
   align-items: center;
 }
+
 
 label {
   font-family: 'Consolas', Courier, monospace;
@@ -26,6 +26,7 @@ label {
   display: block;
   margin-top: 20px;
 }
+
 
 input[type="text"],
 input[type="email"],
@@ -43,12 +44,14 @@ input[type="password"] {
   transition: background-color 0.3s;
 }
 
+
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   background-color: #9fb6f4;
-  color:#292929;
+  color: #292929;
 }
+
 
 input[type="submit"] {
   width: 100%;
@@ -69,9 +72,11 @@ input[type="submit"] {
   transition: background-color 0.3s;
 }
 
+
 input[type="submit"]:hover {
   background-color: #384da1;
 }
+
 
 img.background {
   width: 50%;
@@ -81,14 +86,10 @@ img.background {
   top: 0;
   left: 0;
   min-height: 100vh;
-  /* Высота не менее 100% высоты видимой области */
   min-width: 50vw;
-  /* Ширина не менее 100% ширины видимой области */
-
-  /* Дополнительные стили, если необходимо */
 }
 
-/* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
+
 @media screen and (max-width: 640px) {
   img.bg {
     left: 50%;
@@ -110,9 +111,8 @@ img.background {
   transition: font-size 0.3s, color 0.3s;
 }
 
+
 .overlay:hover {
   font-size: 3.5em;
-  /* Увеличьте размер шрифта по вашему усмотрению */
   color: rgb(83, 215, 204);
-  /* Измените цвет затемнения по вашему усмотрению */
 }
