@@ -27,8 +27,8 @@ const postLike = async (req, res) => {
     const vote = req.body.vote;
 
     const insert = await pool
-      `INSERT INTO ex_users (user_id, exercise_id, vote)
-      VALUES (${userId}, ${exerciseId}, ${vote})
+      `INSERT INTO ex_users (user_id, exercise_id, done, success, run_time, vote)
+      VALUES (${userId}, ${exerciseId}, false, false, 0, ${vote})
       ON CONFLICT (user_id, exercise_id) DO UPDATE
       SET vote = ${vote};`;
 
