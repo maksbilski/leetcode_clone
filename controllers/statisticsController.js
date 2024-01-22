@@ -37,7 +37,6 @@ async function fetchSortedStatistics(sortKey) {
  * @param {object} res - The response object for sending back sorted statistics.
  */
 const getAndSortStatistics = async (req, res) => {
-  console.log(req.session.userId);
   try {
     let key = "total_exercises_completed";
     const validKeys = ["total_exercises_completed", "success_rate"];
@@ -48,7 +47,6 @@ const getAndSortStatistics = async (req, res) => {
 
     const result = await fetchSortedStatistics(key);
 
-    console.log(result);
     res.json(result);
   } catch (error) {
     console.error(error);
