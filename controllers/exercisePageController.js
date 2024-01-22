@@ -20,6 +20,7 @@ const getExercisePage = async (req, res) => {
       FROM exercises e
       INNER JOIN exercise_content ec ON (e.exercise_id = ec.exercise_id)
       WHERE e.exercise_id = ${exerciseId}`;
+    console.log(result);
     res.json(result[0]);
   } catch (error) {
     console.error(error);
