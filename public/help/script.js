@@ -29,7 +29,6 @@ document.getElementById('profile').addEventListener('click', function() {
 document.getElementById('feedbackForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const message = this.message.value;
-    console.log('Message:', message);
 
     fetch('/api/help/sendForm', { 
         method: 'POST',

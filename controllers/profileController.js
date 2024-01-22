@@ -72,7 +72,6 @@ const getHistory = async (req, res) => {
   } else {
     userId = req.session.userId;
   }
-  console.log(userId);
 
   try {
     const result = await pool`

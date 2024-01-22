@@ -7,7 +7,6 @@ const pool = require('../db');
  * @param {object} res - The response object for sending back exercise data.
  */
 const getExercises = async (req, res) => {
-  console.log('sacxz');
   const userId = req.session.userId
   try {
     const result = await pool`

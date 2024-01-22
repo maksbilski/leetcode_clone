@@ -2,7 +2,6 @@ const pool  = require('../db');
 
 async function generateUserTasks() {
   try {
-    console.log('intervalll')
     const users = await pool`
     SELECT * FROM users
     WHERE private = false;`;

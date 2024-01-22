@@ -16,9 +16,6 @@ async function checkExercisesAndSendEmail() {
         if (userTasks[userEmail].length > 0) {
           
             const taskList = userTasks[userEmail].map(task => `- ${task.name}`).join('\n');
-            console.log(taskList);
-            console.log('mail:');
-            console.log(userEmail);
             const mailOptions = {
                 from: 'papproject60@gmail.com',
                 to: userEmail,               

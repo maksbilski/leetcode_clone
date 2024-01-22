@@ -142,7 +142,6 @@ document.getElementById('exercises').addEventListener('click', function () {
 		  return response.json();
 		})
 		.then(data => {
-		  console.log('Session refreshed:', data);
 		  resetSessionTimer();
 		})
 		.catch(error => {
