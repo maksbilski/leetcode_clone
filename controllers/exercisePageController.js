@@ -148,7 +148,7 @@ const addComment = async (req, res) => {
  * @returns {Promise<object>} - The result of code execution.
  */
 const executeCode = async (userId, exerciseId, code) => {
-  const relativePath = `../tests/test_${exerciseId}.py`
+  const relativePath = `../exercise_tests/test_${exerciseId}.py`
   const filePath = getAbsolutePath(relativePath)
   const programPath = await createTemporaryFile(code, exerciseId, userId);
   const result = await runDockerContainer(filePath, programPath);
