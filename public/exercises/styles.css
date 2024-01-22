@@ -3,16 +3,19 @@ html {
 	scrollbar-color: #31748f #927347;
 }
 
+
 *::-webkit-scrollbar,
 html *::-webkit-scrollbar {
 	height: 12px;
 	width: 12px;
 }
 
+
 *::-webkit-scrollbar-track,
 html *::-webkit-scrollbar-track {
 	background: #927347;
 }
+
 
 *::-webkit-scrollbar-thumb,
 html *::-webkit-scrollbar-thumb {
@@ -20,6 +23,7 @@ html *::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	border: 3px solid #927347;
 }
+
 
 body {
 	font-family: 'Consolas', Courier, monospace;
@@ -30,6 +34,7 @@ body {
 	color: #ccc;
 	background-color: #121212;
 }
+
 
 header {
 	display: flex;
@@ -44,6 +49,7 @@ header {
 	margin-bottom: 0;
 }
 
+
 .nav-buttons {
 	padding: 0;
 	display: flex;
@@ -54,8 +60,8 @@ header {
 	margin-left: 10%;
 }
 
-.login-register {
 
+.login-register {
 	padding: 0;
 	display: flex;
 	justify-content: space-between;
@@ -64,20 +70,24 @@ header {
 	margin-right: 10%;
 }
 
+
 .logo {
 	display: flex;
 	justify-content: space-between;
 	margin-left: 2%;
 }
 
+
 .logo:hover {
 	cursor: pointer;
 }
+
 
 .logo h1 {
 	color: darkorange;
 	margin-left: 0;
 }
+
 
 .logo h1:hover {
 	color: rgb(254, 177, 83);
@@ -93,7 +103,6 @@ header {
 }
 
 
-
 .login-register p {
 	width: 5em;
 	margin: 0;
@@ -107,9 +116,11 @@ header {
 	transition: background-color 0.3s;
 }
 
+
 .login-register p:hover {
 	color: #f5f5f5;
 }
+
 
 .nav-buttons p {
 	margin: 0;
@@ -122,6 +133,7 @@ header {
 	transition: background-color 0.3s;
 }
 
+
 .nav-buttons p:hover {
 	color: #f5f5f5;
 }
@@ -133,16 +145,19 @@ h1 {
 	margin-left: 20px;
 }
 
+
 .home-link {
 	color: inherit;
 	transition: color 0.5s;
 	text-decoration: none;
 }
 
+
 .home-link:hover {
 	text-decoration: none;
 	color: #927347;
 }
+
 
 .content-container {
 	display: flex;
@@ -150,6 +165,7 @@ h1 {
 	margin: 10px;
 	max-height: calc(100vh - 120px);
 }
+
 
 .problem-description-and-comments,
 .code-editor,
@@ -168,6 +184,7 @@ h1 {
 	max-height: calc(100vh - 120px);
 }
 
+
 .problem-description {
 	padding: 10px 10px;
 	line-height: 1.6;
@@ -182,9 +199,11 @@ h1 {
 	overflow-y: visible;
 }
 
+
 .text-sm {
 	font-size: 0.875em;
 }
+
 
 .problem-description img {
 	margin-left: 40px;
@@ -199,6 +218,7 @@ h1 {
 	line-height: 1.5;
 }
 
+
 .problem-description code {
 	background-color: #2f2f31;
 	color: #dcdcdc;
@@ -206,10 +226,12 @@ h1 {
 	border-radius: 4px;
 }
 
+
 .problem-description strong {
 	font-weight: bold;
 	color: #ffffff;
 }
+
 
 .problem-description .example {
 	margin-bottom: 20px;
@@ -221,6 +243,7 @@ h1 {
 	flex-direction: row;
 }
 
+
 .likes-dislikes-info {
 	margin-left: auto;
 	margin-right: 30px;
@@ -229,6 +252,7 @@ h1 {
 	color: #bbb;
 }
 
+
 .likes-dislikes-info div {
 	display: inline-flex;
 	align-items: center;
@@ -236,14 +260,17 @@ h1 {
 	transition: color 0.3s ease;
 }
 
+
 .likes-dislikes-info i {
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
+
 .likes-dislikes-info div:hover {
 	color: #fff;
 }
+
 
 #likes-count,
 #dislikes-count {
@@ -252,18 +279,22 @@ h1 {
 	margin-top: 10px;
 }
 
+
 .fa-thumbs-up,
 .fa-thumbs-down {
 	font-size: 1.5em;
 }
 
+
 .fa-thumbs-up {
 	color: #29AD4B;
 }
 
+
 .fa-thumbs-down {
 	color: #e94242;
 }
+
 
 h2 {
 	font-weight: lighter;
@@ -274,6 +305,7 @@ h2 {
 	cursor: pointer;
 }
 
+
 p {
 	flex-grow: 1;
 	font-size: 1.3em;
@@ -281,6 +313,7 @@ p {
 	line-height: 1.0;
 	color: #ffffff;
 }
+
 
 .discussion-header {
 	font-size: 1.0em;
@@ -302,24 +335,28 @@ p {
 	transition: color 0.3s;
 }
 
+
 .discussion-header:hover {
-	/* Styl dla hover efektu, jeśli potrzebny */
 	color: #fff;
 }
+
 
 .arrow {
 	transition: transform 0.3s ease;
 }
 
+
 .discussion-header[aria-expanded="true"] .arrow {
 	transform: rotate(180deg);
 }
+
 
 .discussion-container {
 	display: none;
 	margin-top: 20px;
 	padding: 10px;
 }
+
 
 .add-comment {
 	margin-left: 20px;
@@ -333,6 +370,7 @@ p {
 	box-shadow: 0 0 10px #121212;
 }
 
+
 #comment-text {
 	flex-grow: 1;
 	padding: 10px;
@@ -345,10 +383,12 @@ p {
 	color: #969696;
 }
 
+
 #comment-list {
 	list-style: none;
 	padding: 0;
 }
+
 
 .comment-item {
 	background-color: #2f2f31;
@@ -361,19 +401,23 @@ p {
 	margin-top: 20px;
 }
 
+
 .comment-content {
 	font-size: 16px;
 }
+
 
 .comment-user {
 	font-size: 14px;
 	color: #fff;
 }
 
+
 .comment-date {
 	font-size: 12px;
 	color: #999;
 }
+
 
 #add-comment-btn {
 	background-color: #1d7a34;
@@ -391,10 +435,12 @@ p {
 	font-size: 0.9em;
 }
 
+
 #add-comment-btn:hover {
 	background-color: #249640;
 	color: #ffffff;
 }
+
 
 .code-editor-and-buttons {
 	flex: 2;
@@ -403,12 +449,14 @@ p {
 	margin-left: 10px;
 }
 
+
 .code-editor {
 	flex: 1;
 	display: flex;
 	overflow: hidden;
 	padding: 15px;
 }
+
 
 .CodeMirror {
 	flex: 1;
@@ -423,10 +471,12 @@ p {
 	line-height: 1.5;
 }
 
+
 .console-and-buttons {
 	flex-shrink: 0;
 	margin-top: 10px;
 }
+
 
 .buttons-container {
 	display: flex;
@@ -435,6 +485,7 @@ p {
 	padding: 10px;
 	box-sizing: border-box;
 }
+
 
 .run-submit-container {
 	display: flex;
@@ -448,6 +499,7 @@ p {
 	margin-left: 20px;
 }
 
+
 .console {
 	display: none;
 	max-height: 200px;
@@ -460,11 +512,13 @@ p {
 	border-radius: 5px;
 }
 
+
 .console-visible {
 	display: block;
 	bottom: 50px;
 	opacity: 1;
 }
+
 
 #console-btn,
 #run-btn,
@@ -472,14 +526,13 @@ p {
 	font-size: 0.9em;
 	width: 5em;
 	padding: 6px;
-	/* Light green background */
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	align-self: flex-start;
-	/* Align to the start of flex container */
 
 }
+
 
 #console-btn {
 	background-color: #252526;
@@ -487,9 +540,11 @@ p {
 	transition: color 0.3s;
 }
 
+
 #console-btn:hover {
 	color: #bababa;
 }
+
 
 #run-btn {
 	background-color: #5a5a5a;
@@ -497,9 +552,11 @@ p {
 	transition: background-color 0.3s;
 }
 
+
 #run-btn:hover {
 	background-color: #8b8b8b;
 }
+
 
 #submit-btn {
 	background-color: #29AD4B;
@@ -508,73 +565,90 @@ p {
 	transition: background-color 0.3s;
 }
 
+
 #submit-btn:hover {
 	background-color: #B5CEA8;
 }
+
 
 .CodeMirror-gutters {
 	background: #252526;
 	border-right: 1px solid #252526;
 }
 
+
 .CodeMirror-cursor {
 	border-left: 1px solid #d4d4d4;
 }
+
 
 .CodeMirror-selected {
 	background: rgba(255, 255, 255, 0.1) !important;
 	;
 }
 
+
 .CodeMirror-activeline-background {
 	background: rgba(255, 255, 255, 0.1) !important;
 }
+
 
 .CodeMirror .cm-keyword {
 	color: #31748f;
 }
 
+
 .CodeMirror .cm-operator {
 	color: #e3e42e;
 }
+
 
 .CodeMirror .cm-variable {
 	color: #ffffff;
 }
 
+
 .CodeMirror .cm-variable-2 {
 	color: #ebbcba;
 }
+
 
 .CodeMirror .cm-builtin {
 	color: #f6c177;
 }
 
+
 .CodeMirror .cm-property {
 	color: #ff6e34;
 }
 
+
 .CodeMirror .cm-number {
 	color: #B5CEA8;
 }
+
 
 .CodeMirror .cm-def {
 	color: #e3e42e;
 	font-style: italic;
 }
 
+
 .CodeMirror .cm-string {
 	color: #ebbcba;
 }
+
 
 .CodeMirror .cm-comment {
 	color: #6A9955;
 	font-style: italic;
 }
 
+
 .CodeMirror .cm-tag {
 	color: #569CD6;
 }
+
 
 .CodeMirror .cm-meta {
 	color: #ff6e34;

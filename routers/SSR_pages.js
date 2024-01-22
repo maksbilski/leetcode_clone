@@ -14,31 +14,27 @@ router.get('/profile', (req, res) => {
     res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
     });
 
-    router.get('/profile/:user_id', (req, res) => {
-        res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
-        });
+router.get('/profile/:user_id', (req, res) => {
+    res.status(200).sendFile('profile.html', {root: path.join(__dirname, '..', 'public', 'profile') });
+    });
    
 router.get('/statistics', (req, res) => {
      res.status(200).sendFile('statistics.html', {root: path.join(__dirname, '..', 'public', 'statistics') });
     });
 
 router.get('/', (req, res) => {
-    console.log('homepage')
     res.status(200).sendFile('homepage.html', { root: path.join(__dirname, '..', 'public') });
     });
        
 router.get('/exercises', (req, res) => {
-    console.log('exercises')
     res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercises.html'));
     });
 
 router.get('/exercises/:exercise_id', (req, res) => {
-    console.log('exercise_page')
     res.sendFile(path.join(__dirname, '..', 'public', 'exercises', 'exercise_page.html'));
     });
 
 router.get('/help', (req, res) => {
-    console.log('helo')
     res.sendFile(path.join(__dirname, '..', 'public', 'help', 'help.html'));
     });
 

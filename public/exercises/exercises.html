@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercises page</title>
-  <link rel="stylesheet" href="./exstyles.css">
+  <link rel="stylesheet" href="./exercises_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
@@ -40,7 +40,6 @@
       </div>
     </div>
   </header>
-  <!-- Sorting buttons -->
   <div class="sort-container">
     <span>Sort by:</span>
     <div class="custom-dropdown">
@@ -52,7 +51,6 @@
     </div>
   </div>
 
-  <!-- Table for displaying exercises -->
   <table>
     <thead>
       <tr>
@@ -65,7 +63,6 @@
     <tbody id="exerciseList"></tbody>
   </table>
 
-  <!-- Notification and Log In button -->
   <div id="notification-container" style="display: none;">
 
     <div class="session-expired-notification">
@@ -85,226 +82,7 @@
     <button id="login-button" style="display: none;" onclick="redirectToLoginPage()">Log in</button>
   </div>
 
-  <script>
-    document.getElementById('exercises').addEventListener('click', function () {
-      console.log('dsa')
-      window.location.href = '/exercises';
-    });
-
-    document.getElementById('statistics').addEventListener('click', function () {
-      window.location.href = '/statistics';
-    });
-
-    document.getElementById('register').addEventListener('click', function () {
-      window.location.href = '/register';
-    });
-
-    document.getElementById('home').addEventListener('click', function () {
-      window.location.href = '/';
-    });
-
-    document.getElementById('login').addEventListener('click', function () {
-      window.location.href = '/login';
-    });
-
-    document.getElementById('help').addEventListener('click', function () {
-      window.location.href = '/help';
-    });
-
-    document.getElementById('profile').addEventListener('click', function () {
-      window.location.href = '/profile';
-    });
-
-
-    function redirectToLoginPage() {
-      window.location.href = '/login';
-    }
-
-    function redirectToMainPage() {
-      window.location.href = '/register';
-    }
-
-
-    function toggleDropdown() {
-      const dropdownOptions = document.getElementById('dropdown-options');
-      dropdownOptions.classList.toggle('show');
-    }
-
-    function selectOption(option) {
-      const selectedOption = document.querySelector('.selected-option');
-      selectedOption.textContent = option.textContent;
-      toggleDropdown(); // Скрыть выпадающий список после выбора опции
-      sortBy(option.getAttribute('value')); // Добавлен вызов sortBy
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      // When the page is loaded, fetch exercises from the server
-      fetch('/api/exercises')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch exercises');
-          }
-          return response.json();
-        })
-        .then(exercises => {
-          // Display the fetched exercises in the table
-          const exerciseList = document.getElementById('exerciseList');
-          exercises.forEach(exercise => {
-            const row = document.createElement('tr');
-            const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
-            const categoryClass = `category-${exercise.category.toLowerCase()}`;
-            const status = exercise.success;
-            let statusIcon;
-            if (status == true) {
-              statusIcon = '<i class="fas fa-check"></i>';
-            } else if (status == false) {
-              statusIcon = '<i class="fas fa-spinner"></i>';
-            } else {
-              statusIcon = '';
-            }
-            row.innerHTML = `
-              <td>${statusIcon}</td>
-              <td class="exercise-name"><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
-              <td class="${categoryClass}">${exercise.category}</td>
-              <td class="${difficultyClass}">${exercise.difficulty}</td>
-            `;
-            exerciseList.appendChild(row);
-          });
-        })
-        .catch(error => {
-          console.error(error);
-          // Handle error (e.g., show an error message to the user)
-        });
-    });
-
-    function sortBy(key) {
-      if (key == "") {
-        return;
-      }
-      const exerciseList = document.getElementById('exerciseList');
-      while (exerciseList.firstChild) {
-        exerciseList.firstChild.remove();
-      }
-
-      // Make a fetch request to the server with the selected key as a parameter
-      fetch(`/api/exercises/sort?key=${key}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Failed to sort exercises by ${key}`);
-          }
-          return response.json();
-        })
-        .then(exercises => {
-          // Add the sorted exercises to the table
-          exercises.forEach(exercise => {
-            const row = document.createElement('tr');
-            const difficultyClass = `difficulty-${exercise.difficulty.toLowerCase()}`;
-            const categoryClass = `category-${exercise.category.toLowerCase()}`;
-            const status = exercise.success;
-            let statusIcon;
-            if (status == true) {
-              statusIcon = '<i class="fas fa-check"></i>';
-            } else if (status == false) {
-              statusIcon = '<i class="fas fa-spinner"></i>';
-            } else {
-              statusIcon = '';
-            }
-
-            // Note: Removed the <i> tag from around the ${statusIcon}
-            row.innerHTML = `
-              <td>${statusIcon}</td>
-              <td><a href="/exercises/${exercise.exercise_id}">${exercise.name}</a></td>
-              <td class="${categoryClass}">${exercise.category}</td>
-              <td class="${difficultyClass}">${exercise.difficulty}</td>
-            `;
-            exerciseList.appendChild(row);
-          });
-        })
-        .catch(error => {
-          console.error(error);
-          // Handle error (e.g., show an error message to the user)
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const sessionTimeout = 300000; // 5 minutes in milliseconds
-      let sessionTimer;
-
-      // Функция, которая отправляет запрос на сервер для обновления сессии
-      function refreshSession() {
-        fetch('/api/refresh-session') // Предполагаемый эндпоинт для обновления сессии
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to refresh session');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Session refreshed:', data);
-            resetSessionTimer();
-          })
-          .catch(error => {
-            console.error('Error refreshing session:', error);
-            // Обработка ошибки (например, показать сообщение пользователю)
-          });
-      }
-
-      // Функция, которая показывает уведомление о завершении сессии
-      function showSessionExpiredNotification() {
-        // Скрываем таблицу с заданиями
-        const exerciseTable = document.querySelector('table');
-        if (exerciseTable) {
-          exerciseTable.style.display = 'none';
-        }
-
-        const notificationContainer = document.getElementById('notification-container');
-        if (notificationContainer) {
-          notificationContainer.style.display = 'block';
-        }
-      }
-
-      // Функция для закрытия уведомления
-      window.closeNotificationBanner = function () {
-        // Показываем таблицу с заданиями
-        const exerciseTable = document.querySelector('table');
-        if (exerciseTable) {
-          exerciseTable.style.display = 'table';
-        }
-
-        const notificationContainer = document.getElementById('notification-container');
-        if (notificationContainer) {
-          notificationContainer.style.display = 'none';
-        }
-      };
-
-      function redirectToLoginPage() {
-        window.location.href = '/login';
-      }
-
-      function resetSessionTimer() {
-        clearTimeout(sessionTimer);
-
-        // Запустить таймер заново
-        sessionTimer = setTimeout(() => {
-          showSessionExpiredNotification();
-        }, sessionTimeout);
-      }
-
-      // Запускаем таймер при загрузке страницы
-      resetSessionTimer();
-
-      // Запускать функцию обновления сессии каждые 4 минуты
-      const refreshInterval = setInterval(refreshSession, 240000); // 4 minutes in milliseconds
-
-      document.addEventListener('mousemove', resetSessionTimer);
-      document.addEventListener('keydown', resetSessionTimer);
-
-      // Остановить таймер обновления сессии при закрытии страницы
-      window.addEventListener('beforeunload', function () {
-        clearInterval(refreshInterval);
-      });
-    });
-  </script>
+  <script src="exercises_script.js"></script>
 </body>
 
 </html>
