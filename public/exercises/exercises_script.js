@@ -1,5 +1,4 @@
 document.getElementById('exercises').addEventListener('click', function () {
-	console.log('dsa')
 	window.location.href = '/exercises';
   });
 

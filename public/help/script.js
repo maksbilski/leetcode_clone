@@ -1,5 +1,4 @@
 document.getElementById('exercises').addEventListener('click', function() {
-  console.log('dsa')
   window.location.href = '/exercises';
 });
 
@@ -30,7 +29,7 @@ document.getElementById('profile').addEventListener('click', function() {
 document.getElementById('feedbackForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const message = this.message.value;
-    console.log('Wiadomość:', message);
+    console.log('Message:', message);
 
     fetch('/api/help/sendForm', { 
         method: 'POST',

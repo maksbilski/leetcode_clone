@@ -1,5 +1,4 @@
 document.getElementById('exercises').addEventListener('click', function() {
-    console.log('dsa')
     window.location.href = '/exercises';
   });
 
@@ -31,7 +30,6 @@ document.getElementById('exercises').addEventListener('click', function() {
  document.addEventListener('DOMContentLoaded', function() {
     const pathArray = window.location.pathname.split('/');
     const userId = pathArray[pathArray.length - 1];
-    console.log(userId);
 
     if (userId.trim() != ""){
         const privateProfileSection = document.querySelector('.private-profile-section');
@@ -49,7 +47,6 @@ document.getElementById('exercises').addEventListener('click', function() {
                 toggleButton.textContent = 'Off';
                 toggleButton.classList.add('reverse')
             }
-            console.log(data);
 
             const userName = document.getElementById('username');
             userName.textContent = `${data.name}`;
@@ -152,7 +149,7 @@ document.getElementById('exercises').addEventListener('click', function() {
                 tableBody.appendChild(row);
             });
         })
-        .catch(error => console.error('Błąd pobierania historii:', error));
+        .catch(error => console.error('Failed to get submission history:', error));
 
         const toggleButton = document.getElementById('toggleButton');
 
@@ -178,18 +175,18 @@ document.getElementById('exercises').addEventListener('click', function() {
                 .then((response) => {
                     if (!response.ok) {
                         if (response.status === 403) {
-                            console.error('Brak uprawnień do zmiany tego profilu');
-                            throw new Error('Brak uprawnień');
+                            console.error('No permission for editing this profile');
+                            throw new Error('Permission denied');
                         }
-                        throw new Error('Wystąpił problem z żądaniem');
+                        throw new Error('Problem with response');
                     }
                     return response.json();
                 })
                 .then((data) => {
-                    console.log('Zapytanie wysłane', data);
+                    console.log('Request sent', data);
                 })
                 .catch((error) => {
-                    console.error('Błąd:', error);
+                    console.error('Error:', error);
                 })
                 .finally(() => {
                     setTimeout(() => {
@@ -197,7 +194,4 @@ document.getElementById('exercises').addEventListener('click', function() {
                     }, 500);
                 });
         });
-
-
-
 });

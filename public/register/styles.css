@@ -8,6 +8,7 @@ body {
   font-family: 'Consolas', Courier, monospace;
 }
 
+
 .content {
   display: flex;
   width: 100%;
@@ -15,11 +16,14 @@ body {
   margin-right: auto;
 }
 
-.form{
+
+.form {
   width: 150%;
   padding-top: 5%;
   background-color: #292929;
 }
+
+
 form {
   width: 100%;
   margin-top: 5%;
@@ -29,6 +33,7 @@ form {
   align-items: center;
 }
 
+
 label {
   font-family: 'Consolas', Courier, monospace;
   font-weight: bold;
@@ -36,6 +41,7 @@ label {
   display: block;
   margin-top: 20px;
 }
+
 
 input[type="text"],
 input[type="email"],
@@ -53,12 +59,14 @@ input[type="password"] {
   transition: background-color 0.3s;
 }
 
+
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   background-color: #9fb6f4;
-  color:#292929;
+  color: #292929;
 }
+
 
 input[type="submit"] {
   width: 53%;
@@ -68,21 +76,21 @@ input[type="submit"] {
   font-size: 1em;
   font-weight: bold;
   background-color: #5a7bff;
-  /* Light green background */
   color: white;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   text-align: center;
   justify-content: center;
-  /* Align to the start of flex container */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s;
 }
 
+
 input[type="submit"]:hover {
   background-color: #384da1;
 }
+
 
 img.background {
   width: 50%;
@@ -92,14 +100,10 @@ img.background {
   top: 0;
   left: 0;
   min-height: 100vh;
-  /* Высота не менее 100% высоты видимой области */
   min-width: 50vw;
-  /* Ширина не менее 100% ширины видимой области */
-
-  /* Дополнительные стили, если необходимо */
 }
 
-/* Если вы хотите сделать настройки для маленьких экранов (например, мобильных устройств) */
+
 @media screen and (max-width: 640px) {
   img.bg {
     left: 50%;
@@ -121,12 +125,12 @@ img.background {
   transition: font-size 0.3s, color 0.3s;
 }
 
+
 .overlay:hover {
   font-size: 3.5em;
-  /* Увеличьте размер шрифта по вашему усмотрению */
   color: rgb(83, 215, 204);
-  /* Измените цвет затемнения по вашему усмотрению */
 }
+
 
 .banner {
   padding: 15%;
@@ -138,19 +142,23 @@ img.background {
   font-weight: bold;
 }
 
+
 .leet {
   margin-top: 71%;
   transition: all 0.5s ease-in-out;
 }
+
 
 .leet:hover {
   margin-top: 76%;
   color: #858585;
 }
 
+
 .leet h1 {
   font-size: 1.5em;
 }
+
 
 .container {
   display: block;
@@ -158,6 +166,7 @@ img.background {
   margin-top: 20%;
   position: relative;
 }
+
 
 .baton {
   display: block;
@@ -169,6 +178,7 @@ img.background {
   transform: rotate(-10deg);
   position: absolute;
 }
+
 
 .baton:before,
 .baton:after {
@@ -186,9 +196,11 @@ img.background {
   border-radius: 5px;
 }
 
+
 .baton:after {
   right: 0;
 }
+
 
 .metronome {
   -webkit-transform-origin: 0;
@@ -199,191 +211,222 @@ img.background {
   animation: metronome 1.25s infinite linear;
 }
 
-/* Создаем классы baton-0, baton-1, ..., baton-35 */
+
 .baton-0 {
   animation-delay: 0s;
   transform: rotate(0deg);
 }
+
 
 .baton-1 {
   animation-delay: -0.1429s;
   transform: rotate(10deg);
 }
 
+
 .baton-2 {
   animation-delay: -0.2857s;
   transform: rotate(20deg);
 }
+
 
 .baton-3 {
   animation-delay: -0.4286s;
   transform: rotate(30deg);
 }
 
+
 .baton-4 {
   animation-delay: -0.5714s;
   transform: rotate(40deg);
 }
+
 
 .baton-5 {
   animation-delay: -0.7143s;
   transform: rotate(50deg);
 }
 
+
 .baton-6 {
   animation-delay: -0.8571s;
   transform: rotate(60deg);
 }
+
 
 .baton-7 {
   animation-delay: -1s;
   transform: rotate(70deg);
 }
 
+
 .baton-8 {
   animation-delay: -1.1429s;
   transform: rotate(80deg);
 }
+
 
 .baton-9 {
   animation-delay: -1.2857s;
   transform: rotate(90deg);
 }
 
+
 .baton-10 {
   animation-delay: -1.4286s;
   transform: rotate(100deg);
 }
+
 
 .baton-11 {
   animation-delay: -1.5714s;
   transform: rotate(110deg);
 }
 
+
 .baton-12 {
   animation-delay: -1.7143s;
   transform: rotate(120deg);
 }
+
 
 .baton-13 {
   animation-delay: -1.8571s;
   transform: rotate(130deg);
 }
 
+
 .baton-14 {
   animation-delay: -2s;
   transform: rotate(140deg);
 }
+
 
 .baton-15 {
   animation-delay: -2.1429s;
   transform: rotate(150deg);
 }
 
+
 .baton-16 {
   animation-delay: -2.2857s;
   transform: rotate(160deg);
 }
+
 
 .baton-17 {
   animation-delay: -2.4286s;
   transform: rotate(170deg);
 }
 
+
 .baton-18 {
   animation-delay: -2.5714s;
   transform: rotate(180deg);
 }
+
 
 .baton-19 {
   animation-delay: -2.7143s;
   transform: rotate(190deg);
 }
 
+
 .baton-20 {
   animation-delay: -2.8571s;
   transform: rotate(200deg);
 }
+
 
 .baton-21 {
   animation-delay: -3s;
   transform: rotate(210deg);
 }
 
+
 .baton-22 {
   animation-delay: -3.1429s;
   transform: rotate(220deg);
 }
+
 
 .baton-23 {
   animation-delay: -3.2857s;
   transform: rotate(230deg);
 }
 
+
 .baton-24 {
   animation-delay: -3.4286s;
   transform: rotate(240deg);
 }
+
 
 .baton-25 {
   animation-delay: -3.5714s;
   transform: rotate(250deg);
 }
 
+
 .baton-26 {
   animation-delay: -3.7143s;
   transform: rotate(260deg);
 }
+
 
 .baton-27 {
   animation-delay: -3.8571s;
   transform: rotate(270deg);
 }
 
+
 .baton-28 {
   animation-delay: -4s;
   transform: rotate(280deg);
 }
+
 
 .baton-29 {
   animation-delay: -4.1429s;
   transform: rotate(290deg);
 }
 
+
 .baton-30 {
   animation-delay: -4.2857s;
   transform: rotate(300deg);
 }
+
 
 .baton-31 {
   animation-delay: -4.4286s;
   transform: rotate(310deg);
 }
 
+
 .baton-32 {
   animation-delay: -4.5714s;
   transform: rotate(320deg);
 }
+
 
 .baton-33 {
   animation-delay: -4.7143s;
   transform: rotate(330deg);
 }
 
+
 .baton-34 {
   animation-delay: -4.8571s;
   transform: rotate(340deg);
 }
+
 
 .baton-35 {
   animation-delay: -5s;
   transform: rotate(350deg);
 }
 
-
-
-
-/* ... и так далее до .baton-35 */
 
 @keyframes metronome {
   0% {
@@ -493,6 +536,7 @@ img.background {
     transform: scaleX(1);
   }
 }
+
 
 .error {
   background-color: #EF6461;
