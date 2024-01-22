@@ -22,7 +22,6 @@ app.use(session({
   secret: secret_key,
   resave: false,
   saveUninitialized: true,
-  cookie: {},
 }));
 
 setInterval(checkExercisesAndSendEmail, 2147483647);
