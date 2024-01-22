@@ -52,8 +52,11 @@ document.getElementById('exercises').addEventListener('click', function() {
             userName.textContent = `${data.name}`;
 
             const rank = document.getElementById('rank');
-            rank.textContent = `User rank: ${data.user_rank} / ${data.total_users}`;
-
+            if (!data.user_rank) {
+                rank.textContent = `Solve a problem to see your rank`;
+            } else {
+                rank.textContent = `User rank: ${data.user_rank} / ${data.total_users}`;
+            }
             const solvedProblemsElement = document.getElementById('stats').getElementsByTagName('h2')[0];
             solvedProblemsElement.textContent = `Solved problems: ${data.success_count}`;
 
@@ -137,10 +140,6 @@ document.getElementById('exercises').addEventListener('click', function() {
                 const exerciseNameCell = document.createElement('td');
                 exerciseNameCell.textContent = item.exercise_name;
                 row.appendChild(exerciseNameCell);
-
-                const successCell = document.createElement('td');
-                successCell.textContent = item.success ? 'Yes' : 'No';
-                row.appendChild(successCell);
 
                 const submissionDateCell = document.createElement('td');
                 submissionDateCell.textContent = new Date(item.submission_date).toLocaleDateString();
