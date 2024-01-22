@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Skopiuj pliki z bieżącego katalogu do katalogu roboczego w kontenerze
 COPY ./requirements.txt /app
-COPY ./tests/conftest.py /app
+COPY ./exercise_tests/conftest.py /app
 COPY ./x.txt /app
 
 # Zainstaluj zależności (jeśli potrzebujesz)
