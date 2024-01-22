@@ -282,17 +282,17 @@ td.exercise-name a:hover {
 	text-decoration: none;
 }
 
-td.category-database,
+td.category-pandas,
 td.category-algorithms {
 	font-weight: normal;
 }
 
-td.category-database {
-	color: #FFA500
-}
-
 td.category-algorithms {
 	color: #007BFF
+}
+
+td.category-pandas {
+	color: #7214ca
 }
 
 /* Specific styles for each difficulty level */
